@@ -8,6 +8,7 @@
   import Markdown from '../elements/Markdown.svelte';
   import { apiCall } from '../utility/api';
   import _ from 'lodash';
+  import { _t } from '../translations';
 
   let isLoading = false;
   let text = '';
@@ -25,7 +26,7 @@
 </script>
 
 {#if isLoading}
-  <LoadingInfo message="Loading changelog" />
+  <LoadingInfo message={_t('changelogTab.loadingChangelog', { defaultMessage: 'Loading changelog' })} />
 {:else}
   <div>
     <Markdown source={_.isString(text) ? text: ''} />

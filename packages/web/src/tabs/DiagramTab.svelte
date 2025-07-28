@@ -32,6 +32,7 @@
   import DiagramSettings from '../designer/DiagramSettings.svelte';
   import { derived } from 'svelte/store';
   import { isProApp } from '../utility/proTools';
+  import { _t } from '../translations';
 
   export let tabid;
   export let conid;
@@ -141,7 +142,7 @@
     <svelte:fragment slot="2">
       <WidgetColumnBar>
         <WidgetColumnBarItem
-          title="Settings"
+          title={_t('diagramTab.settings', { defaultMessage: 'Settings' })}
           name="diagramSettings"
           storageName="diagramSettingsWidget"
           onClose={() => {
@@ -168,7 +169,7 @@
         icon="icon settings"
         on:click={() => {
           styleStore.update(x => ({ ...x, settingsVisible: !x.settingsVisible }));
-        }}>Settings</ToolStripButton
+        }}>{_t('diagramTab.settings', { defaultMessage: 'Settings' })}</ToolStripButton
       >
     {/if}
   </svelte:fragment>

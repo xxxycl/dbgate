@@ -12,6 +12,7 @@
   import hasPermission from '../utility/hasPermission';
 
   import { useInstalledPlugins } from '../utility/metadataLoaders';
+  import { _t } from '../translations';
 
   export let packageName;
 
@@ -56,17 +57,17 @@
           <span>{installedFound ? installedFound.version : manifest.version}</span>
         </div>
         {#if isPackaged}
-          <div class="mt-2">Plugin is part of DbGate installation</div>
+          <div class="mt-2">{_t('pluginTab.partOfInstallation', { defaultMessage: 'Plugin is part of DbGate installation' })}</div>
         {:else}
           <div class="mt-1">
             {#if hasPermission('plugins/install') && !installedFound}
-              <FormStyledButton type="button" value="Install" on:click={handleInstall} />
+              <FormStyledButton type="button" value={_t('pluginTab.install', { defaultMessage: 'Install' })} on:click={handleInstall} />
             {/if}
             {#if hasPermission('plugins/install') && installedFound}
-              <FormStyledButton type="button" value="Uninstall" on:click={handleUninstall} />
+              <FormStyledButton type="button" value={_t('pluginTab.uninstall', { defaultMessage: 'Uninstall' })} on:click={handleUninstall} />
             {/if}
             {#if hasPermission('plugins/install') && installedFound && onlineFound && compareVersions(onlineFound.version, installedFound.version) > 0}
-              <FormStyledButton type="button" value="Upgrade" on:click={handleUpgrade} />
+              <FormStyledButton type="button" value={_t('pluginTab.upgrade', { defaultMessage: 'Upgrade' })} on:click={handleUpgrade} />
             {/if}
           </div>
         {/if}

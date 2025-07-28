@@ -13,6 +13,7 @@
   import CommandModal from '../modals/CommandModal.svelte';
   import { showModal } from '../modals/modalTools';
   import { commandsCustomized } from '../stores';
+  import { _t } from '../translations';
 
   $: commandList = _.sortBy(_.values($commandsCustomized), ['category', 'name']);
   let filter;
@@ -20,7 +21,7 @@
 
 <div class="wrapper">
   <div class="flex">
-    <SearchInput placeholder="Search in commands (by category, name, shortcut or id)" bind:value={filter} />
+    <SearchInput placeholder={_t('commandListTab.searchPlaceholder', { defaultMessage: 'Search in commands (by category, name, shortcut or id)' })} bind:value={filter} />
     <CloseSearchButton bind:filter showDisabled />
   </div>
 
@@ -29,10 +30,10 @@
       clickable
       rows={commandList.filter(cmd => filterName(filter, cmd['category'], cmd['name'], cmd['keyText'], cmd['id']))}
       columns={[
-        { header: 'Category', fieldName: 'category' },
-        { header: 'Name', fieldName: 'name' },
-        { header: 'Keyboard shortcut', fieldName: 'keyText', isHighlighted: row => row.customKeyboardShortcut },
-        { header: 'commandId', fieldName: 'id' },
+        { header: _t('commandListTab.category', { defaultMessage: 'Category' }), fieldName: 'category' },
+        { header: _t('commandListTab.name', { defaultMessage: 'Name' }), fieldName: 'name' },
+        { header: _t('commandListTab.keyboardShortcut', { defaultMessage: 'Keyboard shortcut' }), fieldName: 'keyText', isHighlighted: row => row.customKeyboardShortcut },
+        { header: _t('commandListTab.commandId', { defaultMessage: 'Command ID' }), fieldName: 'id' },
       ]}
       on:clickrow={e => showModal(CommandModal, { command: e.detail })}
     />
