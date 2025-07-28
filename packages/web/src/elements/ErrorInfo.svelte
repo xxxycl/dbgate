@@ -1,5 +1,6 @@
 <script lang="ts">
   import FontIcon from '../icons/FontIcon.svelte';
+  import { _t } from '../translations';
 
   export let message;
   export let icon = 'img error';
@@ -10,7 +11,7 @@
 {#if isSmall}
   <div class="container-small">
     <FontIcon {icon} />
-    {message || 'Unknown error'}
+    {message || _t('errorInfo.unknownError', { defaultMessage: 'Unknown error' })}
   </div>
 {:else if alignTop}
   <div>
@@ -18,7 +19,7 @@
       <div class="icon">
         <FontIcon {icon} />
       </div>
-      {message || 'Unknown error'}
+      {message || _t('errorInfo.unknownError', { defaultMessage: 'Unknown error' })}
     </div>
   </div>
 {:else}
@@ -26,7 +27,7 @@
     <div class="icon">
       <FontIcon {icon} />
     </div>
-    {message || 'Unknown error'}
+    {message || _t('errorInfo.unknownError', { defaultMessage: 'Unknown error' })}
   </div>
 {/if}
 

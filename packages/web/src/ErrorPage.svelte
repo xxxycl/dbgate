@@ -5,6 +5,7 @@
   import Link from './elements/Link.svelte';
   import { internalRedirectTo } from './clientAuth';
   import SpecialPageLayout from './widgets/SpecialPageLayout.svelte';
+  import { _t } from './translations';
 
   const config = useConfig();
 
@@ -13,19 +14,19 @@
 </script>
 
 <SpecialPageLayout>
-  <div class="heading">Configuration error</div>
+  <div class="heading">{_t('errorPage.configurationError', { defaultMessage: 'Configuration error' })}</div>
   {#if $config?.checkedLicense?.status == 'error'}
     <ErrorInfo
-      message={`Invalid license. Please contact sales@dbgate.eu for more details. ${$config?.checkedLicense?.error}`}
+      message={`${_t('errorPage.invalidLicense', { defaultMessage: 'Invalid license. Please contact sales@dbgate.eu for more details.' })} ${$config?.checkedLicense?.error}`}
     />
   {:else if $config?.configurationError}
     <ErrorInfo message={$config?.configurationError} />
   {:else if error}
     <ErrorInfo message={error} />
   {:else}
-    <ErrorInfo message="No error found, try to open app again" />
+    <ErrorInfo message={_t('errorPage.noErrorFound', { defaultMessage: 'No error found, try to open app again' })} />
     <div class="m-2">
-      <Link onClick={() => internalRedirectTo('/')}>Back to app</Link>
+      <Link onClick={() => internalRedirectTo('/')}>{_t('errorPage.backToApp', { defaultMessage: 'Back to app' })}</Link>
     </div>
   {/if}
 </SpecialPageLayout>

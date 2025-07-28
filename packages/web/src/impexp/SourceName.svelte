@@ -3,6 +3,7 @@
   import FontIcon from '../icons/FontIcon.svelte';
   import ChangeDownloadUrlModal from '../modals/ChangeDownloadUrlModal.svelte';
   import { showModal } from '../modals/modalTools';
+  import { _t } from '../translations';
 
   export let name;
   const { values, setFieldValue } = getFormContext();
@@ -24,7 +25,7 @@
 </script>
 
 <div class="flex space-between">
-  <div>{name == '__TEMPLATE__' ? '(not selected)' : name}</div>
+  <div>{name == '__TEMPLATE__' ? _t('sourceName.notSelected', { defaultMessage: '(not selected)' }) : name}</div>
   <div class="flex">
     {#if obj && !!obj.isDownload}
       <div class="icon" on:click={handleChangeUrl} title={obj && obj.fileName}>

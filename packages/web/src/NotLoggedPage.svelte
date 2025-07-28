@@ -3,6 +3,7 @@
   import FormStyledButton from './buttons/FormStyledButton.svelte';
   import { doLogout, redirectToAdminLogin, redirectToLogin } from './clientAuth';
   import SpecialPageLayout from './widgets/SpecialPageLayout.svelte';
+  import { _t } from './translations';
 
   onMount(() => {
     const removed = document.getElementById('starting_dbgate_zero');
@@ -24,14 +25,14 @@
 
 <SpecialPageLayout>
   <div class="my-6">
-    <div class="title">Sorry, you are not authorized to run DbGate</div>
+    <div class="title">{_t('notLoggedPage.notAuthorized', { defaultMessage: 'Sorry, you are not authorized to run DbGate' })}</div>
     {#if error}
       <div class="error">{error}</div>
     {/if}
 
     <div class="button">
-      <FormStyledButton value="Log In" on:click={handleLogin} data-testid="NotLoggedPage_loginButton" />
-      <FormStyledButton value="Log Out" on:click={doLogout} data-testid="NotLoggedPage_logoutButton" />
+      <FormStyledButton value={_t('notLoggedPage.logIn', { defaultMessage: 'Log In' })} on:click={handleLogin} data-testid="NotLoggedPage_loginButton" />
+      <FormStyledButton value={_t('notLoggedPage.logOut', { defaultMessage: 'Log Out' })} on:click={doLogout} data-testid="NotLoggedPage_logoutButton" />
     </div>
   </div>
 </SpecialPageLayout>
