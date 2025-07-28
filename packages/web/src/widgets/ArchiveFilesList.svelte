@@ -32,6 +32,7 @@
   import { useArchiveFiles, useArchiveFolders } from '../utility/metadataLoaders';
   import openNewTab from '../utility/openNewTab';
   import WidgetsInnerContainer from './WidgetsInnerContainer.svelte';
+  import { _t } from '../translations';
 
   let filter = '';
 
@@ -76,7 +77,7 @@
 </script>
 
 <SearchBoxWrapper>
-  <SearchInput placeholder="Search archive files" bind:value={filter} />
+  <SearchInput placeholder={_t('archiveFilesList.searchPlaceholder', { defaultMessage: 'Search archive files' })} bind:value={filter} />
 
   <CloseSearchButton bind:filter />
   <DropDownButton icon="icon plus-thick" menu={createAddMenu} />

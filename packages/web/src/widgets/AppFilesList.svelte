@@ -37,6 +37,7 @@
   import openNewTab from '../utility/openNewTab';
   import WidgetsInnerContainer from './WidgetsInnerContainer.svelte';
   import { showSnackbarError } from '../utility/snackbar';
+  import { _t } from '../translations';
 
   let filter = '';
 
@@ -97,7 +98,7 @@
 </script>
 
 <SearchBoxWrapper>
-  <SearchInput placeholder="Search application files" bind:value={filter} />
+  <SearchInput placeholder={_t('appFilesList.searchPlaceholder', { defaultMessage: 'Search application files' })} bind:value={filter} />
 
   <CloseSearchButton bind:filter />
   <DropDownButton icon="icon plus-thick" menu={createAddMenu} />

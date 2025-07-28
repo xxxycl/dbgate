@@ -44,7 +44,7 @@
 
 <WidgetColumnBarItem
   title={driver?.databaseEngineTypes?.includes('document')
-    ? (driver?.collectionPluralLabel ?? 'Collections/containers')
+    ? (driver?.collectionPluralLabel ?? _t('widget.collectionsContainers', { defaultMessage: 'Collections/containers' }))
     : _t('widget.tablesViewsFunctions', { defaultMessage: 'Tables, views, functions' })}
   name="dbObjects"
   storageName="dbObjectsWidget"
@@ -78,7 +78,7 @@
   <WidgetsInnerContainer>
     <FocusedConnectionInfoWidget {conid} {database} connection={$connection} />
 
-    <ErrorInfo message="Database not selected" icon="img alert" />
+    <ErrorInfo message={_t('widget.databaseNotSelected', { defaultMessage: 'Database not selected' })} icon="img alert" />
   </WidgetsInnerContainer>
 </WidgetColumnBarItem>
 
@@ -114,7 +114,7 @@
 
     <div class="incorrect-cloud-status-wrapper">
       <FormStyledButton
-        value={`Show database content`}
+        value={_t('widget.showDatabaseContent', { defaultMessage: 'Show database content' })}
         skipWidth
         on:click={() => {
           $selectedWidget = conid?.startsWith('cloud://') ? 'cloud-private' : 'database';

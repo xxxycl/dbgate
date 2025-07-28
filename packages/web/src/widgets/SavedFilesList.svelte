@@ -12,6 +12,7 @@
   import WidgetsInnerContainer from './WidgetsInnerContainer.svelte';
   import { isProApp } from '../utility/proTools';
   import InlineUploadButton from '../buttons/InlineUploadButton.svelte';
+  import { _t } from '../translations';
 
   let filter = '';
 
@@ -63,9 +64,9 @@
   }
 
   function dataFolderTitle(folder) {
-    if (folder == 'modtrans') return 'Model transforms';
-    if (folder == 'datadeploy') return 'Data deploy jobs';
-    if (folder == 'dbcompare') return 'Database compare jobs';
+    if (folder == 'modtrans') return _t('savedFilesList.modelTransforms', { defaultMessage: 'Model transforms' });
+    if (folder == 'datadeploy') return _t('savedFilesList.dataDeployJobs', { defaultMessage: 'Data deploy jobs' });
+    if (folder == 'dbcompare') return _t('savedFilesList.databaseCompareJobs', { defaultMessage: 'Database compare jobs' });
     return _.startCase(folder);
   }
 
@@ -75,19 +76,19 @@
 </script>
 
 <SearchBoxWrapper>
-  <SearchInput placeholder="Search saved files" bind:value={filter} />
+  <SearchInput placeholder={_t('savedFilesList.searchPlaceholder', { defaultMessage: 'Search saved files' })} bind:value={filter} />
   <CloseSearchButton bind:filter />
   <InlineUploadButton
     filters={[
       {
-        name: `All supported files`,
+        name: _t('savedFilesList.allSupportedFiles', { defaultMessage: 'All supported files' }),
         extensions: ['sql'],
       },
-      { name: `SQL files`, extensions: ['sql'] },
+      { name: _t('savedFilesList.sqlFiles', { defaultMessage: 'SQL files' }), extensions: ['sql'] },
     ]}
     onProcessFile={handleUploadedFile}
   />
-  <InlineButton on:click={handleRefreshFiles} title="Refresh files" data-testid="SavedFileList_buttonRefresh">
+  <InlineButton on:click={handleRefreshFiles} title={_t('savedFilesList.refreshFiles', { defaultMessage: 'Refresh files' })} data-testid="SavedFileList_buttonRefresh">
     <FontIcon icon="icon refresh" />
   </InlineButton>
 </SearchBoxWrapper>
