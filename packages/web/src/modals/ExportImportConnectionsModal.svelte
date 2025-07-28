@@ -107,8 +107,8 @@
       const electron = getElectron();
       filePath = await electron.showSaveDialog({
         filters: [
-          { name: `ZIP files`, extensions: ['zip'] },
-          { name: `All files`, extensions: ['*'] },
+          { name: _t('exportImportModal.zipFiles', { defaultMessage: 'ZIP files' }), extensions: ['zip'] },
+          { name: _t('exportImportModal.allFiles', { defaultMessage: 'All files' }), extensions: ['*'] },
         ],
         defaultPath: `dbgateconfig.zip`,
         properties: ['showOverwriteConfirmation'],
@@ -126,7 +126,7 @@
     await apiCall('files/create-zip-from-jsons', { db: getLimitedData(), filePath });
 
     if (electron) {
-      showSnackbarSuccess(`Saved to file ${filePath}`);
+      showSnackbarSuccess(_t('exportImportModal.savedToFile', { defaultMessage: 'Saved to file {filePath}', filePath }));
     } else {
       await downloadFromApi(`uploads/get?file=${fileName}`, `dbgateconfig.zip`);
     }
@@ -135,12 +135,12 @@
   async function handleSaveToArchive() {
     const filePath = `archive:dbgateconfig-${format(new Date(), 'yyyy-MM-dd-HH-mm-ss')}.zip`;
     await apiCall('files/create-zip-from-jsons', { db: getLimitedData(), filePath });
-    showSnackbarSuccess(`Saved to ${filePath}`);
+    showSnackbarSuccess(_t('exportImportModal.savedTo', { defaultMessage: 'Saved to {filePath}', filePath }));
   }
 
   async function handleImport() {
     await apiCall('config/import-connections-and-settings', { db: getLimitedData() });
-    showSnackbarSuccess(`Imported connections and settings`);
+    showSnackbarSuccess(_t('exportImportModal.importedConnectionsAndSettings', { defaultMessage: 'Imported connections and settings' }));
   }
 
   let connections = [];
@@ -168,11 +168,11 @@
 <FormProvider>
   <ModalBase {...$$restProps} fullScreen>
     <div slot="header">
-      {mode == 'export' ? 'Export' : 'Import'} connections &amp; settings
+      {mode == 'export' ? _t('exportImportModal.export', { defaultMessage: 'Export' }) : _t('exportImportModal.import', { defaultMessage: 'Import' })} {_t('exportImportModal.connectionsAndSettings', { defaultMessage: 'connections & settings' })}
       <span class="check-uncheck">
-        <Link onClick={() => handleCheckAll(true)}>Check all</Link>
+        <Link onClick={() => handleCheckAll(true)}>{_t('exportImportModal.checkAll', { defaultMessage: 'Check all' })}</Link>
         |
-        <Link onClick={() => handleCheckAll(false)}>Uncheck all</Link>
+        <Link onClick={() => handleCheckAll(false)}>{_t('exportImportModal.uncheckAll', { defaultMessage: 'Uncheck all' })}</Link>
       </span>
     </div>
 
@@ -180,16 +180,16 @@
       <TabControl
         tabs={_.compact([
           connections?.length && {
-            label: `Connections (${checkedConnections?.length}/${connections?.length})`,
+            label: `${_t('exportImportModal.connections', { defaultMessage: 'Connections' })} (${checkedConnections?.length}/${connections?.length})`,
             slot: 1,
           },
-          users?.length && { label: `Users (${checkedUsers?.length}/${users?.length})`, slot: 2 },
-          roles?.length && { label: `Roles (${checkedRoles?.length}/${roles?.length})`, slot: 3 },
+          users?.length && { label: `${_t('exportImportModal.users', { defaultMessage: 'Users' })} (${checkedUsers?.length}/${users?.length})`, slot: 2 },
+          roles?.length && { label: `${_t('exportImportModal.roles', { defaultMessage: 'Roles' })} (${checkedRoles?.length}/${roles?.length})`, slot: 3 },
           authMethods?.length && {
-            label: `Auth methods (${checkedAuthMethods?.length}/${authMethods?.length})`,
+            label: `${_t('exportImportModal.authMethods', { defaultMessage: 'Auth methods' })} (${checkedAuthMethods?.length}/${authMethods?.length})`,
             slot: 4,
           },
-          config?.length && { label: `Config (${checkedConfig?.length}/${config?.length})`, slot: 5 },
+          config?.length && { label: `${_t('exportImportModal.config', { defaultMessage: 'Config' })} (${checkedConfig?.length}/${config?.length})`, slot: 5 },
         ])}
       >
         <svelte:fragment slot="1">
@@ -198,11 +198,11 @@
               filters={connectionFilters}
               stickyHeader
               columns={[
-                { header: 'ID', fieldName: 'id', sortable: true, filterable: true },
-                { header: 'Display name', fieldName: 'displayName', sortable: true, filterable: true },
-                { header: 'Engine', fieldName: 'engine', sortable: true, filterable: true },
-                { header: 'Server', fieldName: 'server', sortable: true, filterable: true },
-                { header: 'User', fieldName: 'user', sortable: true, filterable: true },
+                { header: _t('exportImportModal.id', { defaultMessage: 'ID' }), fieldName: 'id', sortable: true, filterable: true },
+                { header: _t('exportImportModal.displayName', { defaultMessage: 'Display name' }), fieldName: 'displayName', sortable: true, filterable: true },
+                { header: _t('exportImportModal.engine', { defaultMessage: 'Engine' }), fieldName: 'engine', sortable: true, filterable: true },
+                { header: _t('exportImportModal.server', { defaultMessage: 'Server' }), fieldName: 'server', sortable: true, filterable: true },
+                { header: _t('exportImportModal.user', { defaultMessage: 'User' }), fieldName: 'user', sortable: true, filterable: true },
               ]}
               clickable
               rows={connections}
@@ -225,8 +225,8 @@
               stickyHeader
               columns={[
                 { header: 'ID', fieldName: 'id', sortable: true, filterable: true },
-                { header: 'Login', fieldName: 'login', sortable: true, filterable: true },
-                { header: 'E-mail', fieldName: 'email', sortable: true, filterable: true },
+                { header: _t('exportImportModal.login', { defaultMessage: 'Login' }), fieldName: 'login', sortable: true, filterable: true },
+                { header: _t('exportImportModal.email', { defaultMessage: 'E-mail' }), fieldName: 'email', sortable: true, filterable: true },
               ]}
               clickable
               rows={users}
@@ -272,8 +272,8 @@
               stickyHeader
               columns={[
                 { header: 'ID', fieldName: 'id', sortable: true, filterable: true },
-                { header: 'Name', fieldName: 'name', sortable: true, filterable: true },
-                { header: 'Type', fieldName: 'type', sortable: true, filterable: true },
+                { header: _t('exportImportModal.name', { defaultMessage: 'Name' }), fieldName: 'name', sortable: true, filterable: true },
+                { header: _t('exportImportModal.type', { defaultMessage: 'Type' }), fieldName: 'type', sortable: true, filterable: true },
               ]}
               clickable
               rows={authMethods}
@@ -297,8 +297,8 @@
               columns={[
                 { header: 'ID', fieldName: 'id', sortable: true, filterable: true },
                 { header: 'Group', fieldName: 'group', sortable: true, filterable: true },
-                { header: 'Key', fieldName: 'key', sortable: true, filterable: true },
-                { header: 'Value', fieldName: 'value', sortable: true, filterable: true },
+                { header: _t('exportImportModal.key', { defaultMessage: 'Key' }), fieldName: 'key', sortable: true, filterable: true },
+                { header: _t('exportImportModal.value', { defaultMessage: 'Value' }), fieldName: 'value', sortable: true, filterable: true },
               ]}
               clickable
               rows={config}

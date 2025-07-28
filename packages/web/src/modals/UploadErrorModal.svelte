@@ -12,6 +12,7 @@
   import Link from '../elements/Link.svelte';
   import LoadingInfo from '../elements/LoadingInfo.svelte';
   import { showSnackbarSuccess } from '../utility/snackbar';
+  import { _t } from '../translations';
   import ErrorInfo from '../elements/ErrorInfo.svelte';
 
   export let error = null;
@@ -33,7 +34,7 @@
   async function handleDelete() {
     const resp = await apiCall('uploads/delete-gist', { url });
     closeCurrentModal();
-    showSnackbarSuccess('Gist was deleted');
+    showSnackbarSuccess(_t('uploadErrorModal.gistDeleted', { defaultMessage: 'Gist was deleted' }));
   }
 
   function handleCopy() {
@@ -42,20 +43,19 @@
 </script>
 
 <ModalBase {...$$restProps}>
-  <svelte:fragment slot="header">Upload error</svelte:fragment>
+  <svelte:fragment slot="header">{_t('uploadErrorModal.uploadError', { defaultMessage: 'Upload error' })}</svelte:fragment>
 
   {#if htmlUrl}
     <div>
       <p>
-        Upload error to gist was successful. Please copy gist URL abnd paste it to related github issue. You could check
-        uploaded data, if don't want to make them public, use Delete button to remove them from gist.
+        {_t('uploadErrorModal.uploadSuccessful', { defaultMessage: 'Upload error to gist was successful. Please copy gist URL abnd paste it to related github issue. You could check uploaded data, if don\'t want to make them public, use Delete button to remove them from gist.' })}
       </p>
-      <p><Link href={htmlUrl}>Open uploaded data</Link></p>
+      <p><Link href={htmlUrl}>{_t('uploadErrorModal.openUploadedData', { defaultMessage: 'Open uploaded data' })}</Link></p>
     </div>
   {:else if errorMessage}
     <ErrorInfo message={errorMessage} />
   {:else}
-    <LoadingInfo message="Uploading error to gist..." />
+    <LoadingInfo message={_t('uploadErrorModal.uploadingToGist', { defaultMessage: 'Uploading error to gist...' })} />
   {/if}
 
   <svelte:fragment slot="footer">

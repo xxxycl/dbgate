@@ -113,12 +113,12 @@
       {#if electron}
         <FormStyledButton
           type="button"
-          value="Save to disk"
+          value={_t('saveFileModal.saveToDisk', { defaultMessage: 'Save to disk' })}
           on:click={async () => {
             const file = await electron.showSaveDialog({
               filters: [
-                { name: `${fileExtension.toUpperCase()} files`, extensions: [fileExtension] },
-                { name: `All files`, extensions: ['*'] },
+                { name: `${fileExtension.toUpperCase()} ${_t('saveFileModal.files', { defaultMessage: 'files' })}`, extensions: [fileExtension] },
+                { name: _t('saveFileModal.allFiles', { defaultMessage: 'All files' }), extensions: ['*'] },
               ],
               defaultPath: filePath || `${name}.${fileExtension}`,
               properties: ['showOverwriteConfirmation'],
