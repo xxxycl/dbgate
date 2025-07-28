@@ -67,42 +67,42 @@ import ExportImportConnectionsModal from '../modals/ExportImportConnectionsModal
 
 registerCommand({
   id: 'theme.changeTheme',
-  category: 'Theme',
-  name: 'Change',
-  toolbarName: 'Change theme',
+  category: _t('command.category.theme', { defaultMessage: 'Theme' }),
+  name: _t('command.theme.changeTheme.name', { defaultMessage: 'Change' }),
+  toolbarName: _t('command.theme.changeTheme.toolbar', { defaultMessage: 'Change theme' }),
   onClick: () => showModal(SettingsModal, { selectedTab: 2 }),
   // getSubCommands: () => get(extensions).themes.map(themeCommand),
 });
 
 registerCommand({
   id: 'toolbar.show',
-  category: 'Toolbar',
-  name: 'Show',
+  category: _t('command.category.toolbar', { defaultMessage: 'Toolbar' }),
+  name: _t('command.toolbar.show.name', { defaultMessage: 'Show' }),
   onClick: () => visibleToolbar.set(true),
   testEnabled: () => !getVisibleToolbar(),
 });
 
 registerCommand({
   id: 'toolbar.hide',
-  category: 'Toolbar',
-  name: 'Hide',
+  category: _t('command.category.toolbar', { defaultMessage: 'Toolbar' }),
+  name: _t('command.toolbar.hide.name', { defaultMessage: 'Hide' }),
   onClick: () => visibleToolbar.set(false),
   testEnabled: () => getVisibleToolbar(),
 });
 
 registerCommand({
   id: 'about.show',
-  category: 'About',
-  name: 'Show',
-  toolbarName: 'About',
+  category: _t('command.category.about', { defaultMessage: 'About' }),
+  name: _t('command.about.show.name', { defaultMessage: 'Show' }),
+  toolbarName: _t('command.about.show.toolbar', { defaultMessage: 'About' }),
   onClick: () => showModal(AboutModal),
 });
 
 registerCommand({
   id: 'toggle.sidebar',
-  category: 'Sidebar',
-  name: 'Show',
-  toolbarName: 'Toggle sidebar',
+  category: _t('command.category.sidebar', { defaultMessage: 'Sidebar' }),
+  name: _t('command.toggle.sidebar.name', { defaultMessage: 'Show' }),
+  toolbarName: _t('command.toggle.sidebar.toolbar', { defaultMessage: 'Toggle sidebar' }),
   keyText: 'CtrlOrCommand+B',
   onClick: () => visibleWidgetSideBar.update(x => !x),
 });
@@ -111,14 +111,14 @@ registerCommand({
   id: 'new.connection',
   toolbar: true,
   icon: 'icon new-connection',
-  toolbarName: 'Add connection',
-  category: 'New',
+  toolbarName: _t('command.new.connection.toolbar', { defaultMessage: 'Add connection' }),
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   toolbarOrder: 1,
-  name: 'Connection',
+  name: _t('command.new.connection.name', { defaultMessage: 'Connection' }),
   testEnabled: () => !getCurrentConfig()?.runAsPortal && !getCurrentConfig()?.storageDatabase,
   onClick: () => {
     openNewTab({
-      title: 'New Connection',
+      title: _t('command.new.connection.title', { defaultMessage: 'New Connection' }),
       icon: 'img connection',
       tabComponent: 'ConnectionTab',
     });
@@ -129,15 +129,15 @@ registerCommand({
   id: 'new.connectionOnCloud',
   toolbar: true,
   icon: 'img cloud-connection',
-  toolbarName: 'Add connection',
-  category: 'New',
+  toolbarName: _t('command.new.connectionOnCloud.toolbar', { defaultMessage: 'Add connection' }),
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   toolbarOrder: 1,
-  name: 'Connection on Cloud',
+  name: _t('command.new.connectionOnCloud.name', { defaultMessage: 'Connection on Cloud' }),
   testEnabled: () =>
     !getCurrentConfig()?.runAsPortal && !getCurrentConfig()?.storageDatabase && !!getCloudSigninTokenHolder(),
   onClick: () => {
     openNewTab({
-      title: 'New Connection on Cloud',
+      title: _t('command.new.connectionOnCloud.title', { defaultMessage: 'New Connection on Cloud' }),
       icon: 'img cloud-connection',
       tabComponent: 'ConnectionTab',
       props: {
@@ -151,16 +151,16 @@ registerCommand({
   id: 'new.connection.folder',
   toolbar: true,
   icon: 'icon add-folder',
-  toolbarName: 'Add connection folder',
-  category: 'New',
+  toolbarName: _t('command.new.connection.folder.toolbar', { defaultMessage: 'Add connection folder' }),
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   toolbarOrder: 1,
-  name: 'Connection folder',
+  name: _t('command.new.connection.folder.name', { defaultMessage: 'Connection folder' }),
   testEnabled: () => !getCurrentConfig()?.runAsPortal,
   onClick: () => {
     showModal(InputTextModal, {
       value: '',
-      label: 'New connection folder name',
-      header: 'Create connection folder',
+      label: _t('command.new.connection.folder.label', { defaultMessage: 'New connection folder name' }),
+      header: _t('command.new.connection.folder.header', { defaultMessage: 'Create connection folder' }),
       onConfirm: async folder => {
         emptyConnectionGroupNames.update(names => {
           if (!folder) return names;
@@ -174,25 +174,25 @@ registerCommand({
 
 registerCommand({
   id: 'new.query',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'icon file',
   toolbar: true,
   toolbarOrder: 2,
-  name: 'Query',
-  toolbarName: 'New query',
+  name: _t('command.new.query.name', { defaultMessage: 'Query' }),
+  toolbarName: _t('command.new.query.toolbar', { defaultMessage: 'New query' }),
   keyText: 'CtrlOrCommand+T',
   onClick: () => newQuery(),
 });
 
 registerCommand({
   id: 'new.shell',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'img shell',
-  name: 'JavaScript Shell',
-  menuName: 'New JavaScript shell',
+  name: _t('command.new.shell.name', { defaultMessage: 'JavaScript Shell' }),
+  menuName: _t('command.new.shell.menu', { defaultMessage: 'New JavaScript shell' }),
   onClick: () => {
     openNewTab({
-      title: 'Shell #',
+      title: _t('command.new.shell.title', { defaultMessage: 'Shell #' }),
       icon: 'img shell',
       tabComponent: 'ShellTab',
     });
@@ -202,10 +202,10 @@ registerCommand({
 if (isProApp()) {
   registerCommand({
     id: 'new.queryDesign',
-    category: 'New',
+    category: _t('command.category.new', { defaultMessage: 'New' }),
     icon: 'img query-design',
-    name: 'Query design',
-    menuName: 'New query design',
+    name: _t('command.new.queryDesign.name', { defaultMessage: 'Query design' }),
+    menuName: _t('command.new.queryDesign.menu', { defaultMessage: 'New query design' }),
     onClick: () => newQueryDesign(),
     testEnabled: () =>
       getCurrentDatabase() &&
@@ -216,14 +216,14 @@ if (isProApp()) {
 if (isProApp()) {
   registerCommand({
     id: 'new.modelTransform',
-    category: 'New',
+    category: _t('command.category.new', { defaultMessage: 'New' }),
     icon: 'img transform',
-    name: 'Model transform',
-    menuName: 'New model transform',
+    name: _t('command.new.modelTransform.name', { defaultMessage: 'Model transform' }),
+    menuName: _t('command.new.modelTransform.menu', { defaultMessage: 'New model transform' }),
     onClick: () => {
       openNewTab(
         {
-          title: 'Model transform #',
+          title: _t('command.new.modelTransform.title', { defaultMessage: 'Model transform #' }),
           icon: 'img transform',
           tabComponent: 'ModelTransformTab',
         },
@@ -260,20 +260,20 @@ if (isProApp()) {
 if (isProApp()) {
   registerCommand({
     id: 'new.perspective',
-    category: 'New',
+    category: _t('command.category.new', { defaultMessage: 'New' }),
     icon: 'img perspective',
-    name: 'Perspective',
-    menuName: 'New perspective',
+    name: _t('command.new.perspective.name', { defaultMessage: 'Perspective' }),
+    menuName: _t('command.new.perspective.menu', { defaultMessage: 'New perspective' }),
     onClick: () => newPerspective(),
   });
 }
 
 registerCommand({
   id: 'new.diagram',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'img diagram',
-  name: 'ER Diagram',
-  menuName: 'New ER diagram',
+  name: _t('command.new.diagram.name', { defaultMessage: 'ER Diagram' }),
+  menuName: _t('command.new.diagram.menu', { defaultMessage: 'New ER diagram' }),
   testEnabled: () =>
     getCurrentDatabase() &&
     findEngineDriver(getCurrentDatabase()?.connection, getExtensions())?.databaseEngineTypes?.includes('sql'),
@@ -282,14 +282,14 @@ registerCommand({
 
 registerCommand({
   id: 'new.archiveFolder',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'img archive',
-  name: 'Archive folder',
+  name: _t('command.new.archiveFolder.name', { defaultMessage: 'Archive folder' }),
   onClick: () => {
     showModal(InputTextModal, {
       value: '',
-      label: 'New archive folder name',
-      header: 'Create archive folder',
+      label: _t('command.new.archiveFolder.label', { defaultMessage: 'New archive folder name' }),
+      header: _t('command.new.archiveFolder.header', { defaultMessage: 'Create archive folder' }),
       onConfirm: async folder => {
         apiCall('archive/create-folder', { folder });
       },
@@ -299,14 +299,14 @@ registerCommand({
 
 registerCommand({
   id: 'new.application',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'img app',
-  name: 'Application',
+  name: _t('command.new.application.name', { defaultMessage: 'Application' }),
   onClick: () => {
     showModal(InputTextModal, {
       value: '',
-      label: 'New application name',
-      header: 'Create application',
+      label: _t('command.new.application.label', { defaultMessage: 'New application name' }),
+      header: _t('command.new.application.header', { defaultMessage: 'Create application' }),
       onConfirm: async folder => {
         apiCall('apps/create-folder', { folder });
       },
@@ -316,11 +316,11 @@ registerCommand({
 
 registerCommand({
   id: 'new.table',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'icon table',
-  name: 'Table',
+  name: _t('command.new.table.name', { defaultMessage: 'Table' }),
   toolbar: true,
-  toolbarName: 'New table',
+  toolbarName: _t('command.new.table.toolbar', { defaultMessage: 'New table' }),
   testEnabled: () => {
     const driver = findEngineDriver(get(currentDatabase)?.connection, getExtensions());
     return !!get(currentDatabase) && driver?.databaseEngineTypes?.includes('sql');
@@ -335,11 +335,11 @@ registerCommand({
 
 registerCommand({
   id: 'new.collection',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'icon table',
-  name: 'Collection',
+  name: _t('command.new.collection.name', { defaultMessage: 'Collection' }),
   toolbar: true,
-  toolbarName: 'New collection/container',
+  toolbarName: _t('command.new.collection.toolbar', { defaultMessage: 'New collection/container' }),
   testEnabled: () => {
     const driver = findEngineDriver(get(currentDatabase)?.connection, getExtensions());
     return !!get(currentDatabase) && driver?.databaseEngineTypes?.includes('document');
@@ -361,12 +361,12 @@ registerCommand({
 
 registerCommand({
   id: 'new.markdown',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'img markdown',
-  name: 'Markdown page',
+  name: _t('command.new.markdown.name', { defaultMessage: 'Markdown page' }),
   onClick: () => {
     openNewTab({
-      title: 'Page #',
+      title: _t('command.new.markdown.title', { defaultMessage: 'Page #' }),
       icon: 'img markdown',
       tabComponent: 'MarkdownEditorTab',
     });
@@ -376,13 +376,13 @@ registerCommand({
 if (isProApp()) {
   registerCommand({
     id: 'new.modelCompare',
-    category: 'New',
+    category: _t('command.category.new', { defaultMessage: 'New' }),
     icon: 'icon compare',
-    name: 'Compare DB',
+    name: _t('command.new.modelCompare.name', { defaultMessage: 'Compare DB' }),
     toolbar: true,
     onClick: () => {
       openNewTab({
-        title: 'Compare',
+        title: _t('command.new.modelCompare.title', { defaultMessage: 'Compare' }),
         icon: 'img compare',
         tabComponent: 'CompareModelTab',
       });
@@ -392,14 +392,14 @@ if (isProApp()) {
 
 registerCommand({
   id: 'new.jsonl',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'img archive',
-  name: 'JSON Lines',
-  menuName: 'New JSON lines file',
+  name: _t('command.new.jsonl.name', { defaultMessage: 'JSON Lines' }),
+  menuName: _t('command.new.jsonl.menu', { defaultMessage: 'New JSON lines file' }),
   onClick: () => {
     openNewTab(
       {
-        title: 'Lines #',
+        title: _t('command.new.jsonl.title', { defaultMessage: 'Lines #' }),
         icon: 'img archive',
         tabComponent: 'JsonLinesEditorTab',
       },
@@ -412,9 +412,9 @@ registerCommand({
 
 registerCommand({
   id: 'new.sqliteDatabase',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'img sqlite-database',
-  name: 'SQLite database',
+  name: _t('command.new.sqliteDatabase.name', { defaultMessage: 'SQLite database' }),
   menuName: _t('command.new.sqliteDatabase', { defaultMessage: 'New SQLite database' }),
   onClick: () => {
     showModal(InputTextModal, {
@@ -432,9 +432,9 @@ registerCommand({
 
 registerCommand({
   id: 'new.duckdbDatabase',
-  category: 'New',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
   icon: 'img sqlite-database',
-  name: 'DuckDB database',
+  name: _t('command.new.duckdbDatabase.name', { defaultMessage: 'DuckDB database' }),
   menuName: _t('command.new.duckdbDatabase', { defaultMessage: 'New DuckDB database' }),
   onClick: () => {
     showModal(InputTextModal, {
@@ -452,11 +452,11 @@ registerCommand({
 
 registerCommand({
   id: 'tabs.changelog',
-  category: 'Tabs',
-  name: 'Changelog',
+  category: _t('command.category.tabs', { defaultMessage: 'Tabs' }),
+  name: _t('command.tabs.changelog.name', { defaultMessage: 'Changelog' }),
   onClick: () => {
     openNewTab({
-      title: 'ChangeLog',
+      title: _t('command.tabs.changelog.title', { defaultMessage: 'ChangeLog' }),
       icon: 'img markdown',
       tabComponent: 'ChangelogTab',
       props: {},
@@ -468,7 +468,7 @@ registerCommand({
   id: 'group.save',
   category: null,
   isGroupCommand: true,
-  name: 'Save',
+  name: _t('command.group.save.name', { defaultMessage: 'Save' }),
   keyText: 'CtrlOrCommand+S',
   group: 'save',
 });
@@ -477,7 +477,7 @@ registerCommand({
   id: 'group.saveAs',
   category: null,
   isGroupCommand: true,
-  name: 'Save As',
+  name: _t('command.group.saveAs.name', { defaultMessage: 'Save As' }),
   keyText: 'CtrlOrCommand+Shift+S',
   group: 'saveAs',
 });
@@ -486,7 +486,7 @@ registerCommand({
   id: 'group.undo',
   category: null,
   isGroupCommand: true,
-  name: 'Undo',
+  name: _t('command.group.undo.name', { defaultMessage: 'Undo' }),
   keyText: 'CtrlOrCommand+Z',
   group: 'undo',
 });
@@ -495,15 +495,15 @@ registerCommand({
   id: 'group.redo',
   category: null,
   isGroupCommand: true,
-  name: 'Redo',
+  name: _t('command.group.redo.name', { defaultMessage: 'Redo' }),
   keyText: 'CtrlOrCommand+Y',
   group: 'redo',
 });
 
 registerCommand({
   id: 'file.open',
-  category: 'File',
-  name: 'Open',
+  category: _t('command.category.file', { defaultMessage: 'File' }),
+  name: _t('command.file.open.name', { defaultMessage: 'Open' }),
   keyText: 'CtrlOrCommand+O',
   testEnabled: () => getElectron() != null,
   onClick: openElectronFile,
@@ -511,36 +511,36 @@ registerCommand({
 
 registerCommand({
   id: 'file.openArchive',
-  category: 'File',
-  name: 'Open DB Model/Archive',
+  category: _t('command.category.file', { defaultMessage: 'File' }),
+  name: _t('command.file.openArchive.name', { defaultMessage: 'Open DB Model/Archive' }),
   testEnabled: () => getElectron() != null,
   onClick: openArchiveFolder,
 });
 
 registerCommand({
   id: 'folder.showLogs',
-  category: 'Folder',
-  name: 'Open logs',
+  category: _t('command.category.folder', { defaultMessage: 'Folder' }),
+  name: _t('command.folder.showLogs.name', { defaultMessage: 'Open logs' }),
   testEnabled: () => getElectron() != null,
   onClick: () => electron.showItemInFolder(getCurrentConfig().logsFilePath),
 });
 
 registerCommand({
   id: 'folder.showData',
-  category: 'Folder',
-  name: 'Open data folder',
+  category: _t('command.category.folder', { defaultMessage: 'Folder' }),
+  name: _t('command.folder.showData.name', { defaultMessage: 'Open data folder' }),
   testEnabled: () => getElectron() != null,
   onClick: () => electron.showItemInFolder(getCurrentConfig().connectionsFilePath),
 });
 
 registerCommand({
   id: 'app.resetSettings',
-  category: 'File',
-  name: 'Reset layout data & settings',
+  category: _t('command.category.file', { defaultMessage: 'File' }),
+  name: _t('command.app.resetSettings.name', { defaultMessage: 'Reset layout data & settings' }),
   testEnabled: () => true,
   onClick: () => {
     showModal(ConfirmModal, {
-      message: `Really reset layout data? All opened tabs, settings and layout data will be lost. Connections and saved files will be preserved. After this, restart DbGate for applying changes.`,
+      message: _t('command.app.resetSettings.message', { defaultMessage: 'Really reset layout data? All opened tabs, settings and layout data will be lost. Connections and saved files will be preserved. After this, restart DbGate for applying changes.' }),
       onConfirm: async () => {
         await apiCall('config/delete-settings');
         localStorage.clear();
@@ -557,8 +557,8 @@ registerCommand({
 
 registerCommand({
   id: 'app.exportConnections',
-  category: 'Settings',
-  name: 'Export connections',
+  category: _t('command.category.settings', { defaultMessage: 'Settings' }),
+  name: _t('command.app.exportConnections.name', { defaultMessage: 'Export connections' }),
   testEnabled: () => !getCurrentConfig()?.runAsPortal && !getCurrentConfig()?.storageDatabase,
   onClick: () => {
     showModal(ExportImportConnectionsModal, {
@@ -569,18 +569,18 @@ registerCommand({
 
 registerCommand({
   id: 'app.importConnections',
-  category: 'Settings',
-  name: 'Import connections',
+  category: _t('command.category.settings', { defaultMessage: 'Settings' }),
+  name: _t('command.app.importConnections.name', { defaultMessage: 'Import connections' }),
   testEnabled: () => !getCurrentConfig()?.runAsPortal && !getCurrentConfig()?.storageDatabase,
   onClick: async () => {
     const files = await electron.showOpenDialog({
       properties: ['showHiddenFiles', 'openFile'],
       filters: [
         {
-          name: `All supported files`,
+          name: _t('command.app.importConnections.allSupportedFiles', { defaultMessage: 'All supported files' }),
           extensions: ['zip'],
         },
-        { name: `ZIP files`, extensions: ['zip'] },
+        { name: _t('command.app.importConnections.zipFiles', { defaultMessage: 'ZIP files' }), extensions: ['zip'] },
       ],
     });
 
@@ -595,8 +595,8 @@ registerCommand({
 
 registerCommand({
   id: 'file.import',
-  category: 'File',
-  name: 'Import data',
+  category: _t('command.category.file', { defaultMessage: 'File' }),
+  name: _t('command.file.import.name', { defaultMessage: 'Import data' }),
   toolbar: true,
   icon: 'icon import',
   onClick: () =>
@@ -616,8 +616,8 @@ registerCommand({
 
 registerCommand({
   id: 'view.reset',
-  category: 'View',
-  name: 'Reset view',
+  category: _t('command.category.view', { defaultMessage: 'View' }),
+  name: _t('command.view.reset.name', { defaultMessage: 'Reset view' }),
   onClick: () => {
     const keys = [
       'leftPanelWidth',
@@ -644,14 +644,14 @@ registerCommand({
       'currentArchive',
     ];
     for (const key of keys) removeLocalStorage(key);
-    showSnackbarSuccess('Restart DbGate (or reload on web) for applying changes');
+    showSnackbarSuccess(_t('command.view.reset.success', { defaultMessage: 'Restart DbGate (or reload on web) for applying changes' }));
   },
 });
 
 registerCommand({
   id: 'sql.generator',
-  category: 'SQL',
-  name: 'SQL Generator',
+  category: _t('command.category.sql', { defaultMessage: 'SQL' }),
+  name: _t('command.sql.generator.name', { defaultMessage: 'SQL Generator' }),
   toolbar: true,
   icon: 'icon sql-generator',
   testEnabled: () =>
@@ -667,8 +667,8 @@ registerCommand({
 
 registerCommand({
   id: 'database.export',
-  category: 'Database',
-  name: 'Export database',
+  category: _t('command.category.database', { defaultMessage: 'Database' }),
+  name: _t('command.database.export.name', { defaultMessage: 'Export database' }),
   toolbar: true,
   icon: 'icon export',
   testEnabled: () => getCurrentDatabase() != null,
@@ -685,8 +685,8 @@ registerCommand({
 if (isProApp()) {
   registerCommand({
     id: 'database.compare',
-    category: 'Database',
-    name: 'Compare databases',
+    category: _t('command.category.database', { defaultMessage: 'Database' }),
+    name: _t('command.database.compare.name', { defaultMessage: 'Compare databases' }),
     toolbar: true,
     icon: 'icon compare',
     testEnabled: () =>
@@ -695,7 +695,7 @@ if (isProApp()) {
     onClick: () => {
       openNewTab(
         {
-          title: 'Compare',
+          title: _t('command.database.compare.title', { defaultMessage: 'Compare' }),
           icon: 'img compare',
           tabComponent: 'CompareModelTab',
           props: {
@@ -717,8 +717,8 @@ if (isProApp()) {
 
   registerCommand({
     id: 'database.chat',
-    category: 'Database',
-    name: 'Database chat',
+    category: _t('command.category.database', { defaultMessage: 'Database' }),
+    name: _t('command.database.chat.name', { defaultMessage: 'Database chat' }),
     toolbar: true,
     icon: 'icon ai',
     testEnabled: () =>
@@ -727,7 +727,7 @@ if (isProApp()) {
       hasPermission('dbops/chat'),
     onClick: () => {
       openNewTab({
-        title: 'Chat',
+        title: _t('command.database.chat.title', { defaultMessage: 'Chat' }),
         icon: 'img ai',
         tabComponent: 'DatabaseChatTab',
         props: {
@@ -742,11 +742,11 @@ if (isProApp()) {
 if (hasPermission('settings/change')) {
   registerCommand({
     id: 'settings.commands',
-    category: 'Settings',
-    name: 'Keyboard shortcuts',
+    category: _t('command.category.settings', { defaultMessage: 'Settings' }),
+    name: _t('command.settings.commands.name', { defaultMessage: 'Keyboard shortcuts' }),
     onClick: () => {
       openNewTab({
-        title: 'Keyboard Shortcuts',
+        title: _t('command.settings.commands.title', { defaultMessage: 'Keyboard Shortcuts' }),
         icon: 'icon keyboard',
         tabComponent: 'CommandListTab',
         props: {},
@@ -756,17 +756,17 @@ if (hasPermission('settings/change')) {
 
   registerCommand({
     id: 'settings.show',
-    category: 'Settings',
-    name: 'Change',
-    toolbarName: 'Settings',
+    category: _t('command.category.settings', { defaultMessage: 'Settings' }),
+    name: _t('command.settings.show.name', { defaultMessage: 'Change' }),
+    toolbarName: _t('command.settings.show.toolbar', { defaultMessage: 'Settings' }),
     onClick: () => showModal(SettingsModal),
   });
 }
 
 registerCommand({
   id: 'cloud.logout',
-  category: 'Cloud',
-  name: 'Logout',
+  category: _t('command.category.cloud', { defaultMessage: 'Cloud' }),
+  name: _t('command.cloud.logout.name', { defaultMessage: 'Logout' }),
   onClick: () => {
     cloudSigninTokenHolder.set(null);
   },
@@ -774,8 +774,8 @@ registerCommand({
 
 registerCommand({
   id: 'file.exit',
-  category: 'File',
-  name: isMac() ? 'Quit' : 'Exit',
+  category: _t('command.category.file', { defaultMessage: 'File' }),
+  name: isMac() ? _t('command.file.exit.quit', { defaultMessage: 'Quit' }) : _t('command.file.exit.exit', { defaultMessage: 'Exit' }),
   // keyText: isMac() ? 'Command+Q' : null,
   testEnabled: () => getElectron() != null,
   onClick: () => getElectron().send('quit-app'),
@@ -783,22 +783,22 @@ registerCommand({
 
 registerCommand({
   id: 'app.logout',
-  category: 'App',
-  name: 'Logout',
+  category: _t('command.category.app', { defaultMessage: 'App' }),
+  name: _t('command.app.logout.name', { defaultMessage: 'Logout' }),
   testEnabled: () => getCurrentConfig()?.isUserLoggedIn,
   onClick: doLogout,
 });
 
 registerCommand({
   id: 'app.loggedUserCommands',
-  category: 'App',
-  name: 'Logged user',
+  category: _t('command.category.app', { defaultMessage: 'App' }),
+  name: _t('command.app.loggedUserCommands.name', { defaultMessage: 'Logged user' }),
   getSubCommands: () => {
     const config = getCurrentConfig();
     if (!config) return [];
     return [
       {
-        text: 'Logout',
+        text: _t('command.app.loggedUserCommands.logout', { defaultMessage: 'Logout' }),
         onClick: () => {
           doLogout();
         },
@@ -809,16 +809,16 @@ registerCommand({
 
 registerCommand({
   id: 'app.disconnect',
-  category: 'App',
-  name: 'Disconnect',
+  category: _t('command.category.app', { defaultMessage: 'App' }),
+  name: _t('command.app.disconnect.name', { defaultMessage: 'Disconnect' }),
   testEnabled: () => getCurrentConfig()?.singleConnection != null && !getCurrentConfig()?.isUserLoggedIn,
   onClick: () => disconnectServerConnection(getCurrentConfig()?.singleConnection?._id),
 });
 
 registerCommand({
   id: 'file.checkForUpdates',
-  category: 'App',
-  name: 'Check for updates',
+  category: _t('command.category.app', { defaultMessage: 'App' }),
+  name: _t('command.file.checkForUpdates.name', { defaultMessage: 'Check for updates' }),
   // testEnabled: () => true,
   testEnabled: () => getAppUpdaterActive(),
   onClick: () => getElectron().send('check-for-updates'),
@@ -844,7 +844,7 @@ export function registerFileCommands({
       id: idPrefix + '.save',
       group: 'save',
       category,
-      name: 'Save',
+      name: _t('command.fileCommands.save.name', { defaultMessage: 'Save' }),
       // keyText: 'CtrlOrCommand+S',
       icon: 'icon save',
       toolbar: true,
@@ -856,14 +856,14 @@ export function registerFileCommands({
       id: idPrefix + '.saveAs',
       group: 'saveAs',
       category,
-      name: 'Save As',
+      name: _t('command.fileCommands.saveAs.name', { defaultMessage: 'Save As' }),
       testEnabled: () => getCurrentEditor() != null,
       onClick: () => saveTabFile(getCurrentEditor(), 'save-as', folder, format, fileExtension),
     });
     registerCommand({
       id: idPrefix + '.saveToDisk',
       category,
-      name: 'Save to disk',
+      name: _t('command.fileCommands.saveToDisk.name', { defaultMessage: 'Save to disk' }),
       testEnabled: () => getCurrentEditor() != null && getElectron() != null,
       onClick: () => saveTabFile(getCurrentEditor(), 'save-to-disk', folder, format, fileExtension),
     });
@@ -873,7 +873,7 @@ export function registerFileCommands({
     registerCommand({
       id: idPrefix + '.execute',
       category,
-      name: 'Execute',
+      name: _t('command.fileCommands.execute.name', { defaultMessage: 'Execute' }),
       icon: 'icon run',
       toolbar: true,
       isRelatedToTab: true,
@@ -887,7 +887,7 @@ export function registerFileCommands({
     registerCommand({
       id: idPrefix + '.kill',
       category,
-      name: 'Kill',
+      name: _t('command.fileCommands.kill.name', { defaultMessage: 'Kill' }),
       icon: 'icon close',
       toolbar: true,
       isRelatedToTab: true,
@@ -900,7 +900,7 @@ export function registerFileCommands({
     registerCommand({
       id: idPrefix + '.toggleComment',
       category,
-      name: 'Toggle comment',
+      name: _t('command.fileCommands.toggleComment.name', { defaultMessage: 'Toggle comment' }),
       keyText: 'CtrlOrCommand+/',
       disableHandleKeyText: 'CtrlOrCommand+/',
       testEnabled: () => getCurrentEditor() != null,
@@ -912,7 +912,7 @@ export function registerFileCommands({
     registerCommand({
       id: idPrefix + '.copy',
       category,
-      name: 'Copy',
+      name: _t('command.fileCommands.copy.name', { defaultMessage: 'Copy' }),
       disableHandleKeyText: 'CtrlOrCommand+C',
       testEnabled: () => getCurrentEditor() != null,
       onClick: () => getCurrentEditor().copy(),
@@ -920,7 +920,7 @@ export function registerFileCommands({
     registerCommand({
       id: idPrefix + '.paste',
       category,
-      name: 'Paste',
+      name: _t('command.fileCommands.paste.name', { defaultMessage: 'Paste' }),
       disableHandleKeyText: 'CtrlOrCommand+V',
       testEnabled: () => getCurrentEditor() != null,
       onClick: () => getCurrentEditor().paste(),
@@ -931,7 +931,7 @@ export function registerFileCommands({
     registerCommand({
       id: idPrefix + '.find',
       category,
-      name: 'Find',
+      name: _t('command.fileCommands.find.name', { defaultMessage: 'Find' }),
       keyText: 'CtrlOrCommand+F',
       testEnabled: () => getCurrentEditor() != null,
       onClick: () => getCurrentEditor().find(),
@@ -940,7 +940,7 @@ export function registerFileCommands({
       id: idPrefix + '.replace',
       category,
       keyText: isMac() ? 'Alt+Command+F' : 'CtrlOrCommand+H',
-      name: 'Replace',
+      name: _t('command.fileCommands.replace.name', { defaultMessage: 'Replace' }),
       testEnabled: () => getCurrentEditor() != null,
       onClick: () => getCurrentEditor().replace(),
     });
@@ -949,7 +949,7 @@ export function registerFileCommands({
     registerCommand({
       id: idPrefix + '.undo',
       category,
-      name: 'Undo',
+      name: _t('command.fileCommands.undo.name', { defaultMessage: 'Undo' }),
       group: 'undo',
       icon: 'icon undo',
       testEnabled: () => getCurrentEditor()?.canUndo(),
@@ -959,7 +959,7 @@ export function registerFileCommands({
       id: idPrefix + '.redo',
       category,
       group: 'redo',
-      name: 'Redo',
+      name: _t('command.fileCommands.redo.name', { defaultMessage: 'Redo' }),
       icon: 'icon redo',
       testEnabled: () => getCurrentEditor()?.canRedo(),
       onClick: () => getCurrentEditor().redo(),
@@ -969,24 +969,24 @@ export function registerFileCommands({
 
 registerCommand({
   id: 'app.minimize',
-  category: 'Application',
-  name: 'Minimize',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.minimize.name', { defaultMessage: 'Minimize' }),
   testEnabled: () => getElectron() != null,
   onClick: () => getElectron().send('window-action', 'minimize'),
 });
 
 registerCommand({
   id: 'app.maximize',
-  category: 'Application',
-  name: 'Maximize',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.maximize.name', { defaultMessage: 'Maximize' }),
   testEnabled: () => getElectron() != null,
   onClick: () => getElectron().send('window-action', 'maximize'),
 });
 
 registerCommand({
   id: 'app.toggleFullScreen',
-  category: 'Application',
-  name: 'Toggle full screen',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.toggleFullScreen.name', { defaultMessage: 'Toggle full screen' }),
   keyText: 'F11',
   testEnabled: () => getElectron() != null,
   onClick: async () => {
@@ -1000,60 +1000,60 @@ registerCommand({
 
 registerCommand({
   id: 'app.toggleDevTools',
-  category: 'Application',
-  name: 'Toggle Dev Tools',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.toggleDevTools.name', { defaultMessage: 'Toggle Dev Tools' }),
   testEnabled: () => getElectron() != null,
   onClick: () => getElectron().send('window-action', 'devtools'),
 });
 
 registerCommand({
   id: 'app.reload',
-  category: 'Application',
-  name: 'Reload',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.reload.name', { defaultMessage: 'Reload' }),
   testEnabled: () => getElectron() != null,
   onClick: () => getElectron().send('window-action', 'reload'),
 });
 
 registerCommand({
   id: 'app.openDocs',
-  category: 'Application',
-  name: 'Documentation',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.openDocs.name', { defaultMessage: 'Documentation' }),
   onClick: () => openWebLink('https://docs.dbgate.io/'),
 });
 
 registerCommand({
   id: 'app.openWeb',
-  category: 'Application',
-  name: 'DbGate web',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.openWeb.name', { defaultMessage: 'DbGate web' }),
   onClick: () => openWebLink('https://dbgate.io/'),
 });
 
 registerCommand({
   id: 'app.openIssue',
-  category: 'Application',
-  name: 'Report problem or feature request',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.openIssue.name', { defaultMessage: 'Report problem or feature request' }),
   onClick: () => openWebLink('https://github.com/dbgate/dbgate/issues/new'),
 });
 
 registerCommand({
   id: 'app.openSponsoring',
-  category: 'Application',
-  name: 'Become sponsor',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.openSponsoring.name', { defaultMessage: 'Become sponsor' }),
   testEnabled: () => !isProApp(),
   onClick: () => openWebLink('https://opencollective.com/dbgate'),
 });
 
 registerCommand({
   id: 'app.giveFeedback',
-  category: 'Application',
-  name: 'Give us feedback',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.giveFeedback.name', { defaultMessage: 'Give us feedback' }),
   onClick: () => openWebLink('https://dbgate.org/feedback'),
 });
 
 registerCommand({
   id: 'app.zoomIn',
-  category: 'Application',
-  name: 'Zoom in',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.zoomIn.name', { defaultMessage: 'Zoom in' }),
   keyText: 'CtrlOrCommand+=',
   testEnabled: () => getElectron() != null,
   onClick: () => getElectron().send('window-action', 'zoomin'),
@@ -1061,8 +1061,8 @@ registerCommand({
 
 registerCommand({
   id: 'app.zoomOut',
-  category: 'Application',
-  name: 'Zoom out',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.zoomOut.name', { defaultMessage: 'Zoom out' }),
   keyText: 'CtrlOrCommand+-',
   testEnabled: () => getElectron() != null,
   onClick: () => getElectron().send('window-action', 'zoomout'),
@@ -1070,16 +1070,16 @@ registerCommand({
 
 registerCommand({
   id: 'app.zoomReset',
-  category: 'Application',
-  name: 'Reset zoom',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.zoomReset.name', { defaultMessage: 'Reset zoom' }),
   testEnabled: () => getElectron() != null,
   onClick: () => getElectron().send('window-action', 'zoomreset'),
 });
 
 registerCommand({
   id: 'edit.undo',
-  category: 'Edit',
-  name: 'Undo',
+  category: _t('command.category.edit', { defaultMessage: 'Edit' }),
+  name: _t('command.edit.undo.name', { defaultMessage: 'Undo' }),
   keyText: 'CtrlOrCommand+Z',
   systemCommand: true,
   testEnabled: () => getElectron() != null,
@@ -1088,8 +1088,8 @@ registerCommand({
 
 registerCommand({
   id: 'edit.redo',
-  category: 'Edit',
-  name: 'Redo',
+  category: _t('command.category.edit', { defaultMessage: 'Edit' }),
+  name: _t('command.edit.redo.name', { defaultMessage: 'Redo' }),
   systemCommand: true,
   testEnabled: () => getElectron() != null,
   onClick: () => getElectron().send('window-action', 'redo'),
@@ -1097,8 +1097,8 @@ registerCommand({
 
 registerCommand({
   id: 'edit.cut',
-  category: 'Edit',
-  name: 'Cut',
+  category: _t('command.category.edit', { defaultMessage: 'Edit' }),
+  name: _t('command.edit.cut.name', { defaultMessage: 'Cut' }),
   keyText: 'CtrlOrCommand+X',
   systemCommand: true,
   testEnabled: () => getElectron() != null,
@@ -1107,8 +1107,8 @@ registerCommand({
 
 registerCommand({
   id: 'edit.copy',
-  category: 'Edit',
-  name: 'Copy',
+  category: _t('command.category.edit', { defaultMessage: 'Edit' }),
+  name: _t('command.edit.copy.name', { defaultMessage: 'Copy' }),
   keyText: 'CtrlOrCommand+C',
   systemCommand: true,
   testEnabled: () => getElectron() != null,
@@ -1117,8 +1117,8 @@ registerCommand({
 
 registerCommand({
   id: 'edit.paste',
-  category: 'Edit',
-  name: 'Paste',
+  category: _t('command.category.edit', { defaultMessage: 'Edit' }),
+  name: _t('command.edit.paste.name', { defaultMessage: 'Paste' }),
   keyText: 'CtrlOrCommand+V',
   systemCommand: true,
   testEnabled: () => getElectron() != null,
@@ -1127,8 +1127,8 @@ registerCommand({
 
 registerCommand({
   id: 'edit.selectAll',
-  category: 'Edit',
-  name: 'Select All',
+  category: _t('command.category.edit', { defaultMessage: 'Edit' }),
+  name: _t('command.edit.selectAll.name', { defaultMessage: 'Select All' }),
   keyText: 'CtrlOrCommand+A',
   systemCommand: true,
   testEnabled: () => getElectron() != null,
@@ -1137,15 +1137,15 @@ registerCommand({
 
 registerCommand({
   id: 'new.gist',
-  category: 'New',
-  name: 'Upload error to gist',
+  category: _t('command.category.new', { defaultMessage: 'New' }),
+  name: _t('command.new.gist.name', { defaultMessage: 'Upload error to gist' }),
   onClick: () => showModal(UploadErrorModal),
 });
 
 registerCommand({
   id: 'app.unsetCurrentDatabase',
-  category: 'Application',
-  name: 'Unset current database',
+  category: _t('command.category.application', { defaultMessage: 'Application' }),
+  name: _t('command.app.unsetCurrentDatabase.name', { defaultMessage: 'Unset current database' }),
   testEnabled: () => getCurrentDatabase() != null,
   onClick: () => currentDatabase.set(null),
 });

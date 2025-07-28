@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+  import { _t } from '../translations';
+
   function generateObjectList(seed = 0) {
     const counts = [1000, 1200, 1100, 2100, 720];
     const schemas = ['A', 'dev', 'public', 'dbo'];
@@ -130,19 +132,19 @@
 
   function createSearchMenu() {
     const res = [];
-    res.push({ label: 'Search by:', isBold: true, disabled: true });
+    res.push({ label: _t('sqlObjectList.searchBy', { defaultMessage: 'Search by:' }), isBold: true, disabled: true });
     if (driver?.databaseEngineTypes?.includes('document')) {
-      res.push({ label: 'Collection name', switchValue: 'pureName' });
+      res.push({ label: _t('sqlObjectList.collectionName', { defaultMessage: 'Collection name' }), switchValue: 'pureName' });
     }
     if (driver?.databaseEngineTypes?.includes('sql')) {
-      res.push({ label: 'Table/view/procedure name', switchValue: 'pureName' });
-      res.push({ label: 'Schema', switchValue: 'schemaName' });
-      res.push({ label: 'Column name', switchValue: 'columnName' });
-      res.push({ label: 'Column data type', switchValue: 'columnDataType' });
-      res.push({ label: 'Table comment', switchValue: 'tableComment' });
-      res.push({ label: 'Column comment', switchValue: 'columnComment' });
-      res.push({ label: 'View/procedure/trigger text', switchValue: 'sqlObjectText' });
-      res.push({ label: 'Table engine', switchValue: 'tableEngine' });
+      res.push({ label: _t('sqlObjectList.tableViewProcedureName', { defaultMessage: 'Table/view/procedure name' }), switchValue: 'pureName' });
+      res.push({ label: _t('sqlObjectList.schema', { defaultMessage: 'Schema' }), switchValue: 'schemaName' });
+      res.push({ label: _t('sqlObjectList.columnName', { defaultMessage: 'Column name' }), switchValue: 'columnName' });
+      res.push({ label: _t('sqlObjectList.columnDataType', { defaultMessage: 'Column data type' }), switchValue: 'columnDataType' });
+      res.push({ label: _t('sqlObjectList.tableComment', { defaultMessage: 'Table comment' }), switchValue: 'tableComment' });
+      res.push({ label: _t('sqlObjectList.columnComment', { defaultMessage: 'Column comment' }), switchValue: 'columnComment' });
+      res.push({ label: _t('sqlObjectList.viewProcedureTriggerText', { defaultMessage: 'View/procedure/trigger text' }), switchValue: 'sqlObjectText' });
+      res.push({ label: _t('sqlObjectList.tableEngine', { defaultMessage: 'Table engine' }), switchValue: 'tableEngine' });
     }
     return res.map(item => ({
       ...item,
@@ -174,7 +176,7 @@
 
   <WidgetsInnerContainer hideContent={differentFocusedDb}>
     <ErrorInfo message={$status.message} icon="img error" />
-    <InlineButton on:click={handleRefreshDatabase}>Refresh</InlineButton>
+    <InlineButton on:click={handleRefreshDatabase}>{_t('sqlObjectList.refresh', { defaultMessage: 'Refresh' })}</InlineButton>
   </WidgetsInnerContainer>
 {:else if objectList.length == 0 && $status && $status.name != 'pending' && $status.name != 'checkStructure' && $status.name != 'loadStructure' && $objects}
   <SchemaSelector
@@ -191,26 +193,32 @@
 
   <WidgetsInnerContainer hideContent={differentFocusedDb}>
     <ErrorInfo
-      message={`Database ${database} is empty or structure is not loaded, press Refresh button to reload structure`}
+      message={_t('sqlObjectList.emptyDatabaseMessage', {
+        defaultMessage: 'Database {database} is empty or structure is not loaded, press Refresh button to reload structure',
+        values: { database }
+      })}
       icon="img alert"
     />
     <div class="m-1" />
-    <InlineButton on:click={handleRefreshDatabase}>Refresh</InlineButton>
+    <InlineButton on:click={handleRefreshDatabase}>{_t('sqlObjectList.refresh', { defaultMessage: 'Refresh' })}</InlineButton>
     {#if driver?.databaseEngineTypes?.includes('sql')}
       <div class="m-1" />
-      <InlineButton on:click={() => runCommand('new.table')}>New table</InlineButton>
+      <InlineButton on:click={() => runCommand('new.table')}>{_t('sqlObjectList.newTable', { defaultMessage: 'New table' })}</InlineButton>
     {/if}
     {#if driver?.databaseEngineTypes?.includes('document')}
       <div class="m-1" />
       <InlineButton on:click={() => runCommand('new.collection')}
-        >New {driver?.collectionSingularLabel ?? 'collection/container'}</InlineButton
+        >{_t('sqlObjectList.newCollection', {
+          defaultMessage: 'New {collectionLabel}',
+          values: { collectionLabel: driver?.collectionSingularLabel ?? 'collection/container' }
+        })}</InlineButton
       >
     {/if}
   </WidgetsInnerContainer>
 {:else}
   <SearchBoxWrapper>
     <SearchInput
-      placeholder="Search in tables, views, procedures"
+      placeholder={_t('sqlObjectList.searchPlaceholder', { defaultMessage: 'Search in tables, views, procedures' })}
       bind:value={filter}
       bind:this={domFilter}
       onFocusFilteredList={() => {
@@ -231,7 +239,7 @@
     {/if}
     <InlineButton
       on:click={handleRefreshDatabase}
-      title="Refresh database connection and object list"
+      title={_t('sqlObjectList.refreshTooltip', { defaultMessage: 'Refresh database connection and object list' })}
       square
       data-testid="SqlObjectList_refreshButton"
     >

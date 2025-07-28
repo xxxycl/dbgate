@@ -19,6 +19,7 @@
   import _ from 'lodash';
   import openNewTab from '../utility/openNewTab';
   import { showSnackbarError } from '../utility/snackbar';
+  import { _t } from '../translations';
 
   import DbKeysSubTree from './DbKeysSubTree.svelte';
 
@@ -43,10 +44,10 @@
     return [
       item.key != null &&
         !connection?.isReadOnly && {
-          label: 'Delete key',
+          label: _t('dbKeysTreeNode.deleteKey', { defaultMessage: 'Delete key' }),
           onClick: () => {
             showModal(ConfirmModal, {
-              message: `Really delete key ${item.key}?`,
+              message: _t('dbKeysTreeNode.confirmDeleteKey', { defaultMessage: 'Really delete key {key}?', key: item.key }),
               onConfirm: async () => {
                 await apiCall('database-connections/call-method', {
                   conid,

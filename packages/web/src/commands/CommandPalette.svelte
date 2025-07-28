@@ -81,6 +81,7 @@
   import { getLocalStorage } from '../utility/storageCache';
   import registerCommand from './registerCommand';
   import { formatKeyText, switchCurrentDatabase } from '../utility/common';
+  import { _t } from '../translations';
 
   let domInput;
   let filter = '';
@@ -201,7 +202,9 @@
           bind:value={filter}
           on:keydown={handleKeyDown}
           placeholder={parentCommand?.text ||
-            ($visibleCommandPalette == 'database' ? 'Search in database' : 'Search in commands')}
+            ($visibleCommandPalette == 'database'
+              ? _t('commandPalette.searchInDatabase', { defaultMessage: 'Search in database' })
+              : _t('commandPalette.searchInCommands', { defaultMessage: 'Search in commands' }))}
         />
       </div>
       <div class="content">
