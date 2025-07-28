@@ -100,51 +100,57 @@ ORDER BY
         bind:value={selectedTab}
         isInline
         tabs={[
-          { label: 'General', slot: 1 },
-          isProApp() && electron && { label: 'License', slot: 7 },
-          { label: 'Connection', slot: 2 },
-          { label: 'Themes', slot: 3 },
-          { label: 'Default Actions', slot: 4 },
-          { label: 'Behaviour', slot: 5 },
-          { label: 'External tools', slot: 8 },
-          { label: 'Other', slot: 6 },
+          { label: _t('settings.general', { defaultMessage: 'General' }), slot: 1 },
+          isProApp() && electron && { label: _t('settings.license', { defaultMessage: 'License' }), slot: 7 },
+          { label: _t('settings.connection', { defaultMessage: 'Connection' }), slot: 2 },
+          { label: _t('settings.themes', { defaultMessage: 'Themes' }), slot: 3 },
+          { label: _t('settings.defaultActions', { defaultMessage: 'Default Actions' }), slot: 4 },
+          { label: _t('settings.behaviour', { defaultMessage: 'Behaviour' }), slot: 5 },
+          { label: _t('settings.externalTools', { defaultMessage: 'External tools' }), slot: 8 },
+          { label: _t('settings.other', { defaultMessage: 'Other' }), slot: 6 },
         ]}
       >
         <svelte:fragment slot="1">
           {#if electron}
-            <div class="heading">Appearance</div>
+            <div class="heading">{_t('settings.appearance', { defaultMessage: 'Appearance' })}</div>
             <FormCheckboxField
               name="app.useNativeMenu"
-              label={isMac() ? 'Use native window title' : 'Use system native menu'}
+              label={isMac() ? _t('settings.useNativeWindowTitle', { defaultMessage: 'Use native window title' }) : _t('settings.useSystemNativeMenu', { defaultMessage: 'Use system native menu' })}
               on:change={() => {
                 restartWarning = true;
               }}
             />
             {#if restartWarning}
               <div class="ml-5 mb-3">
-                <FontIcon icon="img warn" /> Native menu settings will be applied after app restart
+                <FontIcon icon="img warn" /> {_t('settings.nativeMenuRestartWarning', { defaultMessage: 'Native menu settings will be applied after app restart' })}
               </div>
             {/if}
           {/if}
 
           <FormCheckboxField
             name="tabGroup.showServerName"
-            label="Show server name alongside database name in title of the tab group"
+            label={_t('settings.showServerNameInTabGroup', { defaultMessage: 'Show server name alongside database name in title of the tab group' })}
             defaultValue={false}
           />
-          <!-- <div class="heading">{_t('settings.localization', { defaultMessage: 'Localization' })}</div>
+          <div class="heading">{_t('settings.localization', { defaultMessage: 'Localization' })}</div>
           <FormSelectField
-            label="Language"
+            label={_t('settings.language', { defaultMessage: 'Language' })}
             name="localization.language"
             defaultValue={getSelectedLanguage()}
             isNative
             options={[
               { value: 'en', label: 'English' },
               { value: 'cs', label: 'Czech' },
+              { value: 'zh-CN', label: '简体中文' },
             ]}
-            on:change={() => {
+            on:change={(e) => {
+              const newLanguage = e.detail;
+              // 通知Electron更新菜单语言
+              if (electron) {
+                electron.send('language-changed', newLanguage);
+              }
               showModal(ConfirmModal, {
-                message: 'Application will be reloaded to apply new language settings',
+                message: _t('settings.languageReloadMessage', { defaultMessage: 'Application will be reloaded to apply new language settings' }),
                 onConfirm: () => {
                   setTimeout(() => {
                     internalRedirectTo('/');
@@ -152,30 +158,30 @@ ORDER BY
                 },
               });
             }}
-          /> -->
+          />
 
-          <div class="heading">Data grid</div>
+          <div class="heading">{_t('settings.dataGrid', { defaultMessage: 'Data grid' })}</div>
           <FormTextField
             name="dataGrid.pageSize"
-            label="Page size (number of rows for incremental loading, must be between 5 and 1000)"
+            label={_t('settings.dataGridPageSize', { defaultMessage: 'Page size (number of rows for incremental loading, must be between 5 and 1000)' })}
             defaultValue="100"
           />
-          <FormCheckboxField name="dataGrid.showHintColumns" label="Show foreign key hints" defaultValue={true} />
+          <FormCheckboxField name="dataGrid.showHintColumns" label={_t('settings.showForeignKeyHints', { defaultMessage: 'Show foreign key hints' })} defaultValue={true} />
           <!-- <FormCheckboxField name="dataGrid.showHintColumns" label="Show foreign key hints" defaultValue={true} /> -->
 
-          <FormCheckboxField name="dataGrid.thousandsSeparator" label="Use thousands separator for numbers" />
+          <FormCheckboxField name="dataGrid.thousandsSeparator" label={_t('settings.useThousandsSeparator', { defaultMessage: 'Use thousands separator for numbers' })} />
 
           <FormTextField
             name="dataGrid.defaultAutoRefreshInterval"
-            label="Default grid auto refresh interval in seconds"
+            label={_t('settings.defaultAutoRefreshInterval', { defaultMessage: 'Default grid auto refresh interval in seconds' })}
             defaultValue="10"
           />
 
-          <FormCheckboxField name="dataGrid.alignNumbersRight" label="Align numbers to right" defaultValue={false} />
+          <FormCheckboxField name="dataGrid.alignNumbersRight" label={_t('settings.alignNumbersRight', { defaultMessage: 'Align numbers to right' })} defaultValue={false} />
 
           <FormTextField
             name="dataGrid.collectionPageSize"
-            label="Collection page size (for MongoDB JSON view, must be between 5 and 1000)"
+            label={_t('settings.collectionPageSize', { defaultMessage: 'Collection page size (for MongoDB JSON view, must be between 5 and 1000)' })}
             defaultValue="50"
           />
 
