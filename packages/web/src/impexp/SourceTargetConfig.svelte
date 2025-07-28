@@ -53,7 +53,7 @@
           },
           ...$extensions.fileFormats.map(format => ({
             value: format.storageType,
-            label: _t('sourceTargetConfig.fileFormat', { defaultMessage: `${format.name} files(s)`, values: { formatName: format.name } }),
+            label: `${format.name} files(s)`,
             directions: getFileFormatDirections(format),
           })),
           { value: 'query', label: _t('common.query', { defaultMessage: 'Query' }), directions: ['source'] },
