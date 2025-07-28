@@ -1,4 +1,6 @@
 <script context="module">
+  import { _t } from '../translations';
+
   export const extractKey = data => data._id;
   export const createMatcher =
     (filter, cfg = DEFAULT_CONNECTION_SEARCH_SETTINGS) =>
@@ -140,7 +142,6 @@
   import hasPermission from '../utility/hasPermission';
   import { switchCurrentDatabase } from '../utility/common';
   import { getConnectionClickActionSetting } from '../settings/settingsTools';
-  import { _t } from '../translations';
   import { isProApp } from '../utility/proTools';
 
   export let data;

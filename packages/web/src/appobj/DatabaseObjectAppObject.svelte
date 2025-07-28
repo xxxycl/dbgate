@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
   import { copyTextToClipboard } from '../utility/clipboard';
+  import { _t } from '../translations';
 
   export const extractKey = ({ schemaName, pureName }) => (schemaName ? `${schemaName}.${pureName}` : pureName);
   export const createMatcher =
@@ -102,22 +103,22 @@
             divider: true,
           },
           isProApp() && {
-            label: 'Design query',
+            label: _t('contextMenu.designQuery', { defaultMessage: 'Design query' }),
             isQueryDesigner: true,
             requiresWriteAccess: true,
           },
           isProApp() && {
-            label: 'Design perspective query',
+            label: _t('contextMenu.designPerspectiveQuery', { defaultMessage: 'Design perspective query' }),
             tab: 'PerspectiveTab',
             forceNewTab: true,
             icon: 'img perspective',
           },
           createScriptTemplatesSubmenu('tables'),
           {
-            label: 'SQL generator',
+            label: _t('contextMenu.sqlGenerator', { defaultMessage: 'SQL generator' }),
             submenu: [
               {
-                label: 'CREATE TABLE',
+                label: _t('contextMenu.createTable', { defaultMessage: 'CREATE TABLE' }),
                 sqlGeneratorProps: {
                   createTables: true,
                   createIndexes: true,
@@ -125,14 +126,14 @@
                 },
               },
               {
-                label: 'DROP TABLE',
+                label: _t('contextMenu.dropTable', { defaultMessage: 'DROP TABLE' }),
                 sqlGeneratorProps: {
                   dropTables: true,
                   dropReferences: true,
                 },
               },
               {
-                label: 'INSERT',
+                label: _t('contextMenu.insert', { defaultMessage: 'INSERT' }),
                 sqlGeneratorProps: {
                   insert: true,
                 },
