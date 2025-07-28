@@ -162,7 +162,7 @@
     if (saveOnCloud && !getCurrentConnection()?._id) {
       showModal(ChooseCloudFolderModal, {
         requiredRoleVariants: ['write', 'admin'],
-        message: 'Choose cloud folder to saved connection',
+        message: _t('connectionTab.chooseCloudFolder', { defaultMessage: 'Choose cloud folder to saved connection' }),
         onConfirm: async folid => {
           let connection = getCurrentConnection();
           const saved = await apiCall('cloud/save-connection', { folid, connection });
@@ -299,23 +299,23 @@
       contentTestId="ConnectionTab_tabControlContent"
       tabs={[
         {
-          label: 'General',
+          label: _t('connectionTab.general', { defaultMessage: 'General' }),
           component: ConnectionDriverFields,
           props: { getDatabaseList, currentConnection },
           testid: 'ConnectionTab_tabGeneral',
         },
         driver?.showConnectionTab('sshTunnel', $values) && {
-          label: 'SSH Tunnel',
+          label: _t('connectionTab.sshTunnel', { defaultMessage: 'SSH Tunnel' }),
           component: ConnectionSshTunnelFields,
           testid: 'ConnectionTab_tabSshTunnel',
         },
         driver?.showConnectionTab('ssl', $values) && {
-          label: 'SSL',
+          label: _t('connectionTab.ssl', { defaultMessage: 'SSL' }),
           component: ConnectionSslFields,
           testid: 'ConnectionTab_tabSsl',
         },
         {
-          label: 'Advanced',
+          label: _t('connectionTab.advanced', { defaultMessage: 'Advanced' }),
           component: ConnectionAdvancedDriverFields,
           testid: 'ConnectionTab_tabAdvanced',
         },
@@ -373,16 +373,16 @@
                   showModal(ErrorMessageModal, {
                     message: sqlConnectResult.detail,
                     showAsCode: true,
-                    title: 'Database connection error',
+                    title: _t('connectionTab.databaseConnectionError', { defaultMessage: 'Database connection error' }),
                   })}
               >
-                Show detail
+                {_t('connectionTab.showDetail', { defaultMessage: 'Show detail' })}
               </Link>
             </div>
           {/if}
           {#if isTesting}
             <div>
-              <FontIcon icon="icon loading" /> Testing connection
+              <FontIcon icon="icon loading" /> {_t('connectionTab.testingConnection', { defaultMessage: 'Testing connection' })}
             </div>
           {/if}
         </div>

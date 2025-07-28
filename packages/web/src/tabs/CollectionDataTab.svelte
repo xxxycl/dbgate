@@ -9,7 +9,7 @@
     id: 'collectionTable.save',
     group: 'save',
     category: 'Collection data',
-    name: 'Save',
+    name: _t('command.collectionData.save', { defaultMessage: 'Save' }),
     // keyText: 'CtrlOrCommand+S',
     toolbar: true,
     isRelatedToTab: true,
@@ -53,6 +53,7 @@
   import ToolStripCommandButton from '../buttons/ToolStripCommandButton.svelte';
   import ToolStripExportButton, { createQuickExportHandlerRef } from '../buttons/ToolStripExportButton.svelte';
   import { getBoolSettingsValue } from '../settings/settingsTools';
+  import { _t } from '../translations';
   import useEditorData from '../query/useEditorData';
   import { markTabSaved, markTabUnsaved } from '../utility/common';
   import { getNumberIcon } from '../icons/FontIcon.svelte';
@@ -133,7 +134,7 @@
     });
     const { errorMessage } = resp || {};
     if (errorMessage) {
-      showModal(ErrorMessageModal, { title: 'Error when saving', message: errorMessage });
+      showModal(ErrorMessageModal, { title: _t('collectionDataTab.errorWhenSaving', { defaultMessage: 'Error when saving' }), message: errorMessage });
     } else {
       dispatchChangeSet({ type: 'reset', value: createChangeSet() });
       display?.reload();

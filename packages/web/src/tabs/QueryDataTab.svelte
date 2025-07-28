@@ -6,7 +6,7 @@
   registerCommand({
     id: 'queryData.stopLoading',
     category: 'Query data',
-    name: 'Stop loading',
+    name: _t('command.queryData.stopLoading', { defaultMessage: 'Stop loading' }),
     icon: 'icon stop',
     testEnabled: () => getCurrentEditor()?.isLoading(),
     onClick: () => getCurrentEditor().stopLoading(),
@@ -22,6 +22,7 @@
   import ToolStripExportButton, { createQuickExportHandlerRef } from '../buttons/ToolStripExportButton.svelte';
   import invalidateCommands from '../commands/invalidateCommands';
   import registerCommand from '../commands/registerCommand';
+  import { _t } from '../translations';
 
   import JslDataGrid from '../datagrid/JslDataGrid.svelte';
   import LoadingInfo from '../elements/LoadingInfo.svelte';
@@ -102,7 +103,7 @@
   {#if jslid}
     <JslDataGrid {jslid} listenInitializeFile onCustomGridRefresh={handleRefresh} focusOnVisible />
   {:else}
-    <LoadingInfo message="Loading data..." />
+    <LoadingInfo message={_t('queryDataTab.loadingData', { defaultMessage: 'Loading data...' })} />
   {/if}
   <svelte:fragment slot="toolstrip">
     <ToolStripCommandButton command="dataGrid.refresh" />

@@ -455,7 +455,7 @@
         tabs[tabComponent].allowAddToFavorites(props) && [
           { divider: true },
           {
-            text: 'Add to favorites',
+            text: _t('tabsPanel.addToFavorites', { defaultMessage: 'Add to favorites' }),
             onClick: () => showModal(FavoriteModal, { savingTab: tab }),
           },
         ],
@@ -465,7 +465,7 @@
         tabs[tabComponent].allowSwitchDatabase(props) && [
           { divider: true },
           {
-            text: 'Switch database',
+            text: _t('tabsPanel.switchDatabase', { defaultMessage: 'Switch database' }),
             onClick: () => showModal(SwitchDatabaseModal, { callingTab: tab }),
           },
         ],

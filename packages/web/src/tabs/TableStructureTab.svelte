@@ -7,7 +7,7 @@
     id: 'tableStructure.save',
     group: 'save',
     category: 'Table editor',
-    name: 'Save',
+    name: _t('command.tableStructure.save', { defaultMessage: 'Save' }),
     toolbar: true,
     isRelatedToTab: true,
     icon: 'icon save',
@@ -18,7 +18,7 @@
   registerCommand({
     id: 'tableStructure.reset',
     category: 'Table editor',
-    name: 'Reset changes',
+    name: _t('command.tableStructure.reset', { defaultMessage: 'Reset changes' }),
     toolbar: true,
     isRelatedToTab: true,
     icon: 'icon close',
@@ -57,6 +57,7 @@
   import hasPermission from '../utility/hasPermission';
   import { changeTab, markTabSaved, markTabUnsaved } from '../utility/common';
   import { getBoolSettingsValue } from '../settings/settingsTools';
+  import { _t } from '../translations';
 
   export let tabid;
   export let conid;
@@ -115,11 +116,11 @@
     const resp = await apiCall('database-connections/run-script', { conid, database, sql, useTransaction: true });
     const { errorMessage } = resp || {};
     if (errorMessage) {
-      showModal(ErrorMessageModal, { title: 'Error when saving', message: errorMessage });
+      showModal(ErrorMessageModal, { title: _t('tableStructure.errorWhenSaving', { defaultMessage: 'Error when saving' }), message: errorMessage });
     } else {
       markTabSaved(tabid);
       await apiCall('database-connections/sync-model', { conid, database });
-      showSnackbarSuccess('Saved to database');
+      showSnackbarSuccess(_t('tableStructure.savedToDatabase', { defaultMessage: 'Saved to database' }));
       const isCreateTable = $editorValue?.base == null;
       const tableName = _.pick($editorValue.current, ['pureName', 'schemaName']);
       clearEditorData();
@@ -230,7 +231,7 @@
 
     <ToolStripCommandButton
       command="tableStructure.save"
-      buttonLabel={$editorValue?.base ? 'Alter table' : 'Create table'}
+      buttonLabel={$editorValue?.base ? _t('tableStructure.alterTable', { defaultMessage: 'Alter table' }) : _t('tableStructure.createTable', { defaultMessage: 'Create table' })}
     />
     <ToolStripCommandButton command="tableStructure.reset" />
     <ToolStripCommandButton command="tableEditor.addColumn" />
