@@ -5,6 +5,7 @@
   import keycodes from '../utility/keycodes';
   import ModalBase from './ModalBase.svelte';
   import { closeCurrentModal } from './modalTools';
+  import { _t } from '../translations';
 
   export let onChange;
   let value;
@@ -25,10 +26,10 @@
     }
 
     let keyText = '';
-    if (e.ctrlKey) keyText += 'Ctrl+';
-    if (e.shiftKey) keyText += 'Shift+';
-    if (e.metaKey) keyText += 'Command+';
-    if (e.altKey) keyText += 'Alt+';
+    if (e.ctrlKey) keyText += _t('keyboardModal.ctrl', { defaultMessage: 'Ctrl' }) + '+';
+    if (e.shiftKey) keyText += _t('keyboardModal.shift', { defaultMessage: 'Shift' }) + '+';
+    if (e.metaKey) keyText += _t('keyboardModal.command', { defaultMessage: 'Command' }) + '+';
+    if (e.altKey) keyText += _t('keyboardModal.alt', { defaultMessage: 'Alt' }) + '+';
     if (e.key != 'Control' && e.key != 'Alt' && e.key != 'Shift' && e.key != 'Meta') {
       keyText += _.upperFirst(e.key);
     }
@@ -38,7 +39,7 @@
 </script>
 
 <ModalBase {...$$restProps} simple>
-  <div class="mb-2">Show desired key combination and press ENTER</div>
+  <div class="mb-2">{_t('keyboardModal.instruction', { defaultMessage: 'Show desired key combination and press ENTER' })}</div>
   <div class="largeFormMarker">
     <TextField on:keydown={handleKeyDown} bind:value focused />
   </div>

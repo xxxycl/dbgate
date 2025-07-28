@@ -15,6 +15,7 @@
   import _ from 'lodash';
   import { apiCall } from '../utility/api';
   import ErrorInfo from '../elements/ErrorInfo.svelte';
+  import { _t } from '../translations';
 
   export let onConfirm;
   export let conid;
@@ -73,15 +74,15 @@
 
 <FormProvider>
   <ModalBase {...$$restProps}>
-    <svelte:fragment slot="header">Choose value from {field}</svelte:fragment>
+    <svelte:fragment slot="header">{_t('valueLookupModal.chooseValueFrom', { defaultMessage: 'Choose value from {field}', values: { field } })}</svelte:fragment>
 
     <!-- <FormTextField name="search" label='Search' placeholder="Search" bind:value={search} /> -->
     <div class="largeFormMarker">
-      <SearchInput placeholder="Search" bind:value={search} isDebounced />
+      <SearchInput placeholder={_t('valueLookupModal.searchPlaceholder', { defaultMessage: 'Search' })} bind:value={search} isDebounced />
     </div>
 
     {#if isLoading}
-      <LoadingInfo message="Loading data" />
+      <LoadingInfo message={_t('valueLookupModal.loadingData', { defaultMessage: 'Loading data' })} />
     {/if}
 
     {#if !isLoading && rows}
@@ -111,8 +112,8 @@
               },
               {
                 fieldName: 'value',
-                header: 'Value',
-                formatter: row => (row.value == null ? '(NULL)' : row.value),
+                header: _t('valueLookupModal.value', { defaultMessage: 'Value' }),
+                formatter: row => (row.value == null ? _t('valueLookupModal.null', { defaultMessage: '(NULL)' }) : row.value),
               },
             ]}
           >
@@ -139,14 +140,14 @@
     <svelte:fragment slot="footer">
       {#if multiselect}
         <FormSubmit
-          value="OK"
+          value={_t('valueLookupModal.ok', { defaultMessage: 'OK' })}
           on:click={() => {
             closeCurrentModal();
             onConfirm(checkedKeys);
           }}
         />
       {/if}
-      <FormStyledButton type="button" value="Close" on:click={closeCurrentModal} />
+      <FormStyledButton type="button" value={_t('valueLookupModal.close', { defaultMessage: 'Close' })} on:click={closeCurrentModal} />
     </svelte:fragment>
   </ModalBase>
 </FormProvider>
