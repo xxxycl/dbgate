@@ -347,7 +347,7 @@
       });
       let count = selectedCells.length;
       let rowCount = selectedRowData.length;
-      return `Rows: ${rowCount.toLocaleString()}, Count: ${count.toLocaleString()}, Sum:${sum.toLocaleString()}`;
+      return _t('dataGrid.selectedCellsInfo', { defaultMessage: 'Rows: {rowCount}, Count: {count}, Sum: {sum}', values: { rowCount: rowCount.toLocaleString(), count: count.toLocaleString(), sum: sum.toLocaleString() } });
     }
     return null;
   }
@@ -2141,16 +2141,16 @@
       </div>
     {:else if allRowCount != null && multipleGridsOnTab}
       <div class="row-count-label">
-        Rows: {allRowCount.toLocaleString()}
+        {_t('dataGrid.rowsCount', { defaultMessage: 'Rows: {count}', values: { count: allRowCount.toLocaleString() } })}
       </div>
     {/if}
 
     {#if isLoading}
-      <LoadingInfo wrapper message="Loading data" />
+      <LoadingInfo wrapper message={_t('dataGrid.loadingData', { defaultMessage: 'Loading data' })} />
     {/if}
 
     {#if !tabControlHiddenTab && !multipleGridsOnTab && allRowCount != null}
-      <StatusBarTabItem text={`Rows: ${allRowCount.toLocaleString()}`} />
+      <StatusBarTabItem text={_t('dataGrid.rowsCount', { defaultMessage: 'Rows: {count}', values: { count: allRowCount.toLocaleString() } })} />
     {/if}
   </div>
 {/if}
