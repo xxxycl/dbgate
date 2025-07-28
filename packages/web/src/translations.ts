@@ -1,4 +1,5 @@
 import cs from '../../../translations/cs.json';
+import zhCN from '../../../translations/zh-CN.json';
 
 import MessageFormat, { MessageFunction } from '@messageformat/core';
 import { getStringSettingsValue } from './settings/settingsTools';
@@ -6,6 +7,7 @@ import { getStringSettingsValue } from './settings/settingsTools';
 const translations = {
   en: {},
   cs,
+  'zh-CN': zhCN,
 };
 const supportedLanguages = Object.keys(translations);
 
