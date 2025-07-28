@@ -6,6 +6,7 @@
   import { copyTextToClipboard } from '../utility/clipboard';
   import { showSnackbarSuccess } from '../utility/snackbar';
   import TokenizedFilteredText from '../widgets/TokenizedFilteredText.svelte';
+  import { _t } from '../translations';
 
   const dispatch = createEventDispatcher();
 
@@ -154,7 +155,7 @@
         on:click={() => {
           if (statusTitleToCopy) {
             copyTextToClipboard(statusTitleToCopy);
-            showSnackbarSuccess('Copied to clipboard');
+            showSnackbarSuccess(_t('appObjectCore.copiedToClipboard', { defaultMessage: 'Copied to clipboard' }));
           }
         }}
       />

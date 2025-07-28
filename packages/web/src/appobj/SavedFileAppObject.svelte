@@ -179,6 +179,7 @@
   import { isProApp } from '../utility/proTools';
   import { saveFileToDisk } from '../utility/exportFileTools';
   import { getConnectionInfo } from '../utility/metadataLoaders';
+  import { _t } from '../translations';
 
   export let data;
 
@@ -200,18 +201,18 @@
 
   function createMenu() {
     return [
-      handler?.tabComponent && { text: 'Open', onClick: openTab },
-      hasPermission(`files/${data.folder}/write`) && { text: 'Rename', onClick: handleRename },
-      hasPermission(`files/${data.folder}/write`) && { text: 'Create copy', onClick: handleCopy },
-      hasPermission(`files/${data.folder}/write`) && { text: 'Delete', onClick: handleDelete },
-      folder == 'markdown' && { text: 'Show page', onClick: showMarkdownPage },
-      { text: 'Download', onClick: handleDownload },
+      handler?.tabComponent && { text: _t('savedFileAppObject.open', { defaultMessage: 'Open' }), onClick: openTab },
+      hasPermission(`files/${data.folder}/write`) && { text: _t('savedFileAppObject.rename', { defaultMessage: 'Rename' }), onClick: handleRename },
+      hasPermission(`files/${data.folder}/write`) && { text: _t('savedFileAppObject.createCopy', { defaultMessage: 'Create copy' }), onClick: handleCopy },
+      hasPermission(`files/${data.folder}/write`) && { text: _t('savedFileAppObject.delete', { defaultMessage: 'Delete' }), onClick: handleDelete },
+      folder == 'markdown' && { text: _t('savedFileAppObject.showPage', { defaultMessage: 'Show page' }), onClick: showMarkdownPage },
+      { text: _t('savedFileAppObject.download', { defaultMessage: 'Download' }), onClick: handleDownload },
     ];
   }
 
   const handleDelete = () => {
     showModal(ConfirmModal, {
-      message: `Really delete file ${data.file}?`,
+      message: _t('savedFileAppObject.confirmDelete', { defaultMessage: 'Really delete file {fileName}?', values: { fileName: data.file } }),
       onConfirm: () => {
         if (data.folid && data.cntid) {
           apiCall('cloud/delete-content', {
@@ -228,8 +229,8 @@
   const handleRename = () => {
     showModal(InputTextModal, {
       value: data.file,
-      label: 'New file name',
-      header: 'Rename file',
+      label: _t('savedFileAppObject.newFileName', { defaultMessage: 'New file name' }),
+      header: _t('savedFileAppObject.renameFile', { defaultMessage: 'Rename file' }),
       onConfirm: newFile => {
         if (data.folid && data.cntid) {
           apiCall('cloud/rename-content', {
@@ -247,8 +248,8 @@
   const handleCopy = () => {
     showModal(InputTextModal, {
       value: data.file,
-      label: 'New file name',
-      header: 'Copy file',
+      label: _t('savedFileAppObject.newFileName', { defaultMessage: 'New file name' }),
+      header: _t('savedFileAppObject.copyFile', { defaultMessage: 'Copy file' }),
       onConfirm: newFile => {
         if (data.folid && data.cntid) {
           apiCall('cloud/copy-file', {

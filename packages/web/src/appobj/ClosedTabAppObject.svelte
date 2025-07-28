@@ -9,6 +9,7 @@
   import moment from 'moment';
 
   import AppObjectCore from './AppObjectCore.svelte';
+  import { _t } from '../translations';
 
   export let data;
 
@@ -33,8 +34,8 @@
 
   function createMenu() {
     return [
-      { text: 'Delete', onClick: handleDelete },
-      { text: 'Delete older', onClick: handleDeleteOlder },
+      { text: _t('closedTabAppObject.delete', { defaultMessage: 'Delete' }), onClick: handleDelete },
+      { text: _t('closedTabAppObject.deleteOlder', { defaultMessage: 'Delete older' }), onClick: handleDeleteOlder },
     ];
   }
 </script>
