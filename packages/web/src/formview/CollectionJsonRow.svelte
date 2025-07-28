@@ -27,6 +27,7 @@
   import { copyTextToClipboard } from '../utility/clipboard';
   import { getContextMenu, registerMenu } from '../utility/contextMenu';
   import stableStringify from 'json-stable-stringify';
+  import { _t } from '../translations';
 
   export let rowIndex;
   export let grider;
@@ -52,11 +53,11 @@
   }
 
   registerMenu([
-    { text: 'Copy JSON document', onClick: handleCopyJsonDocument },
-    { text: 'Edit document', onClick: handleEditDocument },
-    { text: 'Delete document', onClick: () => grider.deleteRow(rowIndex) },
-    { text: 'Revert row changes', onClick: () => grider.revertRowChanges(rowIndex) },
-    { text: 'Expand document', onClick: handleExpandDocument },
+    { text: _t('collectionJsonRow.copyJsonDocument', { defaultMessage: 'Copy JSON document' }), onClick: handleCopyJsonDocument },
+    { text: _t('collectionJsonRow.editDocument', { defaultMessage: 'Edit document' }), onClick: handleEditDocument },
+    { text: _t('collectionJsonRow.deleteDocument', { defaultMessage: 'Delete document' }), onClick: () => grider.deleteRow(rowIndex) },
+    { text: _t('collectionJsonRow.revertRowChanges', { defaultMessage: 'Revert row changes' }), onClick: () => grider.revertRowChanges(rowIndex) },
+    { text: _t('collectionJsonRow.expandDocument', { defaultMessage: 'Expand document' }), onClick: handleExpandDocument },
   ]);
 </script>
 

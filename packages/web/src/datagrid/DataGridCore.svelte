@@ -16,7 +16,7 @@
   registerCommand({
     id: 'dataGrid.deepRefresh',
     category: 'Data grid',
-    name: 'Refresh with structure',
+    name: _t('command.datagrid.refreshWithStructure', { defaultMessage: 'Refresh with structure' }),
     keyText: 'Ctrl+F5',
     toolbar: true,
     isRelatedToTab: true,
@@ -217,7 +217,7 @@
   registerCommand({
     id: 'dataGrid.filterSelected',
     category: 'Data grid',
-    name: 'Filter selected value',
+    name: _t('command.datagrid.filterSelected', { defaultMessage: 'Filter selected value' }),
     keyText: 'CtrlOrCommand+Shift+F',
     testEnabled: () => getCurrentDataGrid()?.getDisplay().filterable,
     onClick: () => getCurrentDataGrid().filterSelectedValue(),
@@ -225,7 +225,7 @@
   registerCommand({
     id: 'dataGrid.findColumn',
     category: 'Data grid',
-    name: 'Find column',
+    name: _t('command.datagrid.findColumn', { defaultMessage: 'Find column' }),
     keyText: 'CtrlOrCommand+F',
     testEnabled: () => getCurrentDataGrid() != null,
     getSubCommands: () => getCurrentDataGrid().buildFindMenu(),
@@ -233,7 +233,7 @@
   registerCommand({
     id: 'dataGrid.hideColumn',
     category: 'Data grid',
-    name: 'Hide column',
+    name: _t('command.datagrid.hideColumn', { defaultMessage: 'Hide column' }),
     keyText: isMac() ? 'Alt+Command+F' : 'CtrlOrCommand+H',
     testEnabled: () => getCurrentDataGrid()?.canShowLeftPanel(),
     onClick: () => getCurrentDataGrid().hideColumn(),
@@ -241,7 +241,7 @@
   registerCommand({
     id: 'dataGrid.clearFilter',
     category: 'Data grid',
-    name: 'Clear filter',
+    name: _t('command.datagrid.clearFilter', { defaultMessage: 'Clear filter' }),
     keyText: 'CtrlOrCommand+Shift+E',
     testEnabled: () => getCurrentDataGrid()?.clearFilterEnabled(),
     onClick: () => getCurrentDataGrid().clearFilter(),
@@ -249,7 +249,7 @@
   registerCommand({
     id: 'dataGrid.generateSqlFromData',
     category: 'Data grid',
-    name: 'Generate SQL',
+    name: _t('command.datagrid.generateSql', { defaultMessage: 'Generate SQL' }),
     keyText: 'CtrlOrCommand+G',
     testEnabled: () => getCurrentDataGrid()?.generateSqlFromDataEnabled(),
     onClick: () => getCurrentDataGrid().generateSqlFromData(),
@@ -257,21 +257,21 @@
   registerCommand({
     id: 'dataGrid.openFreeTable',
     category: 'Data grid',
-    name: 'Edit selection as table',
+    name: _t('command.datagrid.editSelectionAsTable', { defaultMessage: 'Edit selection as table' }),
     testEnabled: () => getCurrentDataGrid() != null,
     onClick: () => getCurrentDataGrid().openFreeTable(),
   });
   registerCommand({
     id: 'dataGrid.newJson',
     category: 'Data grid',
-    name: 'Add JSON document',
+    name: _t('command.datagrid.addJsonDocument', { defaultMessage: 'Add JSON document' }),
     testEnabled: () => getCurrentDataGrid()?.addJsonDocumentEnabled(),
     onClick: () => getCurrentDataGrid().addJsonDocument(),
   });
   registerCommand({
     id: 'dataGrid.editCellValue',
     category: 'Data grid',
-    name: 'Edit cell value',
+    name: _t('command.datagrid.editCellValue', { defaultMessage: 'Edit cell value' }),
     testEnabled: () => getCurrentDataGrid()?.editCellValueEnabled(),
     onClick: () => getCurrentDataGrid().editCellValue(),
   });
@@ -280,7 +280,7 @@
     registerCommand({
       id: 'dataGrid.sendToDataDeploy',
       category: 'Data grid',
-      name: 'Send to data deployer',
+      name: _t('command.datagrid.sendToDataDeploy', { defaultMessage: 'Send to data deployer' }),
       testEnabled: () => getCurrentDataGrid()?.sendToDataDeployEnabled(),
       onClick: () => getCurrentDataGrid().sendToDataDeploy(),
     });
@@ -579,8 +579,8 @@
   export function addNewColumn() {
     showModal(InputTextModal, {
       value: '',
-      label: 'Column name',
-      header: 'Add new column',
+      label: _t('dataGrid.columnName', { defaultMessage: 'Column name' }),
+      header: _t('dataGrid.addNewColumn', { defaultMessage: 'Add new column' }),
       onConfirm: name => {
         display.addDynamicColumn(name);
         tick().then(() => {
@@ -664,7 +664,7 @@
     const columns = colIndexes.map(col => realColumnUniqueNames[col]);
     copyRowsToClipboard(format, columns, rows, {
       schemaName,
-      pureName: pureName || 'target',
+      pureName: pureName || _t('dataGrid.target', { defaultMessage: 'target' }),
       driver: display?.driver || driverBase,
       keyColumns: display?.baseTable?.primaryKey?.columns?.map(col => col.columnName) || [
         display?.columns ? display?.columns[0].columnName : columns[0],
@@ -736,7 +736,7 @@
 
     openNewTab(
       {
-        title: 'Map',
+        title: _t('dataGrid.map', { defaultMessage: 'Map' }),
         icon: 'img map',
         tabComponent: 'MapTab',
       },
@@ -784,7 +784,7 @@
     const electron = getElectron();
     const files = await electron.showOpenDialog({
       properties: ['showHiddenFiles', 'openFile'],
-      filters: [{ name: 'All Files', extensions: ['*'] }],
+      filters: [{ name: _t('dataGrid.allFiles', { defaultMessage: 'All Files' }), extensions: ['*'] }],
     });
     const file = files && files[0];
     if (file) {
@@ -1788,7 +1788,7 @@
     { command: 'dataGrid.refresh' },
     { placeTag: 'copy' },
     {
-      text: 'Copy advanced',
+      text: _t('dataGrid.copyAdvanced', { defaultMessage: 'Copy advanced' }),
       submenu: [
         _.keys(copyRowsFormatDefs).map(format => ({
           text: copyRowsFormatDefs[format].label,
@@ -1851,7 +1851,7 @@
     isProApp() &&
       hasPermission('dbops/charts') &&
       onOpenChart && {
-        text: 'Open chart',
+        text: _t('dataGrid.openChart', { defaultMessage: 'Open chart' }),
         onClick: () => onOpenChart(),
       },
     { command: 'dataGrid.generateSqlFromData' },
@@ -1887,17 +1887,17 @@
 
 {#if !display || (!isDynamicStructure && (!columns || columns.length == 0))}
   {#if $databaseStatus?.name == 'pending' || $databaseStatus?.name == 'checkStructure' || $databaseStatus?.name == 'loadStructure'}
-    <LoadingInfo wrapper message="Waiting for structure" />
+    <LoadingInfo wrapper message={_t('dataGrid.waitingForStructure', { defaultMessage: 'Waiting for structure' })} />
   {:else}
-    <ErrorInfo alignTop message="No structure was loaded, probably table doesn't exist in current database" />
+    <ErrorInfo alignTop message={_t('dataGrid.noStructureLoaded', { defaultMessage: "No structure was loaded, probably table doesn't exist in current database" })} />
   {/if}
 {:else if errorMessage}
   <div>
     <ErrorInfo message={errorMessage} alignTop />
-    <FormStyledButton value="Reset filter" on:click={() => display.clearFilters()} />
-    <FormStyledButton value="Reset view" on:click={() => display.resetConfig()} />
+    <FormStyledButton value={_t('dataGrid.resetFilter', { defaultMessage: 'Reset filter' })} on:click={() => display.clearFilters()} />
+    <FormStyledButton value={_t('dataGrid.resetView', { defaultMessage: 'Reset view' })} on:click={() => display.resetConfig()} />
     {#if onOpenQueryOnError ?? onOpenQuery}
-      <FormStyledButton value="Open Query" on:click={() => (onOpenQueryOnError ?? onOpenQuery)()} />
+      <FormStyledButton value={_t('dataGrid.openQuery', { defaultMessage: 'Open Query' })} on:click={() => (onOpenQueryOnError ?? onOpenQuery)()} />
     {/if}
   </div>
 {:else if isDynamicStructure && isLoadedAll && grider?.rowCount == 0}
@@ -1905,17 +1905,17 @@
     <ErrorInfo
       alignTop
       message={grider.editable
-        ? 'No rows loaded, check filter or add new documents. You could copy documents from other collections/tables with Copy advanved/Copy as JSON command.'
-        : 'No rows loaded'}
+        ? _t('dataGrid.noRowsLoadedEditable', { defaultMessage: 'No rows loaded, check filter or add new documents. You could copy documents from other collections/tables with Copy advanved/Copy as JSON command.' })
+        : _t('dataGrid.noRowsLoaded', { defaultMessage: 'No rows loaded' })}
     />
     {#if display.filterCount > 0}
-      <FormStyledButton value="Reset filter" on:click={() => display.clearFilters()} />
+      <FormStyledButton value={_t('dataGrid.resetFilter', { defaultMessage: 'Reset filter' })} on:click={() => display.clearFilters()} />
     {/if}
     {#if grider.editable}
-      <FormStyledButton value="Add document" on:click={addJsonDocument} />
+      <FormStyledButton value={_t('dataGrid.addDocument', { defaultMessage: 'Add document' })} on:click={addJsonDocument} />
     {/if}
     {#if onOpenQuery}
-      <FormStyledButton value="Open Query" on:click={() => onOpenQuery()} />
+      <FormStyledButton value={_t('dataGrid.openQuery', { defaultMessage: 'Open Query' })} on:click={() => onOpenQuery()} />
     {/if}
   </div>
 {:else if grider.errors && grider.errors.length > 0}
@@ -2095,16 +2095,16 @@
     {#if !isDynamicStructure && isLoadedAll && grider?.rowCount == 0}
       <div class="no-rows-info ml-2">
         <div class="mb-3">
-          <ErrorInfo alignTop message="No rows loaded" icon="img info" />
+          <ErrorInfo alignTop message={_t('dataGrid.noRowsLoaded', { defaultMessage: 'No rows loaded' })} icon="img info" />
         </div>
         {#if display.filterCount > 0}
-          <FormStyledButton value="Reset filter" on:click={() => display.clearFilters()} />
+          <FormStyledButton value={_t('dataGrid.resetFilter', { defaultMessage: 'Reset filter' })} on:click={() => display.clearFilters()} />
         {/if}
         {#if grider.editable}
-          <FormStyledButton value="Add row" on:click={insertNewRow} />
+          <FormStyledButton value={_t('dataGrid.addRow', { defaultMessage: 'Add row' })} on:click={insertNewRow} />
         {/if}
         {#if onOpenQuery}
-          <FormStyledButton value="Open Query" on:click={() => onOpenQuery()} />
+          <FormStyledButton value={_t('dataGrid.openQuery', { defaultMessage: 'Open Query' })} on:click={() => onOpenQuery()} />
         {/if}
       </div>
     {/if}

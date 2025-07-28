@@ -1,10 +1,12 @@
 <script lang="ts" context="module">
+  import { _t } from '../translations';
+
   const getCurrentEditor = () => getActiveComponent('TableEditor');
 
   registerCommand({
     id: 'tableEditor.addColumn',
     category: 'Table editor',
-    name: 'Add column',
+    name: _t('command.tableEditor.addColumn', { defaultMessage: 'Add column' }),
     icon: 'icon add-column',
     toolbar: true,
     isRelatedToTab: true,
@@ -15,7 +17,7 @@
   registerCommand({
     id: 'tableEditor.addPrimaryKey',
     category: 'Table editor',
-    name: 'Add primary key',
+    name: _t('command.tableEditor.addPrimaryKey', { defaultMessage: 'Add primary key' }),
     icon: 'icon add-key',
     toolbar: true,
     isRelatedToTab: true,
@@ -171,9 +173,9 @@
   {#if tableInfo && (tableFormOptions || isCreateTable)}
     {#key resetCounter}
       <ObjectFieldsEditor
-        title="Table properties"
+        title={_t('tableEditor.tableProperties', { defaultMessage: 'Table properties' })}
         fieldDefinitions={tableFormOptions ?? []}
-        pureNameTitle={isCreateTable ? 'Table name' : null}
+        pureNameTitle={isCreateTable ? _t('tableEditor.tableName', { defaultMessage: 'Table name' }) : null}
         schemaList={isCreateTable && schemaList?.length >= 0 ? schemaList : null}
         values={_.pick(tableInfo, ['schemaName', 'pureName', ...(tableFormOptions ?? []).map(x => x.name)])}
         onChangeValues={vals => {
@@ -187,15 +189,15 @@
 
   <ObjectListControl
     collection={columns?.map((x, index) => ({ ...x, ordinal: index + 1 }))}
-    title={`Columns (${columns?.length || 0})`}
-    emptyMessage="No columns defined"
+    title={_t('tableEditor.columnsCount', { defaultMessage: 'Columns ({count})', count: columns?.length || 0 })}
+    emptyMessage={_t('tableEditor.noColumnsDefined', { defaultMessage: 'No columns defined' })}
     clickable
     on:clickrow={e => showModal(ColumnEditorModal, { columnInfo: e.detail, tableInfo, setTableInfo, driver })}
     onAddNew={isWritable ? addColumn : null}
     displayNameFieldName="columnName"
     multipleItemsActions={[
       {
-        text: 'Remove',
+        text: _t('tableEditor.remove', { defaultMessage: 'Remove' }),
         icon: 'icon delete',
         onClick: selected => {
           setTableInfo(tbl => {
@@ -226,19 +228,19 @@
     columns={[
       !driver?.dialect?.specificNullabilityImplementation && {
         fieldName: 'notNull',
-        header: 'Nullability',
+        header: _t('tableEditor.nullability', { defaultMessage: 'Nullability' }),
         sortable: true,
         slot: 0,
       },
       {
         fieldName: 'dataType',
-        header: 'Data Type',
+        header: _t('tableEditor.dataType', { defaultMessage: 'Data Type' }),
         sortable: true,
         filterable: true,
       },
       {
         fieldName: 'defaultValue',
-        header: 'Default value',
+        header: _t('tableEditor.defaultValue', { defaultMessage: 'Default value' }),
         sortable: true,
         filterable: true,
       },

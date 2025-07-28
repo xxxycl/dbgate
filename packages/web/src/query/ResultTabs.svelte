@@ -11,6 +11,7 @@
   import AllResultsTab from './AllResultsTab.svelte';
   import JslChart from '../charts/JslChart.svelte';
   import { isProApp } from '../utility/proTools';
+  import { _t } from '../translations';
 
   export let tabs = [];
   export let sessionId;
@@ -84,7 +85,7 @@
           props: { jslid: info.jslid, driver, onOpenChart: () => handleOpenChart(info.resultIndex) },
         }))),
     ...charts.map((info, index) => ({
-      label: `Chart ${info.resultIndex + 1}`,
+      label: `${_t('resultTabs.chart', { defaultMessage: 'Chart' })} ${info.resultIndex + 1}`,
       isChart: true,
       resultIndex: info.resultIndex,
       component: JslChart,
