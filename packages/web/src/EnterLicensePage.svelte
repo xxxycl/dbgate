@@ -14,6 +14,7 @@
   import ErrorInfo from './elements/ErrorInfo.svelte';
   import { isOneOfPage } from './utility/pageDefs';
   import { openWebLink } from './utility/simpleTools';
+  import { _t } from './translations';
 
   const config = useConfig();
   const values = writable({ amoid: null, databaseServer: null });
@@ -25,7 +26,7 @@
   let expiredMessageSet = false;
 
   $: if (isExpired && !expiredMessageSet) {
-    errorMessage = 'Your license is expired';
+    errorMessage = _t('enterLicensePage.licenseExpired', { defaultMessage: 'Your license is expired' });
     expiredMessageSet = true;
   }
 
@@ -41,12 +42,12 @@
 <FormProviderCore {values}>
   <SpecialPageLayout>
     {#if getElectron() || ($config?.storageDatabase && hasPermission('admin/license'))}
-      <div class="heading">License</div>
-      <FormTextAreaField label="Enter your license key" name="licenseKey" rows={5} />
+      <div class="heading">{_t('enterLicensePage.license', { defaultMessage: 'License' })}</div>
+      <FormTextAreaField label={_t('enterLicensePage.enterLicenseKey', { defaultMessage: 'Enter your license key' })} name="licenseKey" rows={5} />
 
       <div class="submit">
         <FormSubmit
-          value="Save license"
+          value={_t('enterLicensePage.saveLicense', { defaultMessage: 'Save license' })}
           on:click={async e => {
             sessionStorage.setItem('continueTrialConfirmed', '1');
             const { licenseKey } = e.detail;
@@ -54,7 +55,7 @@
             if (resp?.status == 'ok') {
               internalRedirectTo(isOneOfPage('admin-license') ? '/admin.html' : '/index.html');
             } else {
-              errorMessage = resp?.errorMessage || 'Error saving license key';
+              errorMessage = resp?.errorMessage || _t('enterLicensePage.errorSavingLicense', { defaultMessage: 'Error saving license key' });
             }
           }}
         />
@@ -63,7 +64,7 @@
       {#if !isExpired && trialDaysLeft == null}
         <div class="submit">
           <FormStyledButton
-            value="Start 30-day trial"
+            value={_t('enterLicensePage.startTrial', { defaultMessage: 'Start 30-day trial' })}
             on:click={async e => {
               errorMessage = '';
               const license = await apiCall('config/start-trial');
@@ -71,7 +72,7 @@
                 sessionStorage.setItem('continueTrialConfirmed', '1');
                 internalRedirectTo(isOneOfPage('admin-license') ? '/admin.html' : '/index.html');
               } else {
-                errorMessage = license?.errorMessage || 'Error starting trial';
+                errorMessage = license?.errorMessage || _t('enterLicensePage.errorStartingTrial', { defaultMessage: 'Error starting trial' });
               }
             }}
           />
@@ -81,7 +82,7 @@
       {#if trialDaysLeft > 0}
         <div class="submit">
           <FormStyledButton
-            value={`Continue trial (${trialDaysLeft} days left)`}
+            value={_t('enterLicensePage.continueTrial', { defaultMessage: 'Continue trial ({daysLeft} days left)', values: { daysLeft: trialDaysLeft } })}
             on:click={async e => {
               sessionStorage.setItem('continueTrialConfirmed', '1');
               internalRedirectTo(isOneOfPage('admin-license') ? '/admin.html' : '/index.html');
@@ -92,7 +93,7 @@
 
       <div class="submit">
         <FormStyledButton
-          value="Purchase DbGate Premium"
+          value={_t('enterLicensePage.purchasePremium', { defaultMessage: 'Purchase DbGate Premium' })}
           on:click={async e => {
             // openWebLink(
             //   `https://auth.dbgate.eu/create-checkout-session-simple?source=trial-${isExpired ? 'expired' : (trialDaysLeft ?? 'no')}`
@@ -112,7 +113,7 @@
       {#if getElectron()}
         <div class="submit">
           <FormStyledButton
-            value="Exit"
+            value={_t('enterLicensePage.exit', { defaultMessage: 'Exit' })}
             on:click={e => {
               getElectron().send('quit-app');
             }}
@@ -125,11 +126,10 @@
       {/if}
 
       <div class="purchase-info">
-        For more info about DbGate licensing, you could visit <Link href="https://dbgate.eu/">dbgate.eu</Link> web or contact
-        us at <Link href="mailto:sales@dbgate.eu">sales@dbgate.eu</Link>
+        {_t('enterLicensePage.moreInfo', { defaultMessage: 'For more info about DbGate licensing, you could visit' })} <Link href="https://dbgate.eu/">dbgate.eu</Link> {_t('enterLicensePage.webOrContact', { defaultMessage: 'web or contact us at' })} <Link href="mailto:sales@dbgate.eu">sales@dbgate.eu</Link>
       </div>
     {:else}
-      <ErrorInfo message="License for DbGate is not valid. Please contact administrator." />
+      <ErrorInfo message={_t('enterLicensePage.invalidLicense', { defaultMessage: 'License for DbGate is not valid. Please contact administrator.' })} />
     {/if}
   </SpecialPageLayout>
 </FormProviderCore>
