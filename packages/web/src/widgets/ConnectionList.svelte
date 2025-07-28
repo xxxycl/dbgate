@@ -47,6 +47,7 @@
     getOpenDetailOnArrowsSettings,
   } from '../settings/settingsTools';
   import DropDownButton from '../buttons/DropDownButton.svelte';
+  import { _t } from '../translations';
 
   const connections = useConnectionList();
   const serverStatus = useServerStatus();
@@ -58,7 +59,7 @@
   let domContainer = null;
   let domFilter = null;
 
-  const RECENT_AND_UNSAVED_LABEL = 'Recent & unsaved';
+  const RECENT_AND_UNSAVED_LABEL = _t('connectionList.recentAndUnsaved', { defaultMessage: 'Recent & unsaved' });
 
   function extractConnectionParent(data, openedConnections, openedSingleDatabaseConnections) {
     if (data.parent) {
@@ -160,8 +161,8 @@
     const handleRename = () => {
       showModal(InputTextModal, {
         value: folder,
-        label: 'New folder name',
-        header: 'Rename folder',
+        label: _t('connectionList.newFolderName', { defaultMessage: 'New folder name' }),
+        header: _t('connectionList.renameFolder', { defaultMessage: 'Rename folder' }),
         onConfirm: async newFolder => {
           emptyConnectionGroupNames.update(folders => _.uniq(folders.map(fld => (fld == folder ? newFolder : fld))));
           apiCall('connections/batch-change-folder', {
@@ -174,7 +175,10 @@
 
     const handleDelete = () => {
       showModal(ConfirmModal, {
-        message: `Really delete folder ${folder}? Connections in folder will be moved into root folder.`,
+        message: _t('connectionList.deleteFolderConfirm', {
+          defaultMessage: 'Really delete folder {folder}? Connections in folder will be moved into root folder.',
+          values: { folder }
+        }),
         onConfirm: () => {
           emptyConnectionGroupNames.update(folders => folders.filter(fld => fld != folder));
           apiCall('connections/batch-change-folder', {
@@ -186,19 +190,19 @@
     };
 
     return [
-      { text: 'Rename', onClick: handleRename },
-      { text: 'Delete', onClick: handleDelete },
+      { text: _t('connectionList.rename', { defaultMessage: 'Rename' }), onClick: handleRename },
+      { text: _t('connectionList.delete', { defaultMessage: 'Delete' }), onClick: handleDelete },
     ];
   }
 
   function createSearchMenu() {
     const res = [];
-    res.push({ label: 'Search by:', isBold: true, disabled: true });
-    res.push({ label: 'Display name', switchValue: 'displayName' });
-    res.push({ label: 'Server', switchValue: 'server' });
-    res.push({ label: 'User', switchValue: 'user' });
-    res.push({ label: 'Database engine', switchValue: 'engine' });
-    res.push({ label: 'Database name', switchValue: 'database' });
+    res.push({ label: _t('connectionList.searchBy', { defaultMessage: 'Search by:' }), isBold: true, disabled: true });
+    res.push({ label: _t('connectionList.displayName', { defaultMessage: 'Display name' }), switchValue: 'displayName' });
+    res.push({ label: _t('connectionList.server', { defaultMessage: 'Server' }), switchValue: 'server' });
+    res.push({ label: _t('connectionList.user', { defaultMessage: 'User' }), switchValue: 'user' });
+    res.push({ label: _t('connectionList.databaseEngine', { defaultMessage: 'Database engine' }), switchValue: 'engine' });
+    res.push({ label: _t('connectionList.databaseName', { defaultMessage: 'Database name' }), switchValue: 'database' });
     return res.map(item => ({
       ...item,
       switchStore: connectionAppObjectSearchSettings,
@@ -209,7 +213,7 @@
 
 <SearchBoxWrapper>
   <SearchInput
-    placeholder="Search connection or database"
+    placeholder={_t('connectionList.searchPlaceholder', { defaultMessage: 'Search connection or database' })}
     bind:value={filter}
     bind:this={domFilter}
     onFocusFilteredList={() => {
@@ -227,16 +231,16 @@
   {#if $commandsCustomized['new.connection']?.enabled}
     <InlineButton
       on:click={() => runCommand('new.connection')}
-      title="Add new connection"
+      title={_t('connectionList.addNewConnection', { defaultMessage: 'Add new connection' })}
       data-testid="ConnectionList_buttonNewConnection"
     >
       <FontIcon icon="icon plus-thick" />
     </InlineButton>
-    <InlineButton on:click={() => runCommand('new.connection.folder')} title="Add new connection folder">
+    <InlineButton on:click={() => runCommand('new.connection.folder')} title={_t('connectionList.addNewConnectionFolder', { defaultMessage: 'Add new connection folder' })}>
       <FontIcon icon="icon add-folder" />
     </InlineButton>
   {/if}
-  <InlineButton on:click={handleRefreshConnections} title="Refresh connection list">
+  <InlineButton on:click={handleRefreshConnections} title={_t('connectionList.refreshConnectionList', { defaultMessage: 'Refresh connection list' })}>
     <FontIcon icon="icon refresh" />
   </InlineButton>
 </SearchBoxWrapper>
@@ -364,7 +368,7 @@
   </AppObjectListHandler>
   {#if $connections && $connections.length == 0 && $openedConnections.length == 0 && $commandsCustomized['new.connection']?.enabled && !$openedTabs.find(x => !x.closedTime && x.tabComponent == 'ConnectionTab' && !x.props?.conid)}
     <LargeButton icon="icon new-connection" on:click={() => runCommand('new.connection')} fillHorizontal
-      >Add new connection</LargeButton
+      >{_t('connectionList.addNewConnection', { defaultMessage: 'Add new connection' })}</LargeButton
     >
     <!-- <ToolbarButton icon="icon new-connection" on:click={() => runCommand('new.connection')}>
       Add new connection

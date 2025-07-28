@@ -16,6 +16,7 @@
   import { isProApp } from '../utility/proTools';
   import { openWebLink } from '../utility/simpleTools';
   import { apiCall } from '../utility/api';
+  import { _t } from '../translations';
   import getElectron from '../utility/getElectron';
   import { showModal } from '../modals/modalTools';
   import NewObjectModal from '../modals/NewObjectModal.svelte';
@@ -28,16 +29,16 @@
     getCurrentConfig().storageDatabase && {
       icon: 'icon admin',
       name: 'admin',
-      title: 'Administration',
+      title: _t('widgetIconPanel.administration', { defaultMessage: 'Administration' }),
     },
     {
       icon: 'icon database',
       name: 'database',
-      title: 'Database connections',
+      title: _t('widgetIconPanel.databaseConnections', { defaultMessage: 'Database connections' }),
     },
     getCurrentConfig().allowPrivateCloud && {
       name: 'cloud-private',
-      title: 'DbGate Cloud',
+      title: _t('widgetIconPanel.dbgateCloud', { defaultMessage: 'DbGate Cloud' }),
       icon: 'icon cloud-private',
     },
 
@@ -48,17 +49,17 @@
     {
       icon: 'icon file',
       name: 'file',
-      title: 'Favorites & Saved files',
+      title: _t('widgetIconPanel.favoritesAndSavedFiles', { defaultMessage: 'Favorites & Saved files' }),
     },
     {
       icon: 'icon history',
       name: 'history',
-      title: 'Query history & Closed tabs',
+      title: _t('widgetIconPanel.queryHistoryAndClosedTabs', { defaultMessage: 'Query history & Closed tabs' }),
     },
     {
       icon: 'icon archive',
       name: 'archive',
-      title: 'Archive (saved tabular data)',
+      title: _t('widgetIconPanel.archiveSavedTabularData', { defaultMessage: 'Archive (saved tabular data)' }),
     },
     // {
     //   icon: 'icon plugin',
@@ -68,17 +69,17 @@
     {
       icon: 'icon cell-data',
       name: 'cell-data',
-      title: 'Selected cell data detail view',
+      title: _t('widgetIconPanel.selectedCellDataDetailView', { defaultMessage: 'Selected cell data detail view' }),
     },
     {
       name: 'cloud-public',
-      title: 'DbGate Cloud',
+      title: _t('widgetIconPanel.dbgateCloud', { defaultMessage: 'DbGate Cloud' }),
       icon: 'icon cloud-public',
     },
     {
       icon: 'icon premium',
       name: 'premium',
-      title: 'Premium promo',
+      title: _t('widgetIconPanel.premiumPromo', { defaultMessage: 'Premium promo' }),
       isPremiumPromo: true,
     },
     // {
@@ -110,14 +111,14 @@
       { command: 'theme.changeTheme' },
       { command: 'settings.commands' },
       {
-        text: 'View applications',
+        text: _t('widgetIconPanel.viewApplications', { defaultMessage: 'View applications' }),
         onClick: () => {
           $selectedWidget = 'app';
           $visibleWidgetSideBar = true;
         },
       },
       {
-        text: 'Manage plugins',
+        text: _t('widgetIconPanel.managePlugins', { defaultMessage: 'Manage plugins' }),
         onClick: () => {
           $selectedWidget = 'plugins';
           $visibleWidgetSideBar = true;
@@ -176,7 +177,7 @@
     >
       <FontIcon icon={item.icon} title={item.title} />
       {#if item.isPremiumPromo}
-        <div class="premium-promo">Premium</div>
+        <div class="premium-promo">{_t('widgetIconPanel.premium', { defaultMessage: 'Premium' })}</div>
       {/if}
     </div>
   {/each}
@@ -185,7 +186,7 @@
     class="wrapper"
     on:click={() => showModal(NewObjectModal)}
     data-testid="WidgetIconPanel_addButton"
-    title="Add New"
+    title={_t('widgetIconPanel.addNew', { defaultMessage: 'Add New' })}
   >
     <FontIcon icon="icon add" />
   </div>

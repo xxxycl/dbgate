@@ -5,6 +5,7 @@
   import ChooseConnectionColorModal from '../modals/ChooseConnectionColorModal.svelte';
 
   import FontIcon from '../icons/FontIcon.svelte';
+  import { _t } from '../translations';
 
   import {
     activeTabId,
@@ -69,12 +70,12 @@
       {#if dbid}
         <div
           class="item clickable"
-          title="Database color. Overrides connection color"
+          title={_t('statusBar.databaseColorTitle', { defaultMessage: 'Database color. Overrides connection color' })}
           on:click={() => {
             showModal(ChooseConnectionColorModal, {
               ...dbid,
-              header: 'Choose database color',
-              text: 'This color override connection color for specific database.',
+              header: _t('statusBar.chooseDatabaseColor', { defaultMessage: 'Choose database color' }),
+              text: _t('statusBar.databaseColorText', { defaultMessage: 'This color override connection color for specific database.' }),
             });
           }}
         >
@@ -92,12 +93,12 @@
       {#if dbid}
         <div
           class="item clickable"
-          title="Connection color. Can be overriden by database color"
+          title={_t('statusBar.connectionColorTitle', { defaultMessage: 'Connection color. Can be overriden by database color' })}
           on:click={() => {
             showModal(ChooseConnectionColorModal, {
               conid: dbid.conid,
-              header: 'Choose connection color',
-              text: 'This color serves as default color for all databases in this connection.',
+              header: _t('statusBar.chooseConnectionColor', { defaultMessage: 'Choose connection color' }),
+              text: _t('statusBar.connectionColorText', { defaultMessage: 'This color serves as default color for all databases in this connection.' }),
             });
           }}
         >
@@ -116,21 +117,21 @@
     {#if connection && $status}
       <div class="item clickable" on:click={() => visibleCommandPalette.set(findCommand('database.changeState'))}>
         {#if $status.name == 'pending'}
-          <FontIcon icon="icon loading" padRight /> Loading
+          <FontIcon icon="icon loading" padRight /> {_t('statusBar.loading', { defaultMessage: 'Loading' })}
         {:else if $status.name == 'checkStructure'}
-          <FontIcon icon="icon loading" padRight /> Checking model
+          <FontIcon icon="icon loading" padRight /> {_t('statusBar.checkingModel', { defaultMessage: 'Checking model' })}
         {:else if $status.name == 'loadStructure'}
-          <FontIcon icon="icon loading" padRight /> Loading model
+          <FontIcon icon="icon loading" padRight /> {_t('statusBar.loadingModel', { defaultMessage: 'Loading model' })}
         {:else if $status.name == 'ok'}
-          <FontIcon icon="img ok-inv" padRight /> Connected
+          <FontIcon icon="img ok-inv" padRight /> {_t('statusBar.connected', { defaultMessage: 'Connected' })}
         {:else if $status.name == 'error'}
-          <FontIcon icon="img error-inv" padRight /> Error
+          <FontIcon icon="img error-inv" padRight /> {_t('statusBar.error', { defaultMessage: 'Error' })}
         {/if}
       </div>
     {/if}
     {#if !connection}
       <div class="item">
-        <FontIcon icon="icon disconnected" padRight /> Not connected
+        <FontIcon icon="icon disconnected" padRight /> {_t('statusBar.notConnected', { defaultMessage: 'Not connected' })}
       </div>
     {/if}
     {#if $serverVersion}
@@ -144,9 +145,13 @@
     {#if $status?.analysedTime}
       <div
         class="item flex clickable"
-        title={`Last ${databaseName} model refresh: ${moment($status?.analysedTime).format(
-          'HH:mm:ss'
-        )}\nClick for refresh DB model`}
+        title={_t('statusBar.modelRefreshTooltip', {
+          defaultMessage: 'Last {databaseName} model refresh: {time}\nClick for refresh DB model',
+          values: {
+            databaseName,
+            time: moment($status?.analysedTime).format('HH:mm:ss')
+          }
+        })}
         on:click={handleSyncModel}
       >
         <FontIcon icon="icon history" padRight />

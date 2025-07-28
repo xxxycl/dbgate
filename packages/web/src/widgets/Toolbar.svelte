@@ -18,6 +18,7 @@
   import { useFavorites } from '../utility/metadataLoaders';
   import ToolbarButton from '../buttons/ToolbarButton.svelte';
   import { formatKeyText } from '../utility/common';
+  import { _t } from '../translations';
 
   const electron = getElectron();
 

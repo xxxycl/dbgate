@@ -9,10 +9,15 @@
   import getElectron from '../utility/getElectron';
   import { apiOn } from '../utility/api';
   import { isProApp } from '../utility/proTools';
+  import { _t } from '../translations';
 
-  $: title = _.compact([$activeTab?.title, $currentDatabase?.name, isProApp() ? 'DbGate Premium' : 'DbGate']).join(
-    ' - '
-  );
+  $: title = _.compact([
+    $activeTab?.title,
+    $currentDatabase?.name,
+    isProApp()
+      ? _t('titleBar.appNamePremium', { defaultMessage: 'DbGate Premium' })
+      : _t('titleBar.appName', { defaultMessage: 'DbGate' })
+  ]).join(' - ');
   const electron = getElectron();
 
   let isMaximized = false;
