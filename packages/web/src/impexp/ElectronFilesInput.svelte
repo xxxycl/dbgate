@@ -1,9 +1,11 @@
 <script lang="ts" context="module">
+  import { _t } from '../translations';
+
   function getFileFilters(extensions, storageType) {
     const res = [];
     const format = findFileFormat(extensions, storageType);
     if (format) res.push({ name: format.name, extensions: [format.extension] });
-    res.push({ name: 'All Files', extensions: ['*'] });
+    res.push({ name: _t('electronFilesInput.allFiles', { defaultMessage: 'All Files' }), extensions: ['*'] });
     return res;
   }
 </script>
@@ -47,7 +49,7 @@
   };
 </script>
 
-<FormStyledButton type="button" value="Add file(s)" on:click={handleClick} />
+<FormStyledButton type="button" value={_t('electronFilesInput.addFiles', { defaultMessage: 'Add file(s)' })} on:click={handleClick} />
 {#if isLoading}
-  <LoadingInfo message="Anaysing input files" />
+  <LoadingInfo message={_t('electronFilesInput.analysingFiles', { defaultMessage: 'Analysing input files' })} />
 {/if}
