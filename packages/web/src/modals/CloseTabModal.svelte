@@ -9,6 +9,7 @@
   import ModalBase from './ModalBase.svelte';
   import { closeCurrentModal } from './modalTools';
   import { commandsCustomized } from '../stores';
+  import { _t } from '../translations';
 
   export let tabs;
   export let onConfirm;
@@ -27,12 +28,12 @@
 
 <FormProvider>
   <ModalBase {...$$restProps}>
-    <svelte:fragment slot="header">Confirm close tabs</svelte:fragment>
+    <svelte:fragment slot="header">{_t('closeTabModal.confirmCloseTabs', { defaultMessage: 'Confirm close tabs' })}</svelte:fragment>
 
     <div>
-      Following files are modified, really close tabs? After closing, you could reopen them in history
+      {_t('closeTabModal.modifiedFilesMessage', { defaultMessage: 'Following files are modified, really close tabs? After closing, you could reopen them in history' })}
       <FontIcon icon="icon history" />
-      widget
+      {_t('closeTabModal.widget', { defaultMessage: 'widget' })}
     </div>
 
     {#each tabs as tab}
@@ -41,7 +42,7 @@
 
     <svelte:fragment slot="footer">
       <FormSubmit
-        value="Close tabs"
+        value={_t('closeTabModal.closeTabs', { defaultMessage: 'Close tabs' })}
         on:click={() => {
           closeCurrentModal();
           onConfirm();
@@ -49,7 +50,7 @@
       />
       <FormStyledButton
         type="button"
-        value="Cancel"
+        value={_t('closeTabModal.cancel', { defaultMessage: 'Cancel' })}
         on:click={() => {
           closeCurrentModal();
           onCancel();

@@ -16,6 +16,7 @@
   import FormSubmit from '../forms/FormSubmit.svelte';
   import FormButton from '../forms/FormButton.svelte';
   import { apiCall } from '../utility/api';
+  import { _t } from '../translations';
 
   export let editingData;
   export let savingTab;
@@ -113,10 +114,10 @@
 
 <FormProvider {initialValues}>
   <ModalBase {...$$restProps}>
-    <svelte:fragment slot="header">{editingData ? 'Edit favorite' : 'Share / add to favorites'}</svelte:fragment>
+    <svelte:fragment slot="header">{editingData ? _t('favoriteModal.editFavorite', { defaultMessage: 'Edit favorite' }) : _t('favoriteModal.shareAddToFavorites', { defaultMessage: 'Share / add to favorites' })}</svelte:fragment>
 
-    <FormTextField label="Title" name="title" focused />
-    <FormTextField label="Icon" name="icon" />
+    <FormTextField label={_t('favoriteModal.title', { defaultMessage: 'Title' })} name="title" focused />
+    <FormTextField label={_t('favoriteModal.icon', { defaultMessage: 'Icon' })} name="icon" />
 
     <FormTextField label="URL path" name="urlPath" />
     {#if !!savingTab && !electron && canWriteFavorite}
