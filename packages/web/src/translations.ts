@@ -3,6 +3,7 @@ import zhCN from '../../../translations/zh-CN.json';
 
 import MessageFormat, { MessageFunction } from '@messageformat/core';
 import { getStringSettingsValue } from './settings/settingsTools';
+import { setMomentLocale } from './locales/supportedLocales';
 
 const translations = {
   en: {},
@@ -10,6 +11,8 @@ const translations = {
   'zh-CN': zhCN,
 };
 const supportedLanguages = Object.keys(translations);
+
+
 
 const compiledMessages: Partial<Record<string, Record<string, MessageFunction<'string'>>>> = {};
 
@@ -19,7 +22,14 @@ export function getSelectedLanguage(): string {
   const borwserLanguage = getBrowserLanguage();
   const selectedLanguage = getStringSettingsValue('localization.language', borwserLanguage);
 
-  if (!supportedLanguages.includes(selectedLanguage)) return defaultLanguage;
+  if (!supportedLanguages.includes(selectedLanguage)) {
+    // Set moment.js localization for default language / 为默认语言设置moment.js本地化
+    setMomentLocale(defaultLanguage);
+    return defaultLanguage;
+  }
+
+  // Set moment.js localization / 设置moment.js的本地化
+  setMomentLocale(selectedLanguage);
 
   return selectedLanguage;
 }
