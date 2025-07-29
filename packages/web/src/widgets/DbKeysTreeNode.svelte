@@ -63,12 +63,12 @@
         },
       item.key != null &&
         !connection?.isReadOnly && {
-          label: 'Rename key',
+          label: _t('dbKeysTree.renameKey', { defaultMessage: 'Rename key' }),
           onClick: () => {
             showModal(InputTextModal, {
               value: item.key,
-              label: 'New name',
-              header: 'Rename key',
+              label: _t('dbKeysTree.newNameLabel', { defaultMessage: 'New name' }),
+              header: _t('dbKeysTree.renameKeyHeader', { defaultMessage: 'Rename key' }),
               onConfirm: async newName => {
                 await apiCall('database-connections/call-method', {
                   conid,

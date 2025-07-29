@@ -59,8 +59,8 @@
   function handleChangeTtl(keyInfo) {
     showModal(InputTextModal, {
       value: keyInfo.ttl,
-      label: 'New TTL value (-1=key never expires)',
-      header: `Set TTL for key ${keyInfo.key}`,
+      label: _t('dbKeyDetail.newTtlLabel', { defaultMessage: 'New TTL value (-1=key never expires)' }),
+      header: _t('dbKeyDetail.setTtlHeader', { defaultMessage: 'Set TTL for key {key}', values: { key: keyInfo.key } }),
       onConfirm: async value => {
         const ttl = parseInt(value);
         if (_.isNumber(ttl)) {
@@ -122,7 +122,7 @@
 </script>
 
 {#await apiCall('database-connections/load-key-info', { conid, database, key, refreshToken })}
-  <LoadingInfo message="Loading key details" wrapper />
+  <LoadingInfo message={_t('dbKeyDetail.loadingMessage', { defaultMessage: 'Loading key details' })} wrapper />
 {:then keyInfo}
   <div class="container">
     <div class="top-panel">
