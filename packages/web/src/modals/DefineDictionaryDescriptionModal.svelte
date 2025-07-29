@@ -24,6 +24,7 @@
   import TargetApplicationSelect from '../forms/TargetApplicationSelect.svelte';
   import { currentDatabase } from '../stores';
   import { filterAppsForDatabase } from '../utility/appTools';
+  import { _t } from '../translations';
 
   export let conid;
   export let database;
@@ -72,15 +73,15 @@
 
 <FormProviderCore {values}>
   <ModalBase {...$$restProps}>
-    <svelte:fragment slot="header">Define description</svelte:fragment>
+    <svelte:fragment slot="header">{_t('defineDictionaryDescriptionModal.defineDescription', { defaultMessage: 'Define description' })}</svelte:fragment>
 
     <div class="wrapper">
       <TableControl
         rows={$tableInfo?.columns || []}
         columns={[
           { fieldName: 'checked', header: '', slot: 1 },
-          { fieldName: 'columnName', header: 'Column' },
-          { fieldName: 'dataType', header: 'Data type' },
+          { fieldName: 'columnName', header: _t('defineDictionaryDescriptionModal.column', { defaultMessage: 'Column' }) },
+          { fieldName: 'dataType', header: _t('defineDictionaryDescriptionModal.dataType', { defaultMessage: 'Data type' }) },
         ]}
       >
         <input
@@ -99,12 +100,12 @@
       </TableControl>
     </div>
 
-    <FormTextField name="columns" label="Show columns" />
+    <FormTextField name="columns" label={_t('defineDictionaryDescriptionModal.showColumns', { defaultMessage: 'Show columns' })} />
 
-    <FormTextField name="delimiter" label="Delimiter" />
+    <FormTextField name="delimiter" label={_t('defineDictionaryDescriptionModal.delimiter', { defaultMessage: 'Delimiter' })} />
 
     <FormSelectField
-      label="Target application"
+      label={_t('defineDictionaryDescriptionModal.targetApplication', { defaultMessage: 'Target application' })}
       name="targetApplication"
       disableInitialize
       selectFieldComponent={TargetApplicationSelect}
@@ -114,7 +115,7 @@
 
     <svelte:fragment slot="footer">
       <FormSubmit
-        value="OK"
+        value={_t('common.ok', { defaultMessage: 'OK' })}
         disabled={!checkDescriptionExpression($values?.columns, $tableInfo)}
         on:click={() => {
           closeCurrentModal();
@@ -129,7 +130,7 @@
           onConfirm();
         }}
       />
-      <FormStyledButton type="button" value="Close" on:click={closeCurrentModal} />
+      <FormStyledButton type="button" value={_t('common.close', { defaultMessage: 'Close' })} on:click={closeCurrentModal} />
     </svelte:fragment>
   </ModalBase>
 </FormProviderCore>
