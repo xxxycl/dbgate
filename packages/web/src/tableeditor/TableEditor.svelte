@@ -246,37 +246,37 @@
       },
       driver?.dialect?.columnProperties?.isSparse && {
         fieldName: 'isSparse',
-        header: 'Is Sparse',
+        header: _t('tableEditor.isSparse', { defaultMessage: 'Is Sparse' }),
         sortable: true,
         slot: 1,
       },
       {
         fieldName: 'computedExpression',
-        header: 'Computed Expression',
+        header: _t('tableEditor.computedExpression', { defaultMessage: 'Computed Expression' }),
         sortable: true,
         filterable: true,
       },
       driver?.dialect?.columnProperties?.isPersisted && {
         fieldName: 'isPersisted',
-        header: 'Is Persisted',
+        header: _t('tableEditor.isPersisted', { defaultMessage: 'Is Persisted' }),
         sortable: true,
         slot: 2,
       },
       driver?.dialect?.columnProperties?.isUnsigned && {
         fieldName: 'isUnsigned',
-        header: 'Unsigned',
+        header: _t('tableEditor.unsigned', { defaultMessage: 'Unsigned' }),
         sortable: true,
         slot: 4,
       },
       driver?.dialect?.columnProperties?.isZerofill && {
         fieldName: 'isZerofill',
-        header: 'Zero fill',
+        header: _t('tableEditor.zeroFill', { defaultMessage: 'Zero fill' }),
         sortable: true,
         slot: 5,
       },
       driver?.dialect?.columnProperties?.columnComment && {
         fieldName: 'columnComment',
-        header: 'Comment',
+        header: _t('tableEditor.comment', { defaultMessage: 'Comment' }),
         sortable: true,
         filterable: true,
       },
@@ -297,7 +297,7 @@
         onClick={e => {
           e.stopPropagation();
           setTableInfo(tbl => editorDeleteColumn(tbl, row));
-        }}>Remove</Link
+        }}>{_t('tableEditor.remove', { defaultMessage: 'Remove' })}</Link
       ></svelte:fragment
     >
     <svelte:fragment slot="4" let:row>{row?.isUnsigned ? 'YES' : 'NO'}</svelte:fragment>

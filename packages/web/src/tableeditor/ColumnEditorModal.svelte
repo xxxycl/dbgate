@@ -27,27 +27,27 @@
 <FormProvider initialValues={fillEditorColumnInfo(columnInfo || {}, tableInfo)}>
   <ModalBase {...$$restProps}>
     <svelte:fragment slot="header"
-      >{columnInfo ? 'Edit column' : `Add column ${(tableInfo?.columns || []).length + 1}`}</svelte:fragment
+      >{columnInfo ? _t('columnEditor.editColumn', { defaultMessage: 'Edit column' }) : _t('columnEditor.addColumn', { defaultMessage: 'Add column {number}', values: { number: (tableInfo?.columns || []).length + 1 } })}</svelte:fragment
     >
 
-    <FormTextField name="columnName" label="Column name" focused disabled={isReadOnly} />
+    <FormTextField name="columnName" label={_t('columnEditor.columnName', { defaultMessage: 'Column name' })} focused disabled={isReadOnly} />
     <DataTypeEditor dialect={driver?.dialect} disabled={isReadOnly} />
 
     {#if !driver?.dialect?.specificNullabilityImplementation}
-      <FormCheckboxField name="notNull" label="NOT NULL" disabled={isReadOnly} />
+      <FormCheckboxField name="notNull" label={_t('columnEditor.notNull', { defaultMessage: 'NOT NULL' })} disabled={isReadOnly} />
     {/if}
-    <FormCheckboxField name="isPrimaryKey" label="Is Primary Key" disabled={isReadOnly} />
+    <FormCheckboxField name="isPrimaryKey" label={_t('columnEditor.isPrimaryKey', { defaultMessage: 'Is Primary Key' })} disabled={isReadOnly} />
     {#if !driver?.dialect?.disableAutoIncrement}
-      <FormCheckboxField name="autoIncrement" label="Is Autoincrement" disabled={isReadOnly} />
+      <FormCheckboxField name="autoIncrement" label={_t('columnEditor.isAutoincrement', { defaultMessage: 'Is Autoincrement' })} disabled={isReadOnly} />
     {/if}
     <FormTextField
       name="defaultValue"
-      label="Default value. Please use valid SQL expression, eg. 'Hello World' for string value, '' for empty string"
+      label={_t('columnEditor.defaultValue', { defaultMessage: 'Default value. Please use valid SQL expression, eg. \'Hello World\' for string value, \'\' for empty string' })}
       disabled={!setTableInfo}
     />
-    <FormTextField name="computedExpression" label="Computed expression" disabled={isReadOnly} />
+    <FormTextField name="computedExpression" label={_t('columnEditor.computedExpression', { defaultMessage: 'Computed expression' })} disabled={isReadOnly} />
     {#if driver?.dialect?.columnProperties?.isUnsigned}
-      <FormCheckboxField name="isUnsigned" label="Unsigned" disabled={isReadOnly} />
+      <FormCheckboxField name="isUnsigned" label={_t('columnEditor.unsigned', { defaultMessage: 'Unsigned' })} disabled={isReadOnly} />
     {/if}
     {#if driver?.dialect?.columnProperties?.isZerofill}
       <FormCheckboxField name="isZerofill" label="Zero fill" disabled={isReadOnly} />

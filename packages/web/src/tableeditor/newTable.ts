@@ -8,7 +8,7 @@ export default function newTable(connection, database) {
   const driver = findEngineDriver(connection, getExtensions());
   openNewTab(
     {
-      title: 'Table #',
+      title: _t('newTable.title', { defaultMessage: 'Table #' }),
       tooltip,
       icon: 'img table-structure',
       tabComponent: 'TableStructureTab',
