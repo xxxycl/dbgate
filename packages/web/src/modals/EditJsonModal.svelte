@@ -30,11 +30,10 @@
 
 <FormProvider>
   <ModalBase {...$$restProps}>
-    <div slot="header">Edit JSON value</div>
+    <div slot="header">{_t('editJsonModal.editJsonValue', { defaultMessage: 'Edit JSON value' })}</div>
     {#if showPasteInfo}
       <div class="m-2">
-        Edit JSON object or array. You can paste JSON array or object directly into data grid, new row(s) will be added
-        to recordset.
+        {_t('editJsonModal.pasteInfo', { defaultMessage: 'Edit JSON object or array. You can paste JSON array or object directly into data grid, new row(s) will be added to recordset.' })}
       </div>
     {/if}
 
@@ -60,7 +59,7 @@
       />
       <FormStyledButton
         type="button"
-        value="Close"
+        value={_t('common.close', { defaultMessage: 'Close' })}
         on:click={closeCurrentModal}
         data-testid="EditJsonModal_closeButton"
       />
