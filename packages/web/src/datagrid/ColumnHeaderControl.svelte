@@ -67,14 +67,14 @@
 
       isTypeDateTime(column.dataType) && [
         { divider: true },
-        { onClick: () => setGrouping('GROUP:YEAR'), text: 'Group by YEAR' },
-        { onClick: () => setGrouping('GROUP:MONTH'), text: 'Group by MONTH' },
-        { onClick: () => setGrouping('GROUP:DAY'), text: 'Group by DAY' },
+        { onClick: () => setGrouping('GROUP:YEAR'), text: _t('columnHeader.groupByYear', { defaultMessage: 'Group by YEAR' }) },
+        { onClick: () => setGrouping('GROUP:MONTH'), text: _t('columnHeader.groupByMonth', { defaultMessage: 'Group by MONTH' }) },
+        { onClick: () => setGrouping('GROUP:DAY'), text: _t('columnHeader.groupByDay', { defaultMessage: 'Group by DAY' }) },
       ],
 
       allowDefineVirtualReferences && [
         { divider: true },
-        { onClick: handleDefineVirtualForeignKey, text: 'Define virtual foreign key' },
+        { onClick: handleDefineVirtualForeignKey, text: _t('columnHeader.defineVirtualForeignKey', { defaultMessage: 'Define virtual foreign key' }) },
       ],
     ];
   }

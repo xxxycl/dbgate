@@ -17,6 +17,7 @@
   import SelectField from '../forms/SelectField.svelte';
   import ColumnEditorModal from '../tableeditor/ColumnEditorModal.svelte';
   import { tick } from 'svelte';
+  import { _t } from '../translations';
 
   export let managerSize;
   export let display: GridDisplay;
@@ -175,7 +176,7 @@
 {/if}
 <SearchBoxWrapper>
   <SearchInput
-    placeholder="Search columns"
+    placeholder={_t('columnManager.searchColumns', { defaultMessage: 'Search columns' })}
     value={currentFilter}
     onChange={value => display.setSearchInColumns(value)}
     data-testid="ColumnManager_searchColumns"
@@ -186,8 +187,8 @@
       on:click={() => {
         showModal(InputTextModal, {
           value: '',
-          label: 'Column name',
-          header: 'Add new column',
+          label: _t('columnManager.columnName', { defaultMessage: 'Column name' }),
+          header: _t('columnManager.addNewColumn', { defaultMessage: 'Add new column' }),
           onConfirm: name => {
             display.addDynamicColumn(name);
             tick().then(() => {

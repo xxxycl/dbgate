@@ -8,6 +8,7 @@
   import keycodes from '../utility/keycodes';
   import FormViewFilterColumn from './FormViewFilterColumn.svelte';
   import { stringFilterBehaviour } from 'dbgate-tools';
+  import { _t } from '../translations';
   // import PrimaryKeyFilterEditor from './PrimaryKeyFilterEditor.svelte';
 
   export let managerSize;
@@ -35,7 +36,7 @@
 
 {#if isFormView}
   <div class="m-1">
-    <div>Column name filter</div>
+    <div>{_t('formViewFilters.columnNameFilter', { defaultMessage: 'Column name filter' })}</div>
     <div class="flex">
       <input
         type="text"

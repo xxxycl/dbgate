@@ -27,7 +27,7 @@
   registerCommand({
     id: 'dataForm.copyToClipboard',
     category: 'Data form',
-    name: 'Copy to clipboard',
+    name: _t('command.dataForm.copyToClipboard', { defaultMessage: 'Copy to clipboard' }),
     keyText: 'CtrlOrCommand+C',
     disableHandleKeyText: 'CtrlOrCommand+C',
     testEnabled: () => getCurrentDataForm() != null,
@@ -37,7 +37,7 @@
   registerCommand({
     id: 'dataForm.revertRowChanges',
     category: 'Data form',
-    name: 'Revert row changes',
+    name: _t('command.dataForm.revertRowChanges', { defaultMessage: 'Revert row changes' }),
     keyText: 'CtrlOrCommand+U',
     testEnabled: () => getCurrentDataForm()?.getGrider()?.containsChanges,
     onClick: () => getCurrentDataForm().getGrider().revertRowChanges(0),
@@ -46,7 +46,7 @@
   registerCommand({
     id: 'dataForm.setNull',
     category: 'Data form',
-    name: 'Set NULL',
+    name: _t('command.dataForm.setNull', { defaultMessage: 'Set NULL' }),
     keyText: 'CtrlOrCommand+0',
     testEnabled: () => getCurrentDataForm() != null && !getCurrentDataForm()?.getEditorTypes()?.supportFieldRemoval,
     onClick: () => getCurrentDataForm().setFixedValue(null),
@@ -55,7 +55,7 @@
   registerCommand({
     id: 'dataForm.removeField',
     category: 'Data form',
-    name: 'Remove field',
+    name: _t('command.dataForm.removeField', { defaultMessage: 'Remove field' }),
     keyText: 'CtrlOrCommand+0',
     testEnabled: () => getCurrentDataForm() != null && getCurrentDataForm()?.getEditorTypes()?.supportFieldRemoval,
     onClick: () => getCurrentDataForm().setFixedValue(undefined),
@@ -96,7 +96,7 @@
   registerCommand({
     id: 'dataForm.filterSelected',
     category: 'Data form',
-    name: 'Filter this value',
+    name: _t('command.dataForm.filterSelected', { defaultMessage: 'Filter this value' }),
     keyText: 'CtrlOrCommand+Shift+F',
     testEnabled: () => getCurrentDataForm() != null,
     onClick: () => getCurrentDataForm().filterSelectedValue(),
@@ -105,7 +105,7 @@
   registerCommand({
     id: 'dataForm.addToFilter',
     category: 'Data form',
-    name: 'Add to filter',
+    name: _t('command.dataForm.addToFilter', { defaultMessage: 'Add to filter' }),
     testEnabled: () => getCurrentDataForm() != null,
     onClick: () => getCurrentDataForm().addToFilter(),
   });
@@ -113,7 +113,7 @@
   registerCommand({
     id: 'dataForm.goToFirst',
     category: 'Data form',
-    name: 'First',
+    name: _t('command.dataForm.goToFirst', { defaultMessage: 'First' }),
     keyText: 'CtrlOrCommand+Home',
     toolbar: true,
     isRelatedToTab: true,
@@ -125,7 +125,7 @@
   registerCommand({
     id: 'dataForm.goToPrevious',
     category: 'Data form',
-    name: 'Previous',
+    name: _t('command.dataForm.goToPrevious', { defaultMessage: 'Previous' }),
     keyText: 'CtrlOrCommand+ArrowUp',
     toolbar: true,
     isRelatedToTab: true,
@@ -137,7 +137,7 @@
   registerCommand({
     id: 'dataForm.goToNext',
     category: 'Data form',
-    name: 'Next',
+    name: _t('command.dataForm.goToNext', { defaultMessage: 'Next' }),
     keyText: 'CtrlOrCommand+ArrowDown',
     toolbar: true,
     isRelatedToTab: true,
@@ -149,7 +149,7 @@
   registerCommand({
     id: 'dataForm.goToLast',
     category: 'Data form',
-    name: 'Last',
+    name: _t('command.dataForm.goToLast', { defaultMessage: 'Last' }),
     keyText: 'CtrlOrCommand+End',
     toolbar: true,
     isRelatedToTab: true,
@@ -720,7 +720,7 @@
 </div>
 
 {#if isLoading}
-  <LoadingInfo wrapper message="Loading data" />
+  <LoadingInfo wrapper message={_t('formView.loadingData', { defaultMessage: 'Loading data' })} />
 {/if}
 
 <style>
