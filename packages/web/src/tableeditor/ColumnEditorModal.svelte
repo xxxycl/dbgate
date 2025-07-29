@@ -50,18 +50,18 @@
       <FormCheckboxField name="isUnsigned" label={_t('columnEditor.unsigned', { defaultMessage: 'Unsigned' })} disabled={isReadOnly} />
     {/if}
     {#if driver?.dialect?.columnProperties?.isZerofill}
-      <FormCheckboxField name="isZerofill" label="Zero fill" disabled={isReadOnly} />
+      <FormCheckboxField name="isZerofill" label={_t('columnEditor.zeroFill', { defaultMessage: 'Zero fill' })} disabled={isReadOnly} />
     {/if}
     {#if driver?.dialect?.columnProperties?.columnComment}
-      <FormTextField name="columnComment" label="Comment" disabled={isReadOnly} />
+      <FormTextField name="columnComment" label={_t('columnEditor.comment', { defaultMessage: 'Comment' })} disabled={isReadOnly} />
     {/if}
     {#if driver?.dialect?.columnProperties?.isSparse}
-      <FormCheckboxField name="isSparse" label="Sparse" disabled={isReadOnly} />
+      <FormCheckboxField name="isSparse" label={_t('columnEditor.sparse', { defaultMessage: 'Sparse' })} disabled={isReadOnly} />
     {/if}
 
     <svelte:fragment slot="footer">
       <FormSubmit
-        value={columnInfo ? 'Save' : 'Save and next'}
+        value={columnInfo ? _t('common.save', { defaultMessage: 'Save' }) : _t('columnEditor.saveAndNext', { defaultMessage: 'Save and next' })}
         disabled={isReadOnly}
         on:click={e => {
           closeCurrentModal();
@@ -85,11 +85,11 @@
         />
       {/if}
 
-      <FormStyledButton type="button" value="Close" on:click={closeCurrentModal} />
+      <FormStyledButton type="button" value={_t('common.close', { defaultMessage: 'Close' })} on:click={closeCurrentModal} />
       {#if columnInfo}
         <FormStyledButton
           type="button"
-          value="Remove"
+          value={_t('columnEditor.remove', { defaultMessage: 'Remove' })}
           on:click={() => {
             closeCurrentModal();
             setTableInfo(tbl => editorDeleteColumn(tbl, columnInfo, addDataCommand));

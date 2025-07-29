@@ -347,7 +347,7 @@ ORDER BY
           <div class="m-5">
             {_t('settings.moreThemesAvailable', { defaultMessage: 'More themes are available as' })} <Link onClick={openThemePlugins}>{_t('settings.plugins', { defaultMessage: 'plugins' })}</Link>
             <br />
-            {_t('settings.afterInstallingThemePlugin', { defaultMessage: 'After installing theme plugin (try search "theme" in available extensions) new themes will be available here.' })}
+            {_t('settings.afterInstallingThemePlugin', { defaultMessage: 'After installing theme plugin (try search theme in available extensions) new themes will be available here.' })}
           </div>
 
           <div class="heading">{_t('settings.editorTheme', { defaultMessage: 'Editor theme' })}</div>
