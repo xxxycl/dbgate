@@ -59,7 +59,7 @@
 
   function createScriptTemplatesSubmenu(objectTypeField) {
     return {
-      label: 'SQL template',
+      label: _t('contextMenu.sqlTemplate', { defaultMessage: 'SQL template' }),
       submenu: getSupportedScriptTemplates(objectTypeField),
     };
   }
@@ -126,7 +126,7 @@
                 },
               },
               {
-                label: _t('contextMenu.dropTable', { defaultMessage: 'DROP TABLE' }),
+                label: _t('contextMenu.dropTableSql', { defaultMessage: 'DROP TABLE' }),
                 sqlGeneratorProps: {
                   dropTables: true,
                   dropReferences: true,
@@ -144,45 +144,45 @@
             divider: true,
           },
           hasPermission('dbops/model/edit') && {
-            label: 'Drop table',
+            label: _t('contextMenu.dropTable', { defaultMessage: 'Drop table' }),
             isDrop: true,
             requiresWriteAccess: true,
           },
           hasPermission('dbops/table/rename') &&
             !driver?.dialect.disableRenameTable && {
-              label: 'Rename table',
+              label: _t('contextMenu.renameTable', { defaultMessage: 'Rename table' }),
               isRename: true,
               requiresWriteAccess: true,
             },
           hasPermission('dbops/table/truncate') && {
-            label: 'Truncate table',
+            label: _t('contextMenu.truncateTable', { defaultMessage: 'Truncate table' }),
             isTruncate: true,
             requiresWriteAccess: true,
           },
           {
-            label: 'Copy table name',
+            label: _t('contextMenu.copyTableName', { defaultMessage: 'Copy table name' }),
             isCopyTableName: true,
             requiresWriteAccess: false,
           },
           hasPermission('dbops/table/backup') && {
-            label: 'Create table backup',
+            label: _t('contextMenu.createTableBackup', { defaultMessage: 'Create table backup' }),
             isDuplicateTable: true,
             requiresWriteAccess: true,
           },
           hasPermission('dbops/model/view') && {
-            label: 'Show diagram',
+            label: _t('contextMenu.showDiagram', { defaultMessage: 'Show diagram' }),
             isDiagram: true,
           },
           {
             divider: true,
           },
           hasPermission('dbops/export') && {
-            label: 'Export',
+            label: _t('contextMenu.export', { defaultMessage: 'Export' }),
             functionName: 'tableReader',
             isExport: true,
           },
           hasPermission('dbops/import') && {
-            label: 'Import',
+            label: _t('contextMenu.import', { defaultMessage: 'Import' }),
             isImport: true,
             requiresWriteAccess: true,
           },
@@ -225,12 +225,12 @@
             divider: true,
           },
           hasPermission('dbops/model/edit') && {
-            label: 'Drop view',
+            label: _t('contextMenu.dropView', { defaultMessage: 'Drop view' }),
             isDrop: true,
             requiresWriteAccess: true,
           },
           hasPermission('dbops/model/edit') && {
-            label: 'Rename view',
+            label: _t('contextMenu.renameView', { defaultMessage: 'Rename view' }),
             isRename: true,
             requiresWriteAccess: true,
           },
@@ -238,7 +238,7 @@
             divider: true,
           },
           {
-            label: 'Export',
+            label: _t('contextMenu.export', { defaultMessage: 'Export' }),
             isExport: true,
             functionName: 'tableReader',
           },
