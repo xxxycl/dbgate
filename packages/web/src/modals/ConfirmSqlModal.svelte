@@ -92,7 +92,7 @@
       <div class="mt-2">
         <FormCheckboxField
           templateProps={{ noMargin: true }}
-          label="Delete references CASCADE"
+          label={_t('confirmSqlModal.deleteReferencesCascade', { defaultMessage: 'Delete references CASCADE' })}
           name="deleteReferencesCascade"
           data-testid="ConfirmSqlModal_deleteReferencesCascade"
         />
@@ -102,13 +102,13 @@
     {#if $values.deleteReferencesCascade}
       <div class="form-margin flex">
         <FormStyledButton
-          value="Check all"
+          value={_t('confirmSqlModal.checkAll', { defaultMessage: 'Check all' })}
           on:click={() => {
             $values = _.omitBy($values, (v, k) => k.startsWith('deleteReferencesFor_'));
           }}
         />
         <FormStyledButton
-          value="Uncheck all"
+          value={_t('confirmSqlModal.uncheckAll', { defaultMessage: 'Uncheck all' })}
           on:click={() => {
             const newValues = { ...$values };
             for (const item of deleteCascadesScripts) {
@@ -136,12 +136,11 @@
     {#if isRecreated}
       <div class="form-margin">
         <div>
-          <FontIcon icon="img warn" /> This operation is not directly supported by SQL engine. DbGate can emulate it, but
-          please check the generated SQL script.
+          <FontIcon icon="img warn" /> {_t('confirmSqlModal.operationNotSupported', { defaultMessage: 'This operation is not directly supported by SQL engine. DbGate can emulate it, but please check the generated SQL script.' })}
         </div>
         <FormCheckboxField
           templateProps={{ noMargin: true }}
-          label="Allow recreate (don't use on production databases)"
+          label={_t('confirmSqlModal.allowRecreate', { defaultMessage: 'Allow recreate (do not use on production databases)' })}
           name="allowRecreate"
         />
       </div>
@@ -150,7 +149,7 @@
     {#if skipConfirmSettingKey}
       <div class="mt-2">
         <TemplatedCheckboxField
-          label="Don't ask again"
+          label={_t('confirmSqlModal.dontAskAgain', { defaultMessage: "Do not ask again" })}
           templateProps={{ noMargin: true }}
           checked={dontAskAgain}
           on:change={e => {
