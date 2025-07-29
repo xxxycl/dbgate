@@ -77,6 +77,7 @@
   import createRef from '../utility/createRef';
   import DropDownButton from '../buttons/DropDownButton.svelte';
   import ErrorMessageModal from '../modals/ErrorMessageModal.svelte';
+  import { _t } from '../translations';
 
   // export let uploadedFile = undefined;
   // export let openedFile = undefined;
@@ -220,34 +221,34 @@
           columns={[
             {
               fieldName: 'source',
-              header: 'Source',
+              header: _t('importExportConfigurator.source', { defaultMessage: 'Source' }),
               component: SourceName,
               getProps: row => ({ name: row }),
             },
             {
               fieldName: 'action',
-              header: 'Action',
+              header: _t('importExportConfigurator.action', { defaultMessage: 'Action' }),
               component: SourceAction,
               getProps: row => ({ name: row, targetDbinfo }),
             },
             {
               fieldName: 'target',
-              header: 'Target',
+              header: _t('importExportConfigurator.target', { defaultMessage: 'Target' }),
               slot: 1,
             },
             supportsPreview && {
               fieldName: 'preview',
-              header: 'Preview',
+              header: _t('importExportConfigurator.preview', { defaultMessage: 'Preview' }),
               slot: 0,
             },
             !!progressHolder && {
               fieldName: 'status',
-              header: 'Status',
+              header: _t('importExportConfigurator.status', { defaultMessage: 'Status' }),
               slot: 3,
             },
             {
               fieldName: 'columns',
-              header: 'Columns',
+              header: _t('importExportConfigurator.columns', { defaultMessage: 'Columns' }),
               slot: 2,
             },
           ]}
