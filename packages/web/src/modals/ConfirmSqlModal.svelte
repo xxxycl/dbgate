@@ -54,6 +54,7 @@
 
   import ModalBase from './ModalBase.svelte';
   import { closeCurrentModal, showModal } from './modalTools';
+  import { _t } from '../translations';
 
   export let sql;
   export let onConfirm;
@@ -81,7 +82,7 @@
 
 <FormProviderCore {values}>
   <ModalBase {...$$restProps}>
-    <div slot="header">Save changes</div>
+    <div slot="header">{_t('confirmSqlModal.saveChanges', { defaultMessage: 'Save changes' })}</div>
 
     <div class="editor">
       <SqlEditor {engine} value={currentScript} readOnly />
@@ -162,7 +163,7 @@
 
     <div slot="footer">
       <FormSubmit
-        value="OK"
+        value={_t('confirmSqlModal.ok', { defaultMessage: 'OK' })}
         disabled={isRecreated && !$values.allowRecreate}
         on:click={e => {
           closeCurrentModal();
@@ -172,13 +173,13 @@
       />
       <FormStyledButton
         type="button"
-        value="Close"
+        value={_t('confirmSqlModal.close', { defaultMessage: 'Close' })}
         on:click={closeCurrentModal}
         data-testid="ConfirmSqlModal_closeButton"
       />
       <FormStyledButton
         type="button"
-        value="Open script"
+        value={_t('confirmSqlModal.openScript', { defaultMessage: 'Open script' })}
         on:click={() => {
           newQuery({
             initialData: currentScript,
