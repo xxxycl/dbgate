@@ -12,6 +12,7 @@
 
   import ModalBase from './ModalBase.svelte';
   import { closeCurrentModal } from './modalTools';
+  import { _t } from '../translations';
 
   export let rows;
   export let allColumns = [];
@@ -77,11 +78,11 @@
 
 <FormProvider>
   <ModalBase {...$$restProps}>
-    <svelte:fragment slot="header">Generate SQL from data</svelte:fragment>
+    <svelte:fragment slot="header">{_t('generateSqlFromDataModal.generateSqlFromData', { defaultMessage: 'Generate SQL from data' })}</svelte:fragment>
 
     <div class="flex mb-3">
       <div class="m-1 col-4">
-        <div class="m-1">Choose query type</div>
+        <div class="m-1">{_t('generateSqlFromDataModal.chooseQueryType', { defaultMessage: 'Choose query type' })}</div>
 
         <TableControl
           rows={QUERY_TYPES.map(name => ({ name }))}
@@ -89,12 +90,12 @@
           bind:domTable={domQueryType}
           focusOnCreate
           selectable
-          columns={[{ fieldName: 'name', header: 'Query type' }]}
+          columns={[{ fieldName: 'name', header: _t('generateSqlFromDataModal.queryType', { defaultMessage: 'Query type' }) }]}
         />
       </div>
 
       <div class="m-1 col-4">
-        <div class="m-1">Value columns</div>
+        <div class="m-1">{_t('generateSqlFromDataModal.valueColumns', { defaultMessage: 'Value columns' })}</div>
 
         <CheckableColumnList
           {allColumns}
@@ -104,7 +105,7 @@
       </div>
 
       <div class="m-1 col-4">
-        <div class="m-1">WHERE columns</div>
+        <div class="m-1">{_t('generateSqlFromDataModal.whereColumns', { defaultMessage: 'WHERE columns' })}</div>
 
         <CheckableColumnList
           {allColumns}
@@ -120,13 +121,13 @@
 
     <svelte:fragment slot="footer">
       <FormSubmit
-        value="OK"
+        value={_t('common.ok', { defaultMessage: 'OK' })}
         on:click={() => {
           newQuery({ initialData: sqlPreview });
           closeCurrentModal();
         }}
       />
-      <FormStyledButton type="button" value="Close" on:click={closeCurrentModal} />
+      <FormStyledButton type="button" value={_t('common.close', { defaultMessage: 'Close' })} on:click={closeCurrentModal} />
     </svelte:fragment>
   </ModalBase>
 </FormProvider>
