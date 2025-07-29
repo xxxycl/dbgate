@@ -322,20 +322,20 @@
     <ObjectListControl
       collection={indexes}
       onAddNew={isWritable && columns?.length > 0 ? addIndex : null}
-      title={`Indexes (${indexes?.length || 0})`}
-      emptyMessage={isWritable ? 'No index defined' : null}
+      title={_t('tableEditor.indexesTitle', { defaultMessage: 'Indexes ({count})', values: { count: indexes?.length || 0 } })}
+      emptyMessage={isWritable ? _t('tableEditor.noIndexDefined', { defaultMessage: 'No index defined' }) : null}
       clickable
       on:clickrow={e => showModal(IndexEditorModal, { constraintInfo: e.detail, tableInfo, setTableInfo, driver })}
       columns={[
         {
           fieldName: 'columns',
-          header: 'Columns',
+          header: _t('tableEditor.indexColumns', { defaultMessage: 'Columns' }),
           slot: 0,
           sortable: true,
         },
         {
           fieldName: 'unique',
-          header: 'Unique',
+          header: _t('tableEditor.indexUnique', { defaultMessage: 'Unique' }),
           slot: 1,
           sortable: true,
         },
@@ -349,13 +349,13 @@
     >
       <svelte:fragment slot="name" let:row><ConstraintLabel {...row} /></svelte:fragment>
       <svelte:fragment slot="0" let:row>{row?.columns.map(x => x.columnName).join(', ')}</svelte:fragment>
-      <svelte:fragment slot="1" let:row>{row?.isUnique ? 'YES' : 'NO'}</svelte:fragment>
+      <svelte:fragment slot="1" let:row>{row?.isUnique ? _t('common.yes', { defaultMessage: 'YES' }) : _t('common.no', { defaultMessage: 'NO' })}</svelte:fragment>
       <svelte:fragment slot="2" let:row
         ><Link
           onClick={e => {
             e.stopPropagation();
             setTableInfo(tbl => editorDeleteConstraint(tbl, row));
-          }}>Remove</Link
+          }}>{_t('tableEditor.remove', { defaultMessage: 'Remove' })}</Link
         ></svelte:fragment
       >
     </ObjectListControl>
@@ -365,14 +365,14 @@
     <ObjectListControl
       collection={uniques}
       onAddNew={isWritable && columns?.length > 0 ? addUnique : null}
-      title={`Unique constraints (${uniques?.length || 0})`}
-      emptyMessage={isWritable ? 'No unique defined' : null}
+      title={_t('tableEditor.uniqueConstraintsTitle', { defaultMessage: 'Unique constraints ({count})', values: { count: uniques?.length || 0 } })}
+      emptyMessage={isWritable ? _t('tableEditor.noUniqueDefined', { defaultMessage: 'No unique defined' }) : null}
       clickable
       on:clickrow={e => showModal(UniqueEditorModal, { constraintInfo: e.detail, tableInfo, setTableInfo })}
       columns={[
         {
           fieldName: 'columns',
-          header: 'Columns',
+          header: _t('tableEditor.uniqueColumns', { defaultMessage: 'Columns' }),
           slot: 0,
           sortable: true,
         },
@@ -392,7 +392,7 @@
           onClick={e => {
             e.stopPropagation();
             setTableInfo(tbl => editorDeleteConstraint(tbl, row));
-          }}>Remove</Link
+          }}>{_t('tableEditor.remove', { defaultMessage: 'Remove' })}</Link
         ></svelte:fragment
       >
     </ObjectListControl>
@@ -402,13 +402,13 @@
     <ForeignKeyObjectListControl
       collection={foreignKeys}
       onAddNew={isWritable && columns?.length > 0 ? addForeignKey : null}
-      title={`Foreign keys (${foreignKeys?.length || 0})`}
-      emptyMessage={isWritable ? 'No foreign key defined' : null}
+      title={_t('tableEditor.foreignKeysTitle', { defaultMessage: 'Foreign keys ({count})', values: { count: foreignKeys?.length || 0 } })}
+      emptyMessage={isWritable ? _t('tableEditor.noForeignKeyDefined', { defaultMessage: 'No foreign key defined' }) : null}
       clickable
       onRemove={row => setTableInfo(tbl => editorDeleteConstraint(tbl, row))}
       on:clickrow={e => showModal(ForeignKeyEditorModal, { constraintInfo: e.detail, tableInfo, setTableInfo, dbInfo })}
     />
-    <ForeignKeyObjectListControl collection={dependencies} title="Dependencies" />
+    <ForeignKeyObjectListControl collection={dependencies} title={_t('tableEditor.dependencies', { defaultMessage: 'Dependencies' })} />
   {/if}
 </div>
 

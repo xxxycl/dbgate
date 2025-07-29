@@ -28,8 +28,8 @@
   registerCommand({
     id: 'diagram.deleteSelectedTables',
     category: 'Designer',
-    toolbarName: 'Remove',
-    name: 'Remove selected tables',
+    toolbarName: _t('command.diagram.deleteSelectedTables.toolbar', { defaultMessage: 'Remove' }),
+    name: _t('command.diagram.deleteSelectedTables', { defaultMessage: 'Remove selected tables' }),
     icon: 'icon delete',
     toolbar: true,
     isRelatedToTab: true,
@@ -849,14 +849,14 @@
       settings?.customizeStyle && [
         { divider: true },
         isProApp() && {
-          text: 'Column properties',
+          text: _t('designer.columnProperties', { defaultMessage: 'Column properties' }),
           submenu: [
             {
-              text: `Nullability: ${value?.style?.showNullability ? 'YES' : 'NO'}`,
+              text: `${_t('designer.nullability', { defaultMessage: 'Nullability' })}: ${value?.style?.showNullability ? _t('common.yes', { defaultMessage: 'YES' }) : _t('common.no', { defaultMessage: 'NO' })}`,
               onClick: changeStyleFunc('showNullability', !value?.style?.showNullability),
             },
             {
-              text: `Data type: ${value?.style?.showDataType ? 'YES' : 'NO'}`,
+              text: `${_t('designer.dataType', { defaultMessage: 'Data type' })}: ${value?.style?.showDataType ? _t('common.yes', { defaultMessage: 'YES' }) : _t('common.no', { defaultMessage: 'NO' })}`,
               onClick: changeStyleFunc('showDataType', !value?.style?.showDataType),
             },
           ],
