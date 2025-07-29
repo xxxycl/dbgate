@@ -10,9 +10,10 @@
   import FontIcon from '../icons/FontIcon.svelte';
   import ModalBase from './ModalBase.svelte';
   import { closeCurrentModal } from './modalTools';
+  import { _t } from '../translations';
   import _ from 'lodash';
 
-  export let header = 'Configure columns';
+  export let header = _t('columnMap.configureColumns', { defaultMessage: 'Configure columns' });
   export let onConfirm;
 
   export let sourceTableInfo;
@@ -69,7 +70,7 @@
     if (!value) return;
     if (value.length == 0) return;
     if (value.some(x => !x.src || !x.dst)) {
-      validationError = 'Source and target columns must be defined';
+      validationError = _t('columnMap.sourceTargetRequired', { defaultMessage: 'Source and target columns must be defined' });
       return;
     }
     const duplicates = _.chain(value.map(x => x.dst))
@@ -78,7 +79,7 @@
       .keys()
       .value();
     if (duplicates.length > 0) {
-      validationError = 'Target columns must be unique, duplicates found: ' + duplicates.join(', ');
+      validationError = _t('columnMap.duplicateTargets', { defaultMessage: 'Target columns must be unique, duplicates found: ' }) + duplicates.join(', ');
       return;
     }
   }
@@ -95,19 +96,19 @@
 
     {#if resetValue.length == 0}
       <div class="m-3">
-        When no columns are defined in this mapping, source row is copied to target without any modifications
+        {_t('columnMap.noColumnsInfo', { defaultMessage: 'When no columns are defined in this mapping, source row is copied to target without any modifications' })}
       </div>
     {/if}
 
     <TableControl
       columns={[
-        { fieldName: 'use', header: 'Use', slot: 4 },
-        { fieldName: 'src', header: 'Source column', slot: 1 },
-        { fieldName: 'dst', header: 'Target column', slot: 2 },
+        { fieldName: 'use', header: _t('columnMap.use', { defaultMessage: 'Use' }), slot: 4 },
+        { fieldName: 'src', header: _t('columnMap.sourceColumn', { defaultMessage: 'Source column' }), slot: 1 },
+        { fieldName: 'dst', header: _t('columnMap.targetColumn', { defaultMessage: 'Target column' }), slot: 2 },
         { fieldName: 'actions', header: '', slot: 3 },
       ]}
       rows={value || []}
-      emptyMessage="No transform defined"
+      emptyMessage={_t('columnMap.noTransformDefined', { defaultMessage: 'No transform defined' })}
     >
       <svelte:fragment slot="4" let:row let:index>
         <CheckboxField
@@ -136,7 +137,7 @@
         <Link
           onClick={() => {
             value = value.filter((x, i) => i != index);
-          }}>Remove</Link
+          }}>{_t('columnMap.remove', { defaultMessage: 'Remove' })}</Link
         >
       </svelte:fragment>
     </TableControl>
@@ -150,24 +151,24 @@
 
     <svelte:fragment slot="footer">
       <FormSubmit
-        value="OK"
+        value={_t('common.ok', { defaultMessage: 'OK' })}
         disabled={!!validationError}
         on:click={() => {
           closeCurrentModal();
           onConfirm(!value || value.length == 0 || !differentFromReset ? null : value);
         }}
       />
-      <FormStyledButton type="button" value="Close" on:click={closeCurrentModal} />
+      <FormStyledButton type="button" value={_t('common.close', { defaultMessage: 'Close' })} on:click={closeCurrentModal} />
       <FormStyledButton
         type="button"
-        value="Add column"
+        value={_t('columnMap.addColumn', { defaultMessage: 'Add column' })}
         on:click={() => {
           value = [...(value || []), {}];
         }}
       />
       <FormStyledButton
         type="button"
-        value="Reset"
+        value={_t('columnMap.reset', { defaultMessage: 'Reset' })}
         disabled={!differentFromReset}
         on:click={() => {
           value = resetValue;
