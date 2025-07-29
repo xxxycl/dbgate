@@ -2,6 +2,7 @@ import _ from 'lodash';
 import openNewTab from '../utility/openNewTab';
 import { findEngineDriver, getConnectionLabel } from 'dbgate-tools';
 import { getAppliedCurrentSchema, getExtensions } from '../stores';
+import { _t } from '../translations';
 
 export default function newTable(connection, database) {
   const tooltip = `${getConnectionLabel(connection)}\n${database}`;

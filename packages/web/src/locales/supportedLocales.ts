@@ -77,7 +77,7 @@ export function setMomentLocale(languageCode: string): void {
   moment.locale(momentLocale);
 
   // Debug info in development environment / 开发环境调试信息
-  if (process.env.NODE_ENV === 'development') {
+  if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') {
     console.log(`[Locales] Language: ${languageCode} -> Moment locale: ${momentLocale}`);
     console.log(`[Locales] Available moment locales:`, moment.locales());
   }
