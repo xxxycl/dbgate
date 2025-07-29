@@ -93,7 +93,7 @@ ORDER BY
 
 <SettingsFormProvider>
   <ModalBase {...$$restProps} noPadding>
-    <div slot="header">Settings</div>
+    <div slot="header">{_t('settings.title', { defaultMessage: 'Settings' })}</div>
 
     <FormValues let:values>
       <TabControl
@@ -186,41 +186,41 @@ ORDER BY
           />
 
           <FormSelectField
-            label="Row coloring mode"
+            label={_t('settings.rowColoringMode', { defaultMessage: 'Row coloring mode' })}
             name="dataGrid.coloringMode"
             isNative
             defaultValue="36"
             options={[
-              { value: '36', label: 'Every 3rd and 6th row' },
-              { value: '2-primary', label: 'Every 2-nd row, primary color' },
-              { value: '2-secondary', label: 'Every 2-nd row, secondary color' },
-              { value: 'none', label: 'None' },
+              { value: '36', label: _t('settings.rowColoring.every3rd6th', { defaultMessage: 'Every 3rd and 6th row' }) },
+              { value: '2-primary', label: _t('settings.rowColoring.every2ndPrimary', { defaultMessage: 'Every 2-nd row, primary color' }) },
+              { value: '2-secondary', label: _t('settings.rowColoring.every2ndSecondary', { defaultMessage: 'Every 2-nd row, secondary color' }) },
+              { value: 'none', label: _t('settings.rowColoring.none', { defaultMessage: 'None' }) },
             ]}
           />
 
           <FormCheckboxField
             name="dataGrid.showAllColumnsWhenSearch"
-            label="Show all columns when searching"
+            label={_t('settings.showAllColumnsWhenSearch', { defaultMessage: 'Show all columns when searching' })}
             defaultValue={false}
           />
 
-          <div class="heading">SQL editor</div>
+          <div class="heading">{_t('settings.sqlEditor', { defaultMessage: 'SQL editor' })}</div>
 
           <div class="flex">
             <div class="col-3">
               <FormSelectField
-                label="SQL commands case"
+                label={_t('settings.sqlCommandsCase', { defaultMessage: 'SQL commands case' })}
                 name="sqlEditor.sqlCommandsCase"
                 isNative
                 defaultValue="upperCase"
                 options={[
-                  { value: 'upperCase', label: 'UPPER CASE' },
-                  { value: 'lowerCase', label: 'lower case' },
+                  { value: 'upperCase', label: _t('settings.sqlCase.upperCase', { defaultMessage: 'UPPER CASE' }) },
+                  { value: 'lowerCase', label: _t('settings.sqlCase.lowerCase', { defaultMessage: 'lower case' }) },
                 ]}
               />
             </div>
             <div class="col-3">
-              <FormFieldTemplateLarge label="Editor keybinds" type="combo">
+              <FormFieldTemplateLarge label={_t('settings.editorKeybinds', { defaultMessage: 'Editor keybinds' })} type="combo">
                 <SelectField
                   isNative
                   defaultValue="default"
@@ -231,7 +231,7 @@ ORDER BY
               </FormFieldTemplateLarge>
             </div>
             <div class="col-3">
-              <FormFieldTemplateLarge label="Enable word wrap" type="combo">
+              <FormFieldTemplateLarge label={_t('settings.enableWordWrap', { defaultMessage: 'Enable word wrap' })} type="combo">
                 <CheckboxField
                   checked={$currentEditorWrapEnabled}
                   on:change={e => ($currentEditorWrapEnabled = e.target.checked)}
@@ -242,27 +242,27 @@ ORDER BY
 
           <FormTextField
             name="sqlEditor.limitRows"
-            label="Return only N rows from query"
-            placeholder="(No rows limit)"
+            label={_t('settings.returnOnlyNRows', { defaultMessage: 'Return only N rows from query' })}
+            placeholder={_t('settings.noRowsLimit', { defaultMessage: '(No rows limit)' })}
           />
 
           <FormCheckboxField
             name="sqlEditor.showTableAliasesInCodeCompletion"
-            label="Show table aliases in code completion"
+            label={_t('settings.showTableAliasesInCodeCompletion', { defaultMessage: 'Show table aliases in code completion' })}
             defaultValue={false}
           />
 
           <FormCheckboxField
             name="sqlEditor.disableSplitByEmptyLine"
-            label="Disable split by empty line"
+            label={_t('settings.disableSplitByEmptyLine', { defaultMessage: 'Disable split by empty line' })}
             defaultValue={false}
           />
         </svelte:fragment>
         <svelte:fragment slot="2">
-          <div class="heading">Connection</div>
+          <div class="heading">{_t('settings.connection', { defaultMessage: 'Connection' })}</div>
 
           <FormFieldTemplateLarge
-            label="Show only tabs from selected database"
+            label={_t('settings.showOnlyTabsFromSelectedDatabase', { defaultMessage: 'Show only tabs from selected database' })}
             type="checkbox"
             labelProps={{
               onClick: () => {
@@ -275,17 +275,17 @@ ORDER BY
 
           <FormCheckboxField
             name="connection.autoRefresh"
-            label="Automatic refresh of database model on background"
+            label={_t('settings.automaticRefreshDatabaseModel', { defaultMessage: 'Automatic refresh of database model on background' })}
             defaultValue={false}
           />
           <FormTextField
             name="connection.autoRefreshInterval"
-            label="Interval between automatic DB structure reloads in seconds"
+            label={_t('settings.intervalBetweenAutoReloads', { defaultMessage: 'Interval between automatic DB structure reloads in seconds' })}
             defaultValue="30"
             disabled={values['connection.autoRefresh'] === false}
           />
           <FormSelectField
-            label="Local host address for SSH connections"
+            label={_t('settings.localHostAddressForSSH', { defaultMessage: 'Local host address for SSH connections' })}
             name="connection.sshBindHost"
             isNative
             defaultValue="127.0.0.1"
@@ -296,25 +296,25 @@ ORDER BY
             ]}
           />
 
-          <div class="heading">Query sessions</div>
+          <div class="heading">{_t('settings.querySessions', { defaultMessage: 'Query sessions' })}</div>
           <FormCheckboxField
             name="session.autoClose"
-            label="Automatic close query sessions after period without any activity"
+            label={_t('settings.automaticCloseQuerySessions', { defaultMessage: 'Automatic close query sessions after period without any activity' })}
             defaultValue={true}
           />
           <FormTextField
             name="session.autoCloseTimeout"
-            label="Interval, after which query session without activity is closed (in minutes)"
+            label={_t('settings.intervalAfterWhichQuerySession', { defaultMessage: 'Interval, after which query session without activity is closed (in minutes)' })}
             defaultValue="15"
             disabled={values['session.autoClose'] === false}
           />
         </svelte:fragment>
 
         <svelte:fragment slot="3">
-          <div class="heading">Application theme</div>
+          <div class="heading">{_t('settings.applicationTheme', { defaultMessage: 'Application theme' })}</div>
 
           <FormFieldTemplateLarge
-            label="Use system theme"
+            label={_t('settings.useSystemTheme', { defaultMessage: 'Use system theme' })}
             type="checkbox"
             labelProps={{
               onClick: () => {
@@ -345,19 +345,19 @@ ORDER BY
           </div>
 
           <div class="m-5">
-            More themes are available as <Link onClick={openThemePlugins}>plugins</Link>
+            {_t('settings.moreThemesAvailable', { defaultMessage: 'More themes are available as' })} <Link onClick={openThemePlugins}>{_t('settings.plugins', { defaultMessage: 'plugins' })}</Link>
             <br />
-            After installing theme plugin (try search "theme" in available extensions) new themes will be available here.
+            {_t('settings.afterInstallingThemePlugin', { defaultMessage: 'After installing theme plugin (try search "theme" in available extensions) new themes will be available here.' })}
           </div>
 
-          <div class="heading">Editor theme</div>
+          <div class="heading">{_t('settings.editorTheme', { defaultMessage: 'Editor theme' })}</div>
 
           <div class="flex">
             <div class="col-3">
-              <FormFieldTemplateLarge label="Theme" type="combo">
+              <FormFieldTemplateLarge label={_t('settings.theme', { defaultMessage: 'Theme' })} type="combo">
                 <SelectField
                   isNative
-                  notSelected="(use theme default)"
+                  notSelected={_t('settings.useThemeDefault', { defaultMessage: '(use theme default)' })}
                   options={EDITOR_THEMES.map(theme => ({ label: theme, value: theme }))}
                   value={$currentEditorTheme}
                   on:change={e => ($currentEditorTheme = e.detail)}
@@ -366,10 +366,10 @@ ORDER BY
             </div>
 
             <div class="col-3">
-              <FormFieldTemplateLarge label="Font size " type="combo">
+              <FormFieldTemplateLarge label={_t('settings.fontSize', { defaultMessage: 'Font size' })} type="combo">
                 <SelectField
                   isNative
-                  notSelected="(default)"
+                  notSelected={_t('settings.default', { defaultMessage: '(default)' })}
                   options={FONT_SIZES}
                   value={FONT_SIZES.find(x => x.value == $currentEditorFontSize) ? $currentEditorFontSize : 'custom'}
                   on:change={e => ($currentEditorFontSize = e.detail)}
@@ -378,7 +378,7 @@ ORDER BY
             </div>
 
             <div class="col-3">
-              <FormFieldTemplateLarge label="Custom size " type="text">
+              <FormFieldTemplateLarge label={_t('settings.customSize', { defaultMessage: 'Custom size' })} type="text">
                 <TextField
                   value={$currentEditorFontSize == 'custom' ? '' : $currentEditorFontSize}
                   on:change={e => ($currentEditorFontSize = e.target['value'])}
@@ -389,7 +389,7 @@ ORDER BY
             </div>
 
             <div class="col-3">
-              <FormTextField name="editor.fontFamily" label="Editor font family" />
+              <FormTextField name="editor.fontFamily" label={_t('settings.editorFontFamily', { defaultMessage: 'Editor font family' })} />
             </div>
           </div>
 
@@ -398,68 +398,68 @@ ORDER BY
           </div>
         </svelte:fragment>
         <svelte:fragment slot="4">
-          <div class="heading">Default actions</div>
+          <div class="heading">{_t('settings.defaultActions', { defaultMessage: 'Default actions' })}</div>
 
           <FormSelectField
-            label="Connection click"
+            label={_t('settings.connectionClick', { defaultMessage: 'Connection click' })}
             name="defaultAction.connectionClick"
             isNative
             defaultValue="connect"
             options={[
-              { value: 'openDetails', label: 'Edit / open details' },
-              { value: 'connect', label: 'Connect' },
-              { value: 'none', label: 'Do nothing' },
+              { value: 'openDetails', label: _t('settings.editOpenDetails', { defaultMessage: 'Edit / open details' }) },
+              { value: 'connect', label: _t('settings.connect', { defaultMessage: 'Connect' }) },
+              { value: 'none', label: _t('settings.doNothing', { defaultMessage: 'Do nothing' }) },
             ]}
           />
 
           <FormSelectField
-            label="Database click"
+            label={_t('settings.databaseClick', { defaultMessage: 'Database click' })}
             name="defaultAction.databaseClick"
             isNative
             defaultValue="switch"
             options={[
-              { value: 'switch', label: 'Switch database' },
-              { value: 'none', label: 'Do nothing' },
+              { value: 'switch', label: _t('settings.switchDatabase', { defaultMessage: 'Switch database' }) },
+              { value: 'none', label: _t('settings.doNothing', { defaultMessage: 'Do nothing' }) },
             ]}
           />
 
-          <FormCheckboxField name="defaultAction.useLastUsedAction" label="Use last used action" defaultValue={true} />
+          <FormCheckboxField name="defaultAction.useLastUsedAction" label={_t('settings.useLastUsedAction', { defaultMessage: 'Use last used action' })} defaultValue={true} />
 
           <FormDefaultActionField
-            label="Table click"
+            label={_t('settings.tableClick', { defaultMessage: 'Table click' })}
             objectTypeField="tables"
             disabled={values['defaultAction.useLastUsedAction'] !== false}
           />
           <FormDefaultActionField
-            label="View click"
+            label={_t('settings.viewClick', { defaultMessage: 'View click' })}
             objectTypeField="views"
             disabled={values['defaultAction.useLastUsedAction'] !== false}
           />
           <FormDefaultActionField
-            label="Materialized view click"
+            label={_t('settings.materializedViewClick', { defaultMessage: 'Materialized view click' })}
             objectTypeField="matviews"
             disabled={values['defaultAction.useLastUsedAction'] !== false}
           />
           <FormDefaultActionField
-            label="Procedure click"
+            label={_t('settings.procedureClick', { defaultMessage: 'Procedure click' })}
             objectTypeField="procedures"
             disabled={values['defaultAction.useLastUsedAction'] !== false}
           />
           <FormDefaultActionField
-            label="Function click"
+            label={_t('settings.functionClick', { defaultMessage: 'Function click' })}
             objectTypeField="functions"
             disabled={values['defaultAction.useLastUsedAction'] !== false}
           />
           <FormDefaultActionField
-            label="NoSQL collection click"
+            label={_t('settings.nosqlCollectionClick', { defaultMessage: 'NoSQL collection click' })}
             objectTypeField="collections"
             disabled={values['defaultAction.useLastUsedAction'] !== false}
           />
         </svelte:fragment>
         <svelte:fragment slot="5">
-          <div class="heading">Behaviour</div>
+          <div class="heading">{_t('settings.behaviour', { defaultMessage: 'Behaviour' })}</div>
 
-          <FormCheckboxField name="behaviour.useTabPreviewMode" label="Use tab preview mode" defaultValue={true} />
+          <FormCheckboxField name="behaviour.useTabPreviewMode" label={_t('settings.useTabPreviewMode', { defaultMessage: 'Use tab preview mode' })} defaultValue={true} />
 
           <FormCheckboxField
             name="behaviour.jsonPreviewWrap"
@@ -468,58 +468,57 @@ ORDER BY
           />
 
           <div class="tip">
-            <FontIcon icon="img tip" /> When you single-click or select a file in the "Tables, Views, Functions" view, it
-            is shown in a preview mode and reuses an existing tab (preview tab). This is useful if you are quickly browsing
-            tables and don't want every visited table to have its own tab. When you start editing the table or use double-click
-            to open the table from the "Tables" view, a new tab is dedicated to that table.
+            <FontIcon icon="img tip" /> {_t('settings.tabPreviewModeTip', {
+              defaultMessage: 'When you single-click or select a file in the "Tables, Views, Functions" view, it is shown in a preview mode and reuses an existing tab (preview tab). This is useful if you are quickly browsing tables and don\'t want every visited table to have its own tab. When you start editing the table or use double-click to open the table from the "Tables" view, a new tab is dedicated to that table.'
+            })}
           </div>
 
           <FormCheckboxField
             name="behaviour.openDetailOnArrows"
-            label="Open detail on keyboard navigation"
+            label={_t('settings.openDetailOnKeyboardNavigation', { defaultMessage: 'Open detail on keyboard navigation' })}
             defaultValue={true}
             disabled={values['behaviour.useTabPreviewMode'] === false}
           />
 
-          <div class="heading">Confirmations</div>
+          <div class="heading">{_t('settings.confirmations', { defaultMessage: 'Confirmations' })}</div>
 
-          <FormCheckboxField name="skipConfirm.tableDataSave" label="Skip confirmation when saving table data (SQL)" />
+          <FormCheckboxField name="skipConfirm.tableDataSave" label={_t('settings.skipConfirmationSavingTableData', { defaultMessage: 'Skip confirmation when saving table data (SQL)' })} />
           <FormCheckboxField
             name="skipConfirm.collectionDataSave"
-            label="Skip confirmation when saving collection data (NoSQL)"
+            label={_t('settings.skipConfirmationSavingCollectionData', { defaultMessage: 'Skip confirmation when saving collection data (NoSQL)' })}
           />
         </svelte:fragment>
         <svelte:fragment slot="6">
-          <div class="heading">Other</div>
+          <div class="heading">{_t('settings.other', { defaultMessage: 'Other' })}</div>
 
-          <FormTextField name="other.gistCreateToken" label="API token for creating error gists" defaultValue="" />
+          <FormTextField name="other.gistCreateToken" label={_t('settings.apiTokenForCreatingErrorGists', { defaultMessage: 'API token for creating error gists' })} defaultValue="" />
 
           <FormSelectField
-            label="Auto update application"
+            label={_t('settings.autoUpdateApplication', { defaultMessage: 'Auto update application' })}
             name="app.autoUpdateMode"
             isNative
             defaultValue=""
             options={[
-              { value: 'skip', label: 'Do not check for new versions' },
-              { value: '', label: 'Check for new versions' },
-              { value: 'download', label: 'Check and download new versions' },
+              { value: 'skip', label: _t('settings.doNotCheckForNewVersions', { defaultMessage: 'Do not check for new versions' }) },
+              { value: '', label: _t('settings.checkForNewVersions', { defaultMessage: 'Check for new versions' }) },
+              { value: 'download', label: _t('settings.checkAndDownloadNewVersions', { defaultMessage: 'Check and download new versions' }) },
             ]}
           />
 
           {#if isProApp()}
             <FormCheckboxField
               name="ai.allowSendModels"
-              label="Allow to send DB models and query snippets to AI service"
+              label={_t('settings.allowSendDbModelsToAi', { defaultMessage: 'Allow to send DB models and query snippets to AI service' })}
               defaultValue={false}
             />
           {/if}
         </svelte:fragment>
 
         <svelte:fragment slot="7">
-          <div class="heading">License</div>
+          <div class="heading">{_t('settings.license', { defaultMessage: 'License' })}</div>
           <FormTextAreaField
             name="other.licenseKey"
-            label="License key"
+            label={_t('settings.licenseKey', { defaultMessage: 'License key' })}
             rows={7}
             onChange={async value => {
               licenseKeyCheckResult = await apiCall('config/check-license', { licenseKey: value });
@@ -529,28 +528,28 @@ ORDER BY
             <div class="m-3 ml-5">
               {#if licenseKeyCheckResult.status == 'ok'}
                 <div>
-                  <FontIcon icon="img ok" /> License key is valid
+                  <FontIcon icon="img ok" /> {_t('settings.licenseKeyIsValid', { defaultMessage: 'License key is valid' })}
                 </div>
                 {#if licenseKeyCheckResult.validTo}
                   <div>
-                    License valid to: {licenseKeyCheckResult.validTo}
+                    {_t('settings.licenseValidTo', { defaultMessage: 'License valid to:' })} {licenseKeyCheckResult.validTo}
                   </div>
                 {/if}
                 {#if licenseKeyCheckResult.expiration}
-                  <div>License key expiration: <b>{safeFormatDate(licenseKeyCheckResult.expiration)}</b></div>
+                  <div>{_t('settings.licenseKeyExpiration', { defaultMessage: 'License key expiration:' })} <b>{safeFormatDate(licenseKeyCheckResult.expiration)}</b></div>
                 {/if}
               {:else if licenseKeyCheckResult.status == 'error'}
                 <div>
                   <FontIcon icon="img error" />
-                  {licenseKeyCheckResult.errorMessage ?? 'License key is invalid'}
+                  {licenseKeyCheckResult.errorMessage ?? _t('settings.licenseKeyIsInvalid', { defaultMessage: 'License key is invalid' })}
                   {#if licenseKeyCheckResult.expiration}
-                    <div>License key expiration: <b>{safeFormatDate(licenseKeyCheckResult.expiration)}</b></div>
+                    <div>{_t('settings.licenseKeyExpiration', { defaultMessage: 'License key expiration:' })} <b>{safeFormatDate(licenseKeyCheckResult.expiration)}</b></div>
                   {/if}
                 </div>
                 {#if licenseKeyCheckResult.isExpired}
                   <div class="mt-2">
                     <FormStyledButton
-                      value="Check for new license key"
+                      value={_t('settings.checkForNewLicenseKey', { defaultMessage: 'Check for new license key' })}
                       skipWidth
                       on:click={async () => {
                         licenseKeyCheckResult = await apiCall('config/get-new-license', { oldLicenseKey: licenseKey });
@@ -567,31 +566,31 @@ ORDER BY
         </svelte:fragment>
 
         <svelte:fragment slot="8">
-          <div class="heading">External tools</div>
+          <div class="heading">{_t('settings.externalTools', { defaultMessage: 'External tools' })}</div>
           <FormTextField
             name="externalTools.mysqldump"
-            label="mysqldump (backup MySQL database)"
+            label={_t('settings.mysqldumpBackupMysql', { defaultMessage: 'mysqldump (backup MySQL database)' })}
             defaultValue="mysqldump"
           />
-          <FormTextField name="externalTools.mysql" label="mysql (restore MySQL database)" defaultValue="mysql" />
+          <FormTextField name="externalTools.mysql" label={_t('settings.mysqlRestoreMysql', { defaultMessage: 'mysql (restore MySQL database)' })} defaultValue="mysql" />
           <FormTextField
             name="externalTools.mysqlPlugins"
-            label="Folder with mysql plugins (for example for authentication). Set only in case of problems"
+            label={_t('settings.folderWithMysqlPlugins', { defaultMessage: 'Folder with mysql plugins (for example for authentication). Set only in case of problems' })}
             defaultValue=""
           />
           <FormTextField
             name="externalTools.pg_dump"
-            label="pg_dump (backup PostgreSQL database)"
+            label={_t('settings.pgDumpBackupPostgresql', { defaultMessage: 'pg_dump (backup PostgreSQL database)' })}
             defaultValue="pg_dump"
           />
-          <FormTextField name="externalTools.psql" label="psql (restore PostgreSQL database)" defaultValue="psql" />
+          <FormTextField name="externalTools.psql" label={_t('settings.psqlRestorePostgresql', { defaultMessage: 'psql (restore PostgreSQL database)' })} defaultValue="psql" />
         </svelte:fragment>
       </TabControl>
     </FormValues>
 
     <div slot="footer">
       <!-- <FormSubmit value="OK" on:click={handleOk} /> -->
-      <FormStyledButton value="Close" on:click={closeCurrentModal} />
+      <FormStyledButton value={_t('settings.close', { defaultMessage: 'Close' })} on:click={closeCurrentModal} />
     </div>
   </ModalBase>
 </SettingsFormProvider>
