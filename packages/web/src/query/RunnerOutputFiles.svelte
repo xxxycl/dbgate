@@ -8,6 +8,7 @@
   import { downloadFromApi } from '../utility/exportFileTools';
   import useEffect from '../utility/useEffect';
   import Link from '../elements/Link.svelte';
+  import { _t } from '../translations';
 
   export let runnerId;
   export let executeNumber;
@@ -40,28 +41,28 @@
 </script>
 
 {#if !files || files.length == 0}
-  <ErrorInfo message="No output files" icon="img alert" />
+  <ErrorInfo message={_t('runnerOutputFiles.noOutputFiles', { defaultMessage: 'No output files' })} icon="img alert" />
 {:else}
   <div class="flex1 scroll">
     <TableControl
       rows={files}
       stickyHeader
       columns={[
-        { fieldName: 'name', header: 'Name' },
-        { fieldName: 'size', header: 'Size', formatter: row => formatFileSize(row.size) },
+        { fieldName: 'name', header: _t('runnerOutputFiles.name', { defaultMessage: 'Name' }) },
+        { fieldName: 'size', header: _t('runnerOutputFiles.size', { defaultMessage: 'Size' }), formatter: row => formatFileSize(row.size) },
         !electron && {
           fieldName: 'download',
-          header: 'Download',
+          header: _t('runnerOutputFiles.download', { defaultMessage: 'Download' }),
           slot: 0,
         },
         electron && {
           fieldName: 'copy',
-          header: 'Copy',
+          header: _t('runnerOutputFiles.copy', { defaultMessage: 'Copy' }),
           slot: 1,
         },
         electron && {
           fieldName: 'show',
-          header: 'Show',
+          header: _t('runnerOutputFiles.show', { defaultMessage: 'Show' }),
           slot: 2,
         },
       ]}
@@ -72,7 +73,7 @@
             downloadFromApi(`runners/data/${runnerId}/${row.name}`, row.name);
           }}
         >
-          download
+          {_t('runnerOutputFiles.downloadAction', { defaultMessage: 'download' })}
         </Link>
       </svelte:fragment>
 
@@ -86,7 +87,7 @@
             }
           }}
         >
-          save
+          {_t('runnerOutputFiles.saveAction', { defaultMessage: 'save' })}
         </Link>
       </svelte:fragment>
 
@@ -96,7 +97,7 @@
             electron.showItemInFolder(row.path);
           }}
         >
-          show
+          {_t('runnerOutputFiles.showAction', { defaultMessage: 'show' })}
         </Link>
       </svelte:fragment>
     </TableControl>

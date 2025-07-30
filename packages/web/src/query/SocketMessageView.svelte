@@ -7,6 +7,7 @@
   import useEffect from '../utility/useEffect';
 
   import MessageView from './MessageView.svelte';
+  import { _t } from '../translations';
 
   export let showProcedure = false;
   export let showLine = false;
@@ -68,7 +69,7 @@
 </script>
 
 {#if showNoMessagesAlert && (!displayedMessages || displayedMessages.length == 0)}
-  <ErrorInfo message="No messages" icon="img alert" />
+  <ErrorInfo message={_t('socketMessageView.noMessages', { defaultMessage: 'No messages' })} icon="img alert" />
 {:else}
   <MessageView items={displayedMessages} {onMessageClick} {showProcedure} {showLine} {showCaller} {startLine} />
 {/if}

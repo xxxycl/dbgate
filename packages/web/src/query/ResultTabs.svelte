@@ -69,7 +69,7 @@
     ...(oneTab && resultInfos.length > 0
       ? [
           {
-            label: 'Results',
+            label: _t('resultTabs.results', { defaultMessage: 'Results' }),
             isResult: true,
             component: AllResultsTab,
             props: {
@@ -78,7 +78,7 @@
           },
         ]
       : resultInfos.map((info, index) => ({
-          label: `Result ${index + 1}`,
+          label: `${_t('resultTabs.result', { defaultMessage: 'Result' })} ${index + 1}`,
           isResult: true,
           component: JslDataGrid,
           resultIndex: info.resultIndex,
@@ -175,8 +175,8 @@
   tabs={allTabs}
   menu={resultInfos.length > 0 && [
     oneTab
-      ? { text: 'Every result in single tab', onClick: () => setOneTabValue(false) }
-      : { text: 'All results in one tab', onClick: () => setOneTabValue(true) },
+      ? { text: _t('resultTabs.everyResultInSingleTab', { defaultMessage: 'Every result in single tab' }), onClick: () => setOneTabValue(false) }
+      : { text: _t('resultTabs.allResultsInOneTab', { defaultMessage: 'All results in one tab' }), onClick: () => setOneTabValue(true) },
   ]}
   onUserChange={value => {
     if (allTabs[value].isChart) {
