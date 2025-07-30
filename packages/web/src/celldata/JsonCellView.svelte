@@ -2,6 +2,7 @@
   import _ from 'lodash';
   import ErrorInfo from '../elements/ErrorInfo.svelte';
   import JSONTree from '../jsontree/JSONTree.svelte';
+  import { _t } from '../translations';
 
   export let selection;
   export let showWholeRow = false;
@@ -28,7 +29,7 @@
 </script>
 
 {#if error}
-  <ErrorInfo message="Error parsing JSON" alignTop />
+  <ErrorInfo message={_t('jsonCellView.errorParsingJson', { defaultMessage: 'Error parsing JSON' })} alignTop />
 {:else}
   <div class="outer">
     <div class="inner">

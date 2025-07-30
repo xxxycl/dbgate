@@ -1,6 +1,7 @@
 <script lang="ts">
   import _ from 'lodash';
   import ErrorInfo from '../elements/ErrorInfo.svelte';
+  import { _t } from '../translations';
 
   export let selection;
 
@@ -22,10 +23,10 @@
 
 {#if picture}
   <div class="wrapper">
-    <img src={picture} />
+    <img src={picture} alt="Picture" />
   </div>
 {:else}
-  <ErrorInfo message="Error showing picture" alignTop />
+  <ErrorInfo message={_t('pictureCellView.errorShowingPicture', { defaultMessage: 'Error showing picture' })} alignTop />
 {/if}
 
 <style>
