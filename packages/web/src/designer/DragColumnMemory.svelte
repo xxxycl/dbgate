@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { _t } from '../translations';
+
   export let sourceDragColumn$;
   export let targetDragColumn$;
   export let settings;
@@ -10,7 +12,7 @@
   <div
     class="wrapper"
     draggable={!!memory}
-    title={memory ? 'Drag this column to other column for creating JOIN' : 'Drag column here for creating JOIN'}
+    title={memory ? _t('dragColumnMemory.dragToCreate', { defaultMessage: 'Drag this column to other column for creating JOIN' }) : _t('dragColumnMemory.dragHere', { defaultMessage: 'Drag column here for creating JOIN' })}
     on:dragstart={e => {
       if (!settings?.allowCreateRefByDrag) return;
       if (!memory) return;

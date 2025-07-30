@@ -4,6 +4,7 @@
   import FontIcon from '../icons/FontIcon.svelte';
   import { createEventDispatcher } from 'svelte';
   import keycodes from '../utility/keycodes';
+  import { _t } from '../translations';
 
   const dispatch = createEventDispatcher();
 
@@ -29,9 +30,9 @@
   >
     <FontIcon icon="icon arrow-left" />
   </InlineButton>
-  <span class="label">Start:</span>
+  <span class="label">{_t('pager.start', { defaultMessage: 'Start:' })}</span>
   <TextField type="number" bind:value={skip} on:blur={() => dispatch('load')} on:keydown={handleKeyDown} />
-  <span class="label">Rows:</span>
+  <span class="label">{_t('pager.rows', { defaultMessage: 'Rows:' })}</span>
   <TextField type="number" bind:value={limit} on:blur={() => dispatch('load')} on:keydown={handleKeyDown} />
   <InlineButton
     on:click={() => {

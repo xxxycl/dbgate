@@ -27,6 +27,7 @@
   import { evaluateCondition } from 'dbgate-sqltree';
   import { compileCompoudEvalCondition } from 'dbgate-filterparser';
   import { chevronExpandIcon } from '../icons/expandIcons';
+  import { _t } from '../translations';
 
   export let columns: (TableControlColumn | false)[];
   export let rows = null;
@@ -253,7 +254,7 @@
                 filterBehaviour={evalFilterBehaviour}
                 filter={$filters[col.fieldName]}
                 setFilter={value => filters.update(f => ({ ...f, [col.fieldName]: value }))}
-                placeholder="Data filter"
+                placeholder={_t('tableControl.dataFilter', { defaultMessage: 'Data filter' })}
               />
             {/if}
           </td>

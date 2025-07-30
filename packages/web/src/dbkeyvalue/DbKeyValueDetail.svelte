@@ -6,6 +6,7 @@
   import JsonTree from '../jsontree/JSONTree.svelte';
 
   import AceEditor from '../query/AceEditor.svelte';
+  import { _t } from '../translations';
 
   let display = 'text';
 
@@ -23,8 +24,8 @@
       display = e.detail;
     }}
     options={[
-      { label: 'Text', value: 'text' },
-      { label: 'JSON view', value: 'json' },
+      { label: _t('dbKeyValueDetail.text', { defaultMessage: 'Text' }), value: 'text' },
+      { label: _t('dbKeyValueDetail.jsonView', { defaultMessage: 'JSON view' }), value: 'json' },
     ]}
   />
 </div>

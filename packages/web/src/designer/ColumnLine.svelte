@@ -10,6 +10,8 @@
   import FontIcon from '../icons/FontIcon.svelte';
   import contextMenu from '../utility/contextMenu';
   import SortOrderIcon from './SortOrderIcon.svelte';
+  import { _t } from '../translations';
+
   export let column;
   export let table;
   export let designer;
@@ -58,11 +60,11 @@
 
     return [
       settings?.allowColumnOperations && [
-        { text: 'Sort ascending', onClick: () => setSortOrder(1) },
-        { text: 'Sort descending', onClick: () => setSortOrder(-1) },
-        { text: 'Unsort', onClick: () => setSortOrder(0) },
+        { text: _t('columnLine.sortAscending', { defaultMessage: 'Sort ascending' }), onClick: () => setSortOrder(1) },
+        { text: _t('columnLine.sortDescending', { defaultMessage: 'Sort descending' }), onClick: () => setSortOrder(-1) },
+        { text: _t('columnLine.unsort', { defaultMessage: 'Unsort' }), onClick: () => setSortOrder(0) },
       ],
-      foreignKey && { text: 'Add reference', onClick: addReference },
+      foreignKey && { text: _t('columnLine.addReference', { defaultMessage: 'Add reference' }), onClick: addReference },
     ];
   }
 

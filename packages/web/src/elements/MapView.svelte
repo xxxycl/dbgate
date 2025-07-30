@@ -8,6 +8,7 @@
   import contextMenu from '../utility/contextMenu';
   import { saveFileToDisk } from '../utility/exportFileTools';
   import { apiCall } from '../utility/api';
+  import { _t } from '../translations';
 
   let refContainer;
   let map;
@@ -82,11 +83,11 @@
   function createMenu() {
     return [
       {
-        text: 'Open on new tab',
+        text: _t('mapView.openOnNewTab', { defaultMessage: 'Open on new tab' }),
         onClick: () => {
           openNewTab(
             {
-              title: 'Map',
+              title: _t('mapView.map', { defaultMessage: 'Map' }),
               icon: 'img map',
               tabComponent: 'MapTab',
             },
@@ -95,7 +96,7 @@
         },
       },
       {
-        text: 'Export to HTML file',
+        text: _t('mapView.exportToHtml', { defaultMessage: 'Export to HTML file' }),
         onClick: () => {
           saveFileToDisk(async filePath => {
             await apiCall('files/export-map', {

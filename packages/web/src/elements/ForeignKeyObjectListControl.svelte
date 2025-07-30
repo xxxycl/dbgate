@@ -5,6 +5,7 @@
 
   import ObjectListControl from '../elements/ObjectListControl.svelte';
   import Link from './Link.svelte';
+  import { _t } from '../translations';
 
   export let collection;
   export let title;
@@ -24,29 +25,29 @@
   columns={[
     {
       fieldName: 'baseColumns',
-      header: 'Base columns',
+      header: _t('foreignKeyObjectList.baseColumns', { defaultMessage: 'Base columns' }),
       slot: 0,
       sortable: true,
     },
     {
       fieldName: 'refTableName',
-      header: 'Referenced table',
+      header: _t('foreignKeyObjectList.referencedTable', { defaultMessage: 'Referenced table' }),
       sortable: true,
     },
     {
       fieldName: 'refColumns',
-      header: 'Referenced columns',
+      header: _t('foreignKeyObjectList.referencedColumns', { defaultMessage: 'Referenced columns' }),
       slot: 1,
       sortable: true,
     },
     {
       fieldName: 'updateAction',
-      header: 'ON UPDATE',
+      header: _t('foreignKeyObjectList.onUpdate', { defaultMessage: 'ON UPDATE' }),
       sortable: true,
     },
     {
       fieldName: 'deleteAction',
-      header: 'ON DELETE',
+      header: _t('foreignKeyObjectList.onDelete', { defaultMessage: 'ON DELETE' }),
       sortable: true,
     },
     onRemove
