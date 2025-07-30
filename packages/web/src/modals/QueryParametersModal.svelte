@@ -9,6 +9,7 @@
   import getElectron from '../utility/getElectron';
   import ModalBase from './ModalBase.svelte';
   import { closeCurrentModal } from './modalTools';
+  import { _t } from '../translations';
 
   export let parameterNames;
   export let parameterValues;
@@ -26,7 +27,7 @@
 
 <FormProvider initialValues={parameterValues}>
   <ModalBase {...$$restProps}>
-    <svelte:fragment slot="header">Edit query parameters</svelte:fragment>
+    <svelte:fragment slot="header">{_t('queryParametersModal.title', { defaultMessage: 'Edit query parameters' })}</svelte:fragment>
 
     <div class="params">
       {#each parameterNames as parameterName, index}
@@ -34,11 +35,11 @@
       {/each}
     </div>
 
-    <div>String values must be 'quoted'. You can use valid SQL expressions.</div>
+    <div>{_t('queryParametersModal.hint', { defaultMessage: "String values must be 'quoted'. You can use valid SQL expressions." })}</div>
 
     <svelte:fragment slot="footer">
-      <FormSubmit value="Run query" on:click={handleSubmit} />
-      <FormStyledButton value="Close" on:click={handleClose} />
+      <FormSubmit value={_t('queryParametersModal.runQuery', { defaultMessage: 'Run query' })} on:click={handleSubmit} />
+      <FormStyledButton value={_t('common.close', { defaultMessage: 'Close' })} on:click={handleClose} />
     </svelte:fragment>
   </ModalBase>
 </FormProvider>
