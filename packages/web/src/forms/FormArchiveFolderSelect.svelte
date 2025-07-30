@@ -5,6 +5,7 @@
   import { apiCall } from '../utility/api';
 
   import { useArchiveFolders } from '../utility/metadataLoaders';
+  import { _t } from '../translations';
   import { getFormContext } from './FormProviderCore.svelte';
 
   import FormSelectField from './FormSelectField.svelte';
@@ -48,8 +49,8 @@
   function handleChange(e) {
     if (e.detail == '@create') {
       showModal(InputTextModal, {
-        header: 'Archive',
-        label: 'Name of new archive folder',
+        header: _t('formArchiveFolderSelect.archive', { defaultMessage: 'Archive' }),
+        label: _t('formArchiveFolderSelect.nameOfNewFolder', { defaultMessage: 'Name of new archive folder' }),
         onConfirm: createOption,
       });
     }

@@ -5,13 +5,14 @@
 
   import { getFormContext } from './FormProviderCore.svelte';
   import TextField from './TextField.svelte';
+  import { _t } from '../translations';
 
   export let name;
   export let disabled = false;
   export let defaultFileName = '';
   export let dialogProperties = undefined;
   export let isSaveDialog = false;
-  export let dialogFilters = [{ name: 'All Files', extensions: ['*'] }];
+  export let dialogFilters = [{ name: _t('formElectronFileSelector.allFiles', { defaultMessage: 'All Files' }), extensions: ['*'] }];
 
   const { values, setFieldValue } = getFormContext();
 

@@ -3,9 +3,10 @@
   import { parseFileAsString } from '../utility/parseFileAsString';
   import { getFormContext } from './FormProviderCore.svelte';
   import { createEventDispatcher } from 'svelte';
+  import { _t } from '../translations';
 
   export let label: string;
-  export let buttonLabel: string = 'Choose File';
+  export let buttonLabel: string = _t('formFileInputField.chooseFile', { defaultMessage: 'Choose File' });
   export let name: string;
   export let disabled: boolean = false;
   export let accept: string = '.json,application/json';
