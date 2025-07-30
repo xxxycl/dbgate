@@ -45,7 +45,7 @@
 <FormProvider initialValues={{ name: '' }}>
   <ModalBase {...$$restProps}>
     <svelte:fragment slot="header">
-      {_t('newCollectionModal.title', { defaultMessage: 'Create {collectionType}', values: { collectionType: driver?.collectionSingularLabel ?? _t('newCollectionModal.defaultCollectionType', { defaultMessage: 'collection/container' }) } })}
+      {_t('newCollectionModal.create', { defaultMessage: 'Create' })} {driver?.collectionSingularLabel ?? _t('newCollectionModal.defaultCollectionType', { defaultMessage: 'collection/container' })}
     </svelte:fragment>
 
     <FormArgumentList args={driver?.newCollectionFormParams} />

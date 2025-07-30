@@ -35,7 +35,7 @@
       {/each}
     </div>
 
-    <div>{_t('queryParametersModal.hint', { defaultMessage: "String values must be 'quoted'. You can use valid SQL expressions." })}</div>
+    <div>{_t('queryParametersModal.hint', { defaultMessage: 'String values must be quoted. You can use valid SQL expressions.' })}</div>
 
     <svelte:fragment slot="footer">
       <FormSubmit value={_t('queryParametersModal.runQuery', { defaultMessage: 'Run query' })} on:click={handleSubmit} />

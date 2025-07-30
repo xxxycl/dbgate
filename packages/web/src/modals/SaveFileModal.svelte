@@ -102,7 +102,7 @@
           : [
               {
                 folid: '__local',
-                name: _t('saveFileModal.localFolder', { defaultMessage: "Local folder (don't store on cloud)" }),
+                name: _t('saveFileModal.localFolder', { defaultMessage: 'Local folder (do not store on cloud)' }),
               },
             ]}
       />
