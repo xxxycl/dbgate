@@ -181,7 +181,7 @@
           domInput.focus();
         }}
       >
-        <FontIcon icon="icon menu" /> Commands
+        <FontIcon icon="icon menu" /> {_t('commandPalette.commands', { defaultMessage: 'Commands' })}
       </div>
       <div
         class="page"
@@ -191,7 +191,7 @@
           domInput.focus();
         }}
       >
-        <FontIcon icon="icon database" /> Database
+        <FontIcon icon="icon database" /> {_t('commandPalette.database', { defaultMessage: 'Database' })}
       </div>
     </div>
     <div class="mainInner">

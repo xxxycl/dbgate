@@ -2,6 +2,7 @@
   import _ from 'lodash';
   import { getBoolSettingsValue } from '../settings/settingsTools';
   import { stringifyCellValue } from 'dbgate-tools';
+  import { _t } from '../translations';
 
   export let rowData;
   export let value;
@@ -21,7 +22,7 @@
 </script>
 
 {#if rowData == null}
-  <span class="null">(No row)</span>
+  <span class="null">{_t('cellValue.noRow', { defaultMessage: '(No row)' })}</span>
 {:else}
   <span class={stringified.gridStyle} title={stringified.gridTitle} class:rightMargin>{stringified.value}</span>
 {/if}
