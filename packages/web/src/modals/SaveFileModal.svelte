@@ -89,11 +89,11 @@
 
 <FormProviderCore {values}>
   <ModalBase {...$$restProps}>
-    <svelte:fragment slot="header">Save file</svelte:fragment>
-    <FormTextField label="File name" name="name" focused />
+    <svelte:fragment slot="header">{_t('saveFileModal.title', { defaultMessage: 'Save file' })}</svelte:fragment>
+    <FormTextField label={_t('saveFileModal.fileName', { defaultMessage: 'File name' })} name="name" focused />
     {#if $cloudSigninTokenHolder}
       <FormCloudFolderSelect
-        label="Choose cloud folder"
+        label={_t('saveFileModal.chooseCloudFolder', { defaultMessage: 'Choose cloud folder' })}
         name="cloudFolder"
         isNative
         requiredRoleVariants={['write', 'admin']}
@@ -102,7 +102,7 @@
           : [
               {
                 folid: '__local',
-                name: "Local folder (don't store on cloud)",
+                name: _t('saveFileModal.localFolder', { defaultMessage: "Local folder (don't store on cloud)" }),
               },
             ]}
       />

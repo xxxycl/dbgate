@@ -9,6 +9,7 @@
 
   import ModalBase from './ModalBase.svelte';
   import { closeCurrentModal } from './modalTools';
+  import { _t } from '../translations';
 
   export let sql;
   export let onInsert;
@@ -104,11 +105,11 @@
 </script>
 
 <ModalBase {...$$restProps}>
-  <svelte:fragment slot="header">Insert join</svelte:fragment>
+  <svelte:fragment slot="header">{_t('insertJoinModal.title', { defaultMessage: 'Insert join' })}</svelte:fragment>
 
   <div class="flex mb-3">
     <div class="m-1 col-3">
-      <div class="m-1">Existing table</div>
+      <div class="m-1">{_t('insertJoinModal.existingTable', { defaultMessage: 'Existing table' })}</div>
 
       <TableControl
         rows={sources}
@@ -118,14 +119,14 @@
         selectable
         on:keydown={sourceKeyDown}
         columns={[
-          { fieldName: 'alias', header: 'Alias' },
-          { fieldName: 'name', header: 'Name' },
+          { fieldName: 'alias', header: _t('insertJoinModal.alias', { defaultMessage: 'Alias' }) },
+          { fieldName: 'name', header: _t('insertJoinModal.name', { defaultMessage: 'Name' }) },
         ]}
       />
     </div>
 
     <div class="m-1 col-6">
-      <div class="m-1">New table</div>
+      <div class="m-1">{_t('insertJoinModal.newTable', { defaultMessage: 'New table' })}</div>
 
       <TableControl
         rows={targets}
@@ -134,15 +135,15 @@
         selectable
         on:keydown={targetKeyDown}
         columns={[
-          { fieldName: 'baseColumns', header: 'Column from' },
-          { fieldName: 'refTable', header: 'Table to' },
-          { fieldName: 'refColumns', header: 'Column to' },
+          { fieldName: 'baseColumns', header: _t('insertJoinModal.columnFrom', { defaultMessage: 'Column from' }) },
+          { fieldName: 'refTable', header: _t('insertJoinModal.tableTo', { defaultMessage: 'Table to' }) },
+          { fieldName: 'refColumns', header: _t('insertJoinModal.columnTo', { defaultMessage: 'Column to' }) },
         ]}
       />
     </div>
 
     <div class="m-1 col-3">
-      <div class="m-1">Join</div>
+      <div class="m-1">{_t('insertJoinModal.join', { defaultMessage: 'Join' })}</div>
 
       <TableControl
         rows={JOIN_TYPES.map(name => ({ name }))}
@@ -150,10 +151,10 @@
         bind:domTable={domJoin}
         selectable
         on:keydown={joinKeyDown}
-        columns={[{ fieldName: 'name', header: 'Join type' }]}
+        columns={[{ fieldName: 'name', header: _t('insertJoinModal.joinType', { defaultMessage: 'Join type' }) }]}
       />
 
-      <div class="m-1">Alias</div>
+      <div class="m-1">{_t('insertJoinModal.alias', { defaultMessage: 'Alias' })}</div>
       <TextField
         value={alias}
         on:input={e => {
@@ -171,13 +172,13 @@
 
   <svelte:fragment slot="footer">
     <FormStyledButton
-      value="OK"
+      value={_t('common.ok', { defaultMessage: 'OK' })}
       on:click={() => {
         closeCurrentModal();
         onInsert(sqlPreview);
       }}
     />
-    <FormStyledButton type="button" value="Close" on:click={closeCurrentModal} />
+    <FormStyledButton type="button" value={_t('common.close', { defaultMessage: 'Close' })} on:click={closeCurrentModal} />
   </svelte:fragment>
 </ModalBase>
 
