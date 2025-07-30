@@ -155,8 +155,8 @@
       class="colmode"
       value={isDynamicStructure ? 'variable' : 'fixed'}
       options={[
-        { label: 'Fixed columns (like SQL)', value: 'fixed' },
-        { label: 'Variable columns (like MongoDB)', value: 'variable' },
+        { label: _t('columnManager.fixedColumns', { defaultMessage: 'Fixed columns (like SQL)' }), value: 'fixed' },
+        { label: _t('columnManager.variableColumns', { defaultMessage: 'Variable columns (like MongoDB)' }), value: 'variable' },
       ]}
       on:change={e => {
         dispatchChangeSet({
