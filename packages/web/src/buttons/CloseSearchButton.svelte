@@ -2,6 +2,7 @@
   import FontIcon from '../icons/FontIcon.svelte';
 
   import InlineButton from './InlineButton.svelte';
+  import { _t } from '../translations';
 
   export let filter;
   export let showDisabled = false;
@@ -18,7 +19,7 @@
         filter = '';
       }
     }}
-    title="Clear filter"
+    title={_t('closeSearchButton.clearFilter', { defaultMessage: 'Clear filter' })}
     disabled={!filter}
   >
     <FontIcon icon="icon close" />
