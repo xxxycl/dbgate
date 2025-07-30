@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import FontIcon from '../icons/FontIcon.svelte';
   import ToolbarButton from '../buttons/ToolbarButton.svelte';
+  import { _t } from '../translations';
 
   const dispatch = createEventDispatcher();
 
@@ -16,7 +17,7 @@
       {reference.columns.map(x => x.baseName).join(', ')}]
     </div>
   </div>
-  <ToolbarButton icon="icon close" on:click={() => dispatch('close')}>Close</ToolbarButton>
+  <ToolbarButton icon="icon close" on:click={() => dispatch('close')}>{_t('referenceHeader.close', { defaultMessage: 'Close' })}</ToolbarButton>
 </div>
 
 <style>

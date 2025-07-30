@@ -10,6 +10,7 @@
   import SearchInput from '../elements/SearchInput.svelte';
   import FontIcon from '../icons/FontIcon.svelte';
   import TokenizedFilteredText from '../widgets/TokenizedFilteredText.svelte';
+  import { _t } from '../translations';
 
   export let managerSize;
   export let display: GridDisplay;
@@ -24,12 +25,12 @@
 </script>
 
 <SearchBoxWrapper>
-  <SearchInput placeholder="Search references" bind:value={filter} />
+  <SearchInput placeholder={_t('referenceManager.searchReferences', { defaultMessage: 'Search references' })} bind:value={filter} />
   <CloseSearchButton bind:filter />
 </SearchBoxWrapper>
 <ManagerInnerContainer width={managerSize}>
   {#if foreignKeys.length > 0}
-    <div class="bold nowrap ml-1">References tables ({foreignKeys.length})</div>
+    <div class="bold nowrap ml-1">{_t('referenceManager.referencesTables', { defaultMessage: 'References tables' })} ({foreignKeys.length})</div>
     {#each foreignKeys.filter(fk => filterName(filter, fk.refTableName)) as fk}
       <div
         class="link"
@@ -53,7 +54,7 @@
   {/if}
 
   {#if dependencies.length > 0}
-    <div class="bold nowrap ml-1">Dependend tables ({dependencies.length})</div>
+    <div class="bold nowrap ml-1">{_t('referenceManager.dependentTables', { defaultMessage: 'Dependent tables' })} ({dependencies.length})</div>
     {#each dependencies.filter(fk => filterName(filter, fk.pureName)) as fk}
       <div
         class="link"

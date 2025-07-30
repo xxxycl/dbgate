@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+  import { _t } from '../translations';
+
   const OVERLAY_STATUS_ICONS = {
     regular: 'icon equal',
     updated: 'icon not-equal',
@@ -6,10 +8,10 @@
     inserted: 'img archive',
   };
   const OVERLAY_STATUS_TOOLTIPS = {
-    regular: 'Row is the same in database and archive',
-    updated: 'Row is different in database and archive',
-    missing: 'Row is only in database',
-    inserted: 'Row is only in archive',
+    regular: _t('dataGridRow.rowSame', { defaultMessage: 'Row is the same in database and archive' }),
+    updated: _t('dataGridRow.rowDifferent', { defaultMessage: 'Row is different in database and archive' }),
+    missing: _t('dataGridRow.rowOnlyInDatabase', { defaultMessage: 'Row is only in database' }),
+    inserted: _t('dataGridRow.rowOnlyInArchive', { defaultMessage: 'Row is only in archive' }),
   };
 </script>
 

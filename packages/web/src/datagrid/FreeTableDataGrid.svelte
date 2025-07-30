@@ -6,6 +6,7 @@
   import RowsArrayGrider from './RowsArrayGrider';
   import ErrorInfo from '../elements/ErrorInfo.svelte';
   import LoadingInfo from '../elements/LoadingInfo.svelte';
+  import { _t } from '../translations';
 
   export let model;
 
@@ -19,7 +20,7 @@
 </script>
 
 {#if !model}
-  <LoadingInfo wrapper message="Loading data" />
+  <LoadingInfo wrapper message={_t('freeTableDataGrid.loadingData', { defaultMessage: 'Loading data' })} />
 {:else if errorMessage}
   <ErrorInfo message={errorMessage} />
 {:else if grider}
