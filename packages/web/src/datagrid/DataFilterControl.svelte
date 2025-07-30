@@ -9,6 +9,7 @@
   import { getFilterValueExpression } from 'dbgate-filterparser';
 
   import { showModal } from '../modals/modalTools';
+  import { _t } from '../translations';
   import SetFilterModal from '../modals/SetFilterModal.svelte';
   import keycodes from '../utility/keycodes';
 
@@ -62,43 +63,43 @@
 
   function createMenu() {
     const res = [
-      { onClick: () => setFilter(''), text: 'Clear Filter' },
-      { onClick: () => filterMultipleValues(), text: 'Filter multiple values' },
+      { onClick: () => setFilter(''), text: _t('dataFilter.clearFilter', { defaultMessage: 'Clear Filter' }) },
+      { onClick: () => filterMultipleValues(), text: _t('dataFilter.filterMultipleValues', { defaultMessage: 'Filter multiple values' }) },
     ];
 
     if (filterBehaviour.supportEquals) {
       res.push(
-        { onClick: () => openFilterWindow('='), text: 'Equals...' },
-        { onClick: () => openFilterWindow('<>'), text: 'Does Not Equal...' }
+        { onClick: () => openFilterWindow('='), text: _t('dataFilter.equals', { defaultMessage: 'Equals...' }) },
+        { onClick: () => openFilterWindow('<>'), text: _t('dataFilter.doesNotEqual', { defaultMessage: 'Does Not Equal...' }) }
       );
     }
 
     if (filterBehaviour.supportExistsTesting) {
       res.push(
-        { onClick: () => setFilter('EXISTS'), text: 'Field exists' },
-        { onClick: () => setFilter('NOT EXISTS'), text: 'Field does not exist' }
+        { onClick: () => setFilter('EXISTS'), text: _t('dataFilter.fieldExists', { defaultMessage: 'Field exists' }) },
+        { onClick: () => setFilter('NOT EXISTS'), text: _t('dataFilter.fieldDoesNotExist', { defaultMessage: 'Field does not exist' }) }
       );
     }
 
     if (filterBehaviour.supportNotEmptyArrayTesting) {
-      res.push({ onClick: () => setFilter('NOT EMPTY ARRAY'), text: 'Array is not empty' });
+      res.push({ onClick: () => setFilter('NOT EMPTY ARRAY'), text: _t('dataFilter.arrayIsNotEmpty', { defaultMessage: 'Array is not empty' }) });
     }
 
     if (filterBehaviour.supportEmptyArrayTesting) {
-      res.push({ onClick: () => setFilter('EMPTY ARRAY'), text: 'Array is empty' });
+      res.push({ onClick: () => setFilter('EMPTY ARRAY'), text: _t('dataFilter.arrayIsEmpty', { defaultMessage: 'Array is empty' }) });
     }
 
     if (filterBehaviour.supportNullTesting) {
       res.push(
-        { onClick: () => setFilter('NULL'), text: 'Is Null' },
-        { onClick: () => setFilter('NOT NULL'), text: 'Is Not Null' }
+        { onClick: () => setFilter('NULL'), text: _t('dataFilter.isNull', { defaultMessage: 'Is Null' }) },
+        { onClick: () => setFilter('NOT NULL'), text: _t('dataFilter.isNotNull', { defaultMessage: 'Is Not Null' }) }
       );
     }
 
     if (filterBehaviour.supportEmpty) {
       res.push(
-        { onClick: () => setFilter('EMPTY, NULL'), text: 'Is Empty Or Null' },
-        { onClick: () => setFilter('NOT EMPTY NOT NULL'), text: 'Has Not Empty Value' }
+        { onClick: () => setFilter('EMPTY, NULL'), text: _t('dataFilter.isEmptyOrNull', { defaultMessage: 'Is Empty Or Null' }) },
+        { onClick: () => setFilter('NOT EMPTY NOT NULL'), text: _t('dataFilter.hasNotEmptyValue', { defaultMessage: 'Has Not Empty Value' }) }
       );
     }
 
@@ -106,10 +107,10 @@
       res.push(
         { divider: true },
 
-        { onClick: () => openFilterWindow('>'), text: 'Greater Than...' },
-        { onClick: () => openFilterWindow('>='), text: 'Greater Than Or Equal To...' },
-        { onClick: () => openFilterWindow('<'), text: 'Less Than...' },
-        { onClick: () => openFilterWindow('<='), text: 'Less Than Or Equal To...' }
+        { onClick: () => openFilterWindow('>'), text: _t('dataFilter.greaterThan', { defaultMessage: 'Greater Than...' }) },
+        { onClick: () => openFilterWindow('>='), text: _t('dataFilter.greaterThanOrEqual', { defaultMessage: 'Greater Than Or Equal To...' }) },
+        { onClick: () => openFilterWindow('<'), text: _t('dataFilter.lessThan', { defaultMessage: 'Less Than...' }) },
+        { onClick: () => openFilterWindow('<='), text: _t('dataFilter.lessThanOrEqual', { defaultMessage: 'Less Than Or Equal To...' }) }
       );
     }
 
@@ -117,12 +118,12 @@
       res.push(
         { divider: true },
 
-        { onClick: () => openFilterWindow('+'), text: 'Contains...' },
-        { onClick: () => openFilterWindow('~'), text: 'Does Not Contain...' },
-        { onClick: () => openFilterWindow('^'), text: 'Begins With...' },
-        { onClick: () => openFilterWindow('!^'), text: 'Does Not Begin With...' },
-        { onClick: () => openFilterWindow('$'), text: 'Ends With...' },
-        { onClick: () => openFilterWindow('!$'), text: 'Does Not End With...' }
+        { onClick: () => openFilterWindow('+'), text: _t('dataFilter.contains', { defaultMessage: 'Contains...' }) },
+        { onClick: () => openFilterWindow('~'), text: _t('dataFilter.doesNotContain', { defaultMessage: 'Does Not Contain...' }) },
+        { onClick: () => openFilterWindow('^'), text: _t('dataFilter.beginsWith', { defaultMessage: 'Begins With...' }) },
+        { onClick: () => openFilterWindow('!^'), text: _t('dataFilter.doesNotBeginWith', { defaultMessage: 'Does Not Begin With...' }) },
+        { onClick: () => openFilterWindow('$'), text: _t('dataFilter.endsWith', { defaultMessage: 'Ends With...' }) },
+        { onClick: () => openFilterWindow('!$'), text: _t('dataFilter.doesNotEndWith', { defaultMessage: 'Does Not End With...' }) }
       );
     }
 

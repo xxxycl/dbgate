@@ -10,6 +10,7 @@
   import { copyTextToClipboard } from '../utility/clipboard';
   import VirtualForeignKeyEditorModal from '../tableeditor/VirtualForeignKeyEditorModal.svelte';
   import { showModal } from '../modals/modalTools';
+  import { _t } from '../translations';
 
   export let column;
   export let conid = undefined;
@@ -47,23 +48,23 @@
 
   function getMenu() {
     return [
-      setSort && { onClick: () => setSort('ASC'), text: 'Sort ascending' },
-      setSort && { onClick: () => setSort('DESC'), text: 'Sort descending' },
-      isSortDefined && addToSort && !order && { onClick: () => addToSort('ASC'), text: 'Add to sort - ascending' },
-      isSortDefined && addToSort && !order && { onClick: () => addToSort('DESC'), text: 'Add to sort - descending' },
-      order && clearSort && { onClick: () => clearSort(), text: 'Clear sort criteria' },
-      { onClick: () => copyTextToClipboard(column.columnName), text: 'Copy column name' },
+      setSort && { onClick: () => setSort('ASC'), text: _t('columnHeader.sortAscending', { defaultMessage: 'Sort ascending' }) },
+      setSort && { onClick: () => setSort('DESC'), text: _t('columnHeader.sortDescending', { defaultMessage: 'Sort descending' }) },
+      isSortDefined && addToSort && !order && { onClick: () => addToSort('ASC'), text: _t('columnHeader.addToSortAscending', { defaultMessage: 'Add to sort - ascending' }) },
+      isSortDefined && addToSort && !order && { onClick: () => addToSort('DESC'), text: _t('columnHeader.addToSortDescending', { defaultMessage: 'Add to sort - descending' }) },
+      order && clearSort && { onClick: () => clearSort(), text: _t('columnHeader.clearSortCriteria', { defaultMessage: 'Clear sort criteria' }) },
+      { onClick: () => copyTextToClipboard(column.columnName), text: _t('columnHeader.copyColumnName', { defaultMessage: 'Copy column name' }) },
 
       column.foreignKey && [{ divider: true }, { onClick: openReferencedTable, text: column.foreignKey.refTableName }],
 
       setGrouping && { divider: true },
-      setGrouping && { onClick: () => setGrouping('GROUP'), text: 'Group by' },
-      setGrouping && { onClick: () => setGrouping('MAX'), text: 'MAX' },
-      setGrouping && { onClick: () => setGrouping('MIN'), text: 'MIN' },
-      setGrouping && { onClick: () => setGrouping('SUM'), text: 'SUM' },
-      setGrouping && { onClick: () => setGrouping('AVG'), text: 'AVG' },
-      setGrouping && { onClick: () => setGrouping('COUNT'), text: 'COUNT' },
-      setGrouping && { onClick: () => setGrouping('COUNT DISTINCT'), text: 'COUNT DISTINCT' },
+      setGrouping && { onClick: () => setGrouping('GROUP'), text: _t('columnHeader.groupBy', { defaultMessage: 'Group by' }) },
+      setGrouping && { onClick: () => setGrouping('MAX'), text: _t('columnHeader.max', { defaultMessage: 'MAX' }) },
+      setGrouping && { onClick: () => setGrouping('MIN'), text: _t('columnHeader.min', { defaultMessage: 'MIN' }) },
+      setGrouping && { onClick: () => setGrouping('SUM'), text: _t('columnHeader.sum', { defaultMessage: 'SUM' }) },
+      setGrouping && { onClick: () => setGrouping('AVG'), text: _t('columnHeader.avg', { defaultMessage: 'AVG' }) },
+      setGrouping && { onClick: () => setGrouping('COUNT'), text: _t('columnHeader.count', { defaultMessage: 'COUNT' }) },
+      setGrouping && { onClick: () => setGrouping('COUNT DISTINCT'), text: _t('columnHeader.countDistinct', { defaultMessage: 'COUNT DISTINCT' }) },
 
       isTypeDateTime(column.dataType) && [
         { divider: true },
