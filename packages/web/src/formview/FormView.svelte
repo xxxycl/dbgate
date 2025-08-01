@@ -251,9 +251,9 @@
           (display.config.formViewRecordNumber || 0) + 1
         ).toLocaleString()} / ${allRowCount.toLocaleString()}`;
       }
-      return 'No data';
+      return _t('formView.noData', { defaultMessage: 'No data' });
     }
-    if (allRowCount == null || display == null) return 'Loading row count...';
+    if (allRowCount == null || display == null) return _t('formView.loadingRowCount', { defaultMessage: 'Loading row count...' });
     return `Row: ${(
       (display.config.formViewRecordNumber || 0) + 1
     ).toLocaleString()} / ${allRowCount.toLocaleString()}`;

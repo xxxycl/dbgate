@@ -37,6 +37,7 @@
   import CollectionJsonRow from './CollectionJsonRow.svelte';
   import { getIntSettingsValue } from '../settings/settingsTools';
   import invalidateCommands from '../commands/invalidateCommands';
+  import { _t } from '../translations';
 
   export let conid;
   export let database;
@@ -115,7 +116,7 @@
 </div>
 
 {#if isLoading}
-  <LoadingInfo wrapper message="Loading data" />
+  <LoadingInfo wrapper message={_t('collectionJsonView.loadingData', { defaultMessage: 'Loading data' })} />
 {/if}
 
 <style>

@@ -10,8 +10,10 @@
 </script>
 
 <script lang="ts">
+  import { _t } from '../translations';
+
   export let disabled: boolean = false;
-  export let label: string = 'Choose File';
+  export let label: string = _t('simpleFilesInput.chooseFile', { defaultMessage: 'Choose File' });
   export let onChange: ((fileData: ProcessedFile | ProcessedFile[]) => void) | null = null;
   export let accept: string = '*';
   export let multiple: boolean = false;

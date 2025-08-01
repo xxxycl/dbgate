@@ -7,6 +7,7 @@
   import ErrorInfo from '../elements/ErrorInfo.svelte';
   import LoadingInfo from '../elements/LoadingInfo.svelte';
   import { apiCall } from '../utility/api';
+  import { _t } from '../translations';
 
   export let reader;
 
@@ -41,7 +42,7 @@
       isLoading = false;
       // errorMessage = (err && err.response && err.response.data && err.response.data.error) || 'Loading failed';
       // TODO API
-      errorMessage = 'Loading failed';
+      errorMessage = _t('previewDataGrid.loadingFailed', { defaultMessage: 'Loading failed' });
       console.error(err.response);
     }
   };
@@ -52,7 +53,7 @@
 </script>
 
 {#if isLoading}
-  <LoadingInfo wrapper message="Loading data" />
+  <LoadingInfo wrapper message={_t('previewDataGrid.loadingData', { defaultMessage: 'Loading data' })} />
 {:else if errorMessage}
   <ErrorInfo message={errorMessage} />
 {:else if grider}

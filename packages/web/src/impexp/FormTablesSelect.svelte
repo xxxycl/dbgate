@@ -5,6 +5,7 @@
 
   import { getFormContext } from '../forms/FormProviderCore.svelte';
   import FormSelectField from '../forms/FormSelectField.svelte';
+  import { _t } from '../translations';
   import { useConnectionInfo, useDatabaseInfo } from '../utility/metadataLoaders';
 
   export let conidName;
@@ -41,7 +42,7 @@
       {#if $dbinfo && $dbinfo[field]?.length > 0}
         <FormStyledButton
           type="button"
-          value={`All ${field}`}
+          value={_t('formTablesSelect.allField', { defaultMessage: 'All' }) + ' ' + field}
           data-testid={`FormTablesSelect_buttonAll_${field}`}
           on:click={() =>
             setFieldValue(
@@ -52,7 +53,7 @@
       {/if}
     {/each}
 
-    <FormStyledButton type="button" value="Remove all" on:click={() => setFieldValue(name, [])} />
+    <FormStyledButton type="button" value={_t('formTablesSelect.removeAll', { defaultMessage: 'Remove all' })} on:click={() => setFieldValue(name, [])} />
   </div>
 </div>
 
