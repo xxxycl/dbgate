@@ -5,6 +5,7 @@
 
   import WidgetTitle from '../widgets/WidgetTitle.svelte';
   import MacroParameters from './MacroParameters.svelte';
+  import { _t } from '../translations';
 
   const selectedMacro = getContext('selectedMacro') as any;
 
@@ -13,23 +14,23 @@
 
 <div class="wrapper">
   <div class="section">
-    <WidgetTitle>Execute</WidgetTitle>
-    <FormStyledButton value="Execute" on:click={onExecute} />
+    <WidgetTitle>{_t('macroInfoTab.execute', { defaultMessage: 'Execute' })}</WidgetTitle>
+    <FormStyledButton value={_t('macroInfoTab.execute', { defaultMessage: 'Execute' })} on:click={onExecute} />
   </div>
 
   <div class="section">
-    <WidgetTitle>Parameters</WidgetTitle>
+    <WidgetTitle>{_t('macroInfoTab.parameters', { defaultMessage: 'Parameters' })}</WidgetTitle>
     {#if $selectedMacro?.args && $selectedMacro?.args?.length > 0}
       {#key $selectedMacro?.name}
         <MacroParameters args={$selectedMacro?.args||[]} namePrefix={`${$selectedMacro?.name}#`} />
       {/key}
     {:else}
-      <div class="m-1">This macro has no parameters</div>
+      <div class="m-1">{_t('macroInfoTab.noParameters', { defaultMessage: 'This macro has no parameters' })}</div>
     {/if}
   </div>
 
   <div class="section">
-    <WidgetTitle>Description</WidgetTitle>
+    <WidgetTitle>{_t('macroInfoTab.description', { defaultMessage: 'Description' })}</WidgetTitle>
     <div class="m-1">{$selectedMacro?.description}</div>
   </div>
 </div>

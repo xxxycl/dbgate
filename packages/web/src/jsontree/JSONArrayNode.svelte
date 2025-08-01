@@ -1,5 +1,6 @@
 <script>
   import JSONNested from './JSONNested.svelte';
+  import { _t } from '../translations';
 
   export let key, value, isParentExpanded, isParentArray;
   export let expanded = false;
@@ -22,7 +23,7 @@
   {keys}
   {previewKeys}
   {getValue}
-  label="Array({value.length})"
+  label={_t('jsonArrayNode.array', { defaultMessage: 'Array' }) + `(${value.length})`}
   bracketOpen="["
   bracketClose="]"
   elementValue={value}
