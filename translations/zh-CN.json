@@ -28,6 +28,7 @@
   "appObjectCore.copiedToClipboard": "已复制到剪贴板",
   "archiveFilesList.searchPlaceholder": "搜索归档文件",
   "authToken": "认证令牌",
+  "availablePluginsList.searchExtensions": "在网上搜索扩展",
   "cellValue.noRow": "（无行）",
   "changeDownloadUrlModal.cancel": "取消",
   "changeDownloadUrlModal.downloadFromWeb": "从网络下载导入文件",

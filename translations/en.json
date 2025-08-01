@@ -28,6 +28,7 @@
   "appObjectCore.copiedToClipboard": "Copied to clipboard",
   "archiveFilesList.searchPlaceholder": "Search archive files",
   "authToken": "Auth token",
+  "availablePluginsList.searchExtensions": "Search extensions on web",
   "cellValue.noRow": "(No row)",
   "changeDownloadUrlModal.cancel": "Cancel",
   "changeDownloadUrlModal.downloadFromWeb": "Download imported file from web",
