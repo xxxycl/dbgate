@@ -212,7 +212,7 @@
   </div>
 
   <div class="m-2">
-    <div class="title"><FontIcon icon="icon tables" /> Map source tables/files</div>
+    <div class="title"><FontIcon icon="icon tables" /> {_t('importExportConfigurator.mapSourceTablesFiles', { defaultMessage: 'Map source tables/files' })}</div>
 
     {#key targetEditKey}
       {#key progressHolder}
@@ -307,21 +307,33 @@
                   },
                 });
               }}
-              >{columnCount > 0 ? `(${columnCount} columns)` : '(copy from source)'}
+              >{columnCount > 0 ?
+                _t('importExportConfigurator.columnsCount', {
+                  defaultMessage: '({count} columns)',
+                  values: { count: columnCount }
+                }) :
+                _t('importExportConfigurator.copyFromSource', { defaultMessage: '(copy from source)' })
+              }
             </Link>
           </svelte:fragment>
           <svelte:fragment slot="3" let:row>
             {#if progressHolder[row]?.status == 'running' && isRunning}
               <FontIcon icon="icon loading" />
               {#if progressHolder[row]?.writtenRowCount}
-                {progressHolder[row]?.writtenRowCount} rows writtem
+                {_t('importExportConfigurator.rowsWritten', {
+                  defaultMessage: '{count} rows written',
+                  values: { count: progressHolder[row]?.writtenRowCount }
+                })}
               {:else if progressHolder[row]?.readRowCount}
-                {progressHolder[row]?.readRowCount} rows read
+                {_t('importExportConfigurator.rowsRead', {
+                  defaultMessage: '{count} rows read',
+                  values: { count: progressHolder[row]?.readRowCount }
+                })}
               {:else}
-                Running
+                {_t('importExportConfigurator.running', { defaultMessage: 'Running' })}
               {/if}
             {:else if progressHolder[row]?.status == 'error'}
-              <FontIcon icon="img error" /> Error
+              <FontIcon icon="img error" /> {_t('importExportConfigurator.error', { defaultMessage: 'Error' })}
               {#if progressHolder[row]?.errorMessage}
                 <FontIcon
                   icon="img info"
@@ -334,20 +346,32 @@
             {:else if progressHolder[row]?.status == 'done'}
               <FontIcon icon="img ok" />
               {#if progressHolder[row]?.writtenRowCount}
-                {progressHolder[row]?.writtenRowCount} rows written
+                {_t('importExportConfigurator.rowsWritten', {
+                  defaultMessage: '{count} rows written',
+                  values: { count: progressHolder[row]?.writtenRowCount }
+                })}
               {:else if progressHolder[row]?.readRowCount}
-                {progressHolder[row]?.readRowCount} rows written
+                {_t('importExportConfigurator.rowsWritten', {
+                  defaultMessage: '{count} rows written',
+                  values: { count: progressHolder[row]?.readRowCount }
+                })}
               {:else}
-                Done
+                {_t('importExportConfigurator.done', { defaultMessage: 'Done' })}
               {/if}
             {:else}
               <FontIcon icon="icon wait" />
               {#if progressHolder[row]?.writtenRowCount}
-                {progressHolder[row]?.writtenRowCount} rows writtem
+                {_t('importExportConfigurator.rowsWritten', {
+                  defaultMessage: '{count} rows written',
+                  values: { count: progressHolder[row]?.writtenRowCount }
+                })}
               {:else if progressHolder[row]?.readRowCount}
-                {progressHolder[row]?.readRowCount} rows read
+                {_t('importExportConfigurator.rowsRead', {
+                  defaultMessage: '{count} rows read',
+                  values: { count: progressHolder[row]?.readRowCount }
+                })}
               {:else}
-                Queued
+                {_t('importExportConfigurator.queued', { defaultMessage: 'Queued' })}
               {/if}
             {/if}
           </svelte:fragment>

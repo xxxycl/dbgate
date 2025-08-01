@@ -26,6 +26,7 @@
   } from '../stores';
   import { apiCall } from '../utility/api';
   import { useConnectionInfo } from '../utility/metadataLoaders';
+  import { _t } from '../translations';
 
   import DbKeysSubTree from './DbKeysSubTree.svelte';
   import WidgetsInnerContainer from './WidgetsInnerContainer.svelte';
@@ -113,7 +114,7 @@
 
 <SearchBoxWrapper noMargin>
   <SearchInput
-    placeholder="Redis pattern or key part"
+    placeholder={_t('dbKeysTree.searchPlaceholder', { defaultMessage: 'Redis pattern or key part' })}
     bind:value={filter}
     isDebounced
     bind:this={domFilter}
@@ -122,10 +123,10 @@
     }}
   />
   <CloseSearchButton bind:filter />
-  <InlineButton on:click={handleAddKey} title="Add new key">
+  <InlineButton on:click={handleAddKey} title={_t('dbKeysTree.addNewKey', { defaultMessage: 'Add new key' })}>
     <FontIcon icon="icon plus-thick" />
   </InlineButton>
-  <InlineButton on:click={reloadModel} title="Refresh key list">
+  <InlineButton on:click={reloadModel} title={_t('dbKeysTree.refreshKeyList', { defaultMessage: 'Refresh key list' })}>
     <FontIcon icon="icon refresh" />
   </InlineButton>
 </SearchBoxWrapper>
@@ -134,9 +135,15 @@
     {#if model}
       <div>
         {#if isLoading}
-          Loading...
+          {_t('dbKeysTree.loading', { defaultMessage: 'Loading...' })}
         {:else}
-          Scanned {Math.min(model?.scannedKeys, model?.dbsize) ?? '???'}/{model?.dbsize ?? '???'}
+          {_t('dbKeysTree.scannedKeys', {
+            defaultMessage: 'Scanned {scanned}/{total}',
+            values: {
+              scanned: Math.min(model?.scannedKeys, model?.dbsize) ?? '???',
+              total: model?.dbsize ?? '???'
+            }
+          })}
         {/if}
       </div>
     {/if}
@@ -145,8 +152,8 @@
         <FontIcon icon="icon loading" />
       </div>
     {:else}
-      <InlineButton on:click={loadNextPage} title="Scan more keys">
-        <FontIcon icon="icon more" /> Scan more
+      <InlineButton on:click={loadNextPage} title={_t('dbKeysTree.scanMoreKeys', { defaultMessage: 'Scan more keys' })}>
+        <FontIcon icon="icon more" /> {_t('dbKeysTree.scanMore', { defaultMessage: 'Scan more' })}
       </InlineButton>
     {/if}
   </div>
